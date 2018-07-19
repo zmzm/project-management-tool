@@ -1,0 +1,26 @@
+{
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  },
+  "extends": "airbnb",
+  "parser": "typescript-eslint-parser",
+  "plugins": ["typescript", "jest"],
+  "rules": {
+    "no-console": 1,
+    "strict": 0,
+    "react/jsx-filename-extension": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  }
+}
