@@ -1,20 +1,48 @@
+import * as Koa from 'koa';
+import * as Router from 'koa-router';
+import { Server } from 'http';
+import GraphQLRoutes from './routes/graphQLRoutes';
+
+
 require('dotenv').config();
-const Koa = require('koa');
-const Router = require('koa-router');
-const graphqlHTTP = require('koa-graphql');
-const schema = require('./schemas');
 
-const app = new Koa();
-const router = new Router();
+class AppServer {
+  private app: Koa;
 
-router.all('/graphql', graphqlHTTP({
-  schema,
-  graphiql: true,
-}));
+  private server: Server;
 
-app.use(router.routes()).use(router.allowedMethods());
+  constructor(app: Koa) {
+    this.app = app;
+  }
 
-app.listen(process.env.PORT);
-console.log(`app running on http://localhost:${process.env.PORT}`);
+  public listen(port: string): Server {
+    this.server = this.app.listen(port);
+    return this.server;
+  }
 
-export = app;
+  public getServer(): Server {
+    return this.server;
+  }
+
+  public closeServer(): void {
+    if (this.server === undefined) {
+      throw new Error('Server is not initialized.');
+    }
+
+    this.server.close();
+  }
+}
+
+export default async function createServer(): Promise<AppServer> {
+  const app = new Koa();
+  const appSrv = new AppServer(app);
+  const router = new Router();
+
+  GraphQLRoutes.map(router, app);
+
+  appSrv.listen(process.env.PORT);
+
+  return appSrv;
+}
+
+createServer();

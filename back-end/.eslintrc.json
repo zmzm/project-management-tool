@@ -4,7 +4,12 @@
     "plugins": ["typescript"],
     "rules": {
         "no-console": 1,
-        "import/no-unresolved": 1,
-        "strict": 0
-    }
+        "strict": 0,
+        "no-undef": "off",
+        "no-param-reassign": [2, { "props": false }],
+
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "no-unused-vars": "off"
+    }    
 }

@@ -27,11 +27,16 @@
   "author": "Bantsevich team",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.1",
+    "bcryptjs": "^2.4.3",
+    "dataloader": "^1.4.0",
     "dotenv": "^6.0.0",
     "graphql": "^0.13.2",
+    "knex": "^0.15.1",
     "koa": "^2.5.1",
     "koa-graphql": "^0.7.5",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "pg": "^7.4.3"
   },
   "devDependencies": {
     "@types/node": "^10.5.2",
