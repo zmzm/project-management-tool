@@ -27,8 +27,10 @@
   "author": "Bantsevich team",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^6.0.0",
     "graphql": "^0.13.2",
+    "knex": "^0.15.1",
     "koa": "^2.5.1",
     "koa-graphql": "^0.7.5",
     "koa-router": "^7.4.0"
