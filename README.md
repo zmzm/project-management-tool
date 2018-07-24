@@ -13,3 +13,15 @@ back-end
     ts - checks ts files
 
     test - run tests from /test folder
+
+front-end
+
+  commands:
+
+    start - start dev-server with hot-reload,
+
+    build - build production
+    
+    test - run tests from /src/__test__ folder
+    
+    eslint: eslint src/. --ext tsx,ts,
