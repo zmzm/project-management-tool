@@ -1,13 +1,12 @@
 import User from '../entities/user';
 import { NotFoundError, ValidationError } from '../errors';
 import Postgres from '../database';
+import UserModel from '../models/userModel';
 
 export default class UserRepository {
   private readonly TABLE: string = 'user';
 
   private db: Postgres;
-
-  private row: any;
 
   constructor(db: Postgres) {
     this.db = db;
@@ -81,16 +80,15 @@ export default class UserRepository {
   }
 
   private transform(row: any): User {
-    this.row = row;
     return {
-      id: this.row.id,
-      email: this.row.email,
-      password: this.row.password,
-      role: this.row.role,
-      firstName: this.row.first_name,
-      lastName: this.row.last_name,
-      created: this.row.created,
-      updated: this.row.updated,
+      id: row.id,
+      email: row.email,
+      password: row.password,
+      role: row.role,
+      firstName: row.first_name,
+      lastName: row.last_name,
+      created: row.created,
+      updated: row.updated,
     };
   }
 }

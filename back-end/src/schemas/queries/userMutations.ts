@@ -1,11 +1,17 @@
-import User from '../../entities/user';
+import { GraphQLID } from 'graphql';
+import UserType from '../types/userType';
 import Context from '../../context';
 
-export default class UserMutation {
-  private context: Context<any>;
+const deleteUser = {
+  type: UserType,
+  args: {
+    id: { type: GraphQLID },
+  },
+  async resolve(root: any, args: any, ctx: Context<any>) {
+    await this.ctx.Services.UserService.delete(args.id);
+  },
+};
 
-  public async deleteUser(root: any, args: any, context: Context<any>): Promise<void> {
-    this.context = context;
-    await this.context.Services.UserService.delete(args.id);
-  }
-}
+export default {
+  deleteUser,
+};

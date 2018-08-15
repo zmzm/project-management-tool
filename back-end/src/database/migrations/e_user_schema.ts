@@ -7,26 +7,32 @@ export function up(db: knex) {
       table.increments('id').primary();
       table.string('email', 64).unique();
       table.string('password', 256).notNullable();
-      table.enum('role', ['user', 'admin']).notNullable();
+      table.integer('role_id')
+        .unsigned()
+        .references('id')
+        .inTable('role');
+      table.integer('team_id')
+        .unsigned()
+        .references('id')
+        .inTable('team');
       table.string('first_name', 64).notNullable();
       table.string('last_name', 64).notNullable();
-      table.dateTime('created').notNullable();
-      table.dateTime('updated').notNullable();
+      table.timestamp('created_at').defaultTo(db.fn.now());
+      table.timestamp('updated_at').defaultTo(db.fn.now());
     })
-    .then(() => db('user').insert([
+    .then(() => db(' user').insert([
       {
         id: 1,
         email: 'teastd@sdfsdf.sdfsdf',
         password: 'asdasdasd123213',
-        role: 'user',
+        role_id: 1,
+        team_id: 1,
         first_name: 'Test',
         last_name: 'Testov',
-        created: '29.06.2018',
-        updated: '29.06.2018',
       },
     ]));
 }
 
 export function down(db: knex) {
-  return db.schema.dropTable('task').dropTable('user');
+  return db.schema.dropTable('user');
 }

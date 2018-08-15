@@ -3,6 +3,7 @@ import { ValidationError } from '../errors';
 import Authenticator from '../lib/auth';
 import { Hasher } from '../lib/hasher';
 import UserRepository from '../repositories/userRepository';
+import UserModel from '../models/userModel';
 
 export default class UserService {
   private repo: UserRepository;

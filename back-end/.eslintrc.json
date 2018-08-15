@@ -7,6 +7,7 @@
         "strict": 0,
         "no-undef": "off",
         "no-param-reassign": [2, { "props": false }],
+        "class-methods-use-this": ["error", { "exceptMethods": ["transform", "hashPassword", "verifyPassword", "execute"] }],
 
         "import/no-unresolved": "off",
         "import/extensions": "off",

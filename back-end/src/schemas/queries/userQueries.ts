@@ -1,12 +1,19 @@
+import { GraphQLString } from 'graphql';
+import UserType from '../types/userType';
 import User from '../../entities/user';
 import Context from '../../context';
 
-export default class UsersQuery {
-  private context: Context<any>;
+const findUserByEmail = {
+  type: UserType,
+  args: {
+    email: { type: GraphQLString },
+  },
+  async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
+    const user = await ctx.Services.UserService.findByEmail(args.email);
+    return user;
+  },
+};
 
-  public async findUserByEmail(root: any, args: any, context: Context<any>): Promise<User> {
-    this.context = context;
-    const users = await this.context.Services.UserService.findByEmail(args.email);
-    return users;
-  }
-}
+export default {
+  findUserByEmail,
+};

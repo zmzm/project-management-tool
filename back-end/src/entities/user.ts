@@ -5,8 +5,8 @@ export interface User {
     role: string;
     firstName: string;
     lastName: string;
-    created: String;
-    updated: String
+    created: string;
+    updated: string
 }
 
 export { User as default };

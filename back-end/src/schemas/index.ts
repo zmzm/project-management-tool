@@ -13,30 +13,14 @@ export default class Schema {
   private rootQuery: GraphQLObjectType = new GraphQLObjectType({
     name: 'Query',
     fields: {
-      findUserByEmail: {
-        type: UserType,
-        args: {
-          email: { type: GraphQLString },
-        },
-        resolve(root: any, args: any, ctx: Context<any>) {
-          return new UsersQuery().findUserByEmail(root, args, ctx);
-        },
-      },
+      findUserByEmail: UsersQuery.findUserByEmail,
     },
   });
 
   private rootMutation: GraphQLObjectType = new GraphQLObjectType({
     name: 'Mutation',
     fields: {
-      deleteUser: {
-        type: UserType,
-        args: {
-          id: { type: GraphQLID },
-        },
-        resolve(root: any, args: any, ctx: Context<any>) {
-          return new UserMutation().deleteUser(root, args, ctx);
-        },
-      },
+      deleteUser: UserMutation.deleteUser,
     },
   });
 
