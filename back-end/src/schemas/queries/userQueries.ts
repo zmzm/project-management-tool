@@ -1,7 +1,26 @@
-import { GraphQLString } from 'graphql';
+import { GraphQLString, GraphQLList, GraphQLInt } from 'graphql';
 import UserType from '../types/userType';
-import User from '../../entities/user';
 import Context from '../../context';
+import { User } from '../../models/userModel';
+
+const findAll = {
+  type: new GraphQLList(UserType),
+  async resolve(root: any, args: any, ctx: Context<any>): Promise<User[]> {
+    const users = await ctx.Services.UserService.findAll();
+    return users;
+  },
+};
+
+const findById = {
+  type: UserType,
+  args: {
+    id: { type: GraphQLInt },
+  },
+  async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
+    const user = await ctx.Services.UserService.findById(args.id);
+    return user;
+  },
+};
 
 const findUserByEmail = {
   type: UserType,
@@ -15,5 +34,7 @@ const findUserByEmail = {
 };
 
 export default {
+  findAll,
+  findById,
   findUserByEmail,
 };

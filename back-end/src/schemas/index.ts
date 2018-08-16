@@ -3,16 +3,22 @@ import {
 } from 'graphql';
 
 import UsersQuery from './queries/userQueries';
-import UserType from './types/userType';
-import Context from '../context';
-import UserMutation from './queries/userMutations';
+import UserMutation from './mutations/userMutations';
 
+/**
+ * Creating GraphQL schema
+ *
+ * @export
+ * @class Schema
+ */
 export default class Schema {
   private static instance: Schema;
 
   private rootQuery: GraphQLObjectType = new GraphQLObjectType({
     name: 'Query',
     fields: {
+      findAll: UsersQuery.findAll,
+      findById: UsersQuery.findById,
       findUserByEmail: UsersQuery.findUserByEmail,
     },
   });
@@ -21,6 +27,7 @@ export default class Schema {
     name: 'Mutation',
     fields: {
       deleteUser: UserMutation.deleteUser,
+      updateUser: UserMutation.updateUser,
     },
   });
 

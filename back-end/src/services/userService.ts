@@ -1,9 +1,8 @@
-import User from '../entities/user';
 import { ValidationError } from '../errors';
 import Authenticator from '../lib/auth';
 import { Hasher } from '../lib/hasher';
 import UserRepository from '../repositories/userRepository';
-import UserModel from '../models/userModel';
+import { User } from '../models/userModel';
 
 export default class UserService {
   private repo: UserRepository;
@@ -18,30 +17,42 @@ export default class UserService {
     this.auth = auth;
   }
 
-  public async findByEmail(email: string): Promise<User> {
-    return this.repo.findByEmail(email);
+  public async findAll(): Promise<User[]> {
+    const users = await this.repo.findAll();
+    return users.map(user => new User(user));
   }
 
-  public async create(user: User): Promise<User> {
-    const hashPassword = await this.hasher.hashPassword(user.password);
+  public async findById(id: number): Promise<User> {
+    const user = await this.repo.findById(id);
+    return new User(user);
+  }
 
-    user.password = hashPassword;
-
-    return this.repo.insert(user);
+  public async findByEmail(email: string): Promise<User> {
+    const user = await this.repo.findByEmail(email);
+    return user;
   }
 
   public async login(email: string, password: string): Promise<string> {
     const user = await this.repo.findByEmail(email);
 
-    if (await this.hasher.verifyPassword(password, user.password)) {
+    if (await this.hasher.verifyPassword(password, user.Password)) {
       return '';
     }
 
     throw new ValidationError('Wrong credentials');
   }
 
-  public update(user: User): Promise<User> {
-    return this.repo.update(user);
+  public async create(user: User): Promise<User> {
+    const hashPassword = await this.hasher.hashPassword(user.Password);
+    user.setPassword(hashPassword);
+    const result = await this.repo.create(user.toDatabaseObject());
+
+    return new User(result);
+  }
+
+  public async update(user: User): Promise<User> {
+    const result = await this.repo.update(user.toDatabaseObject());
+    return new User(result);
   }
 
   public delete(userId: number): Promise<void> {

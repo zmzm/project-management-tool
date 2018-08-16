@@ -10,6 +10,12 @@ import ServicesContext from '../context/servicesContext';
 import UserRepository from '../repositories/userRepository';
 import UserService from '../services/userService';
 
+/**
+ * Registering GraphQL routes and creating context for GraphQL
+ *
+ * @export
+ * @class GraphQLRoutes
+ */
 export default class GraphQLRoutes {
   static map(router: Router, app: Koa): void {
     GraphQLRoutes.buildContext();
