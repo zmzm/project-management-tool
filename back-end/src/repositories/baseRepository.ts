@@ -6,6 +6,7 @@ import Postgres from '../database';
  * @export
  * @class BaseRepository
  * @template T
+ * @template S
  */
 export default class BaseRepository<T, S> {
   protected db: Postgres;
@@ -51,10 +52,10 @@ export default class BaseRepository<T, S> {
   }
 
   /**
-   * Create entity of @type T in database
+   * Create entity of @type S in database
    *
-   * @param {T} entity
-   * @returns {Promise<T>}
+   * @param {S} entity
+   * @returns {Promise<S>}
    * @memberof BaseRepository
    */
   public async create(entity: S): Promise<S> {

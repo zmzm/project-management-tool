@@ -1,32 +1,37 @@
-import { ValidationError } from '../errors';
 import Authenticator from '../lib/auth';
-import { Hasher } from '../lib/hasher';
+import BaseService from './baseservice';
 import UserRepository from '../repositories/userRepository';
-import { User } from '../models/userModel';
+import { Hasher } from '../lib/hasher';
+import { User, RawUser } from '../models/userModel';
+import { ValidationError } from '../errors';
+import BaseRepository from '../repositories/baseRepository';
 
-export default class UserService {
+
+export default class UserService extends BaseService<User, RawUser> {
   private repo: UserRepository;
 
   private hasher: Hasher;
 
   private auth: Authenticator;
 
+  public getRepository(): BaseRepository<User, RawUser> {
+    return this.repo;
+  }
+
   constructor(repo: UserRepository, hasher: Hasher, auth: Authenticator) {
+    super();
     this.repo = repo;
     this.hasher = hasher;
     this.auth = auth;
   }
 
-  public async findAll(): Promise<User[]> {
-    const users = await this.repo.findAll();
-    return users.map(user => new User(user));
-  }
-
-  public async findById(id: number): Promise<User> {
-    const user = await this.repo.findById(id);
-    return new User(user);
-  }
-
+  /**
+   * Find user by email
+   *
+   * @param {string} email
+   * @returns {Promise<User>}
+   * @memberof UserService
+   */
   public async findByEmail(email: string): Promise<User> {
     const user = await this.repo.findByEmail(email);
     return user;
@@ -40,22 +45,5 @@ export default class UserService {
     }
 
     throw new ValidationError('Wrong credentials');
-  }
-
-  public async create(user: User): Promise<User> {
-    const hashPassword = await this.hasher.hashPassword(user.Password);
-    user.setPassword(hashPassword);
-    const result = await this.repo.create(user.toDatabaseObject());
-
-    return new User(result);
-  }
-
-  public async update(user: User): Promise<User> {
-    const result = await this.repo.update(user.toDatabaseObject());
-    return new User(result);
-  }
-
-  public delete(userId: number): Promise<void> {
-    return this.repo.delete(userId);
   }
 }

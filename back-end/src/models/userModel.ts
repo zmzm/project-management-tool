@@ -1,5 +1,4 @@
 /* eslint camelcase: 0 */
-import BaseModel from './baseModel';
 /**
  * User object for database
  *

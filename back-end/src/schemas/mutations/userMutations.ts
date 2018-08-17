@@ -1,4 +1,5 @@
-import { GraphQLID, GraphQLString } from 'graphql';
+import { GraphQLID, GraphQLNonNull, GraphQLString } from 'graphql';
+import { User, RawUser } from '../../models/userModel';
 import UserType from '../types/userType';
 import Context from '../../context';
 
@@ -15,11 +16,15 @@ const deleteUser = {
 const updateUser = {
   type: UserType,
   args: {
-    user: { firstName: GraphQLString },
+    firstName: { type: new GraphQLNonNull(GraphQLString) },
+    lastName: { type: new GraphQLNonNull(GraphQLString) },
   },
   async resolve(root: any, args: any, ctx: Context<any>) {
-    const user = await ctx.Services.UserService.update(args.user);
-    return user;
+    const userModel = new User()
+      .setFirstName(args.firstName)
+      .setLastName(args.lastName);
+    const user = await ctx.Services.UserService.update(new RawUser(userModel));
+    return new User(user);
   },
 };
 

@@ -34,8 +34,6 @@ export default class UserRepository extends BaseRepository<User, RawUser> {
       throw new NotFoundError('User does not exist');
     }
 
-    console.log(result);
-
     return new User(result);
   }
 }

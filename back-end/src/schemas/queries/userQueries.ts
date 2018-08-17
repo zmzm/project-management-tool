@@ -7,7 +7,7 @@ const findAll = {
   type: new GraphQLList(UserType),
   async resolve(root: any, args: any, ctx: Context<any>): Promise<User[]> {
     const users = await ctx.Services.UserService.findAll();
-    return users;
+    return users.map(user => new User(user));
   },
 };
 
@@ -18,7 +18,7 @@ const findById = {
   },
   async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
     const user = await ctx.Services.UserService.findById(args.id);
-    return user;
+    return new User(user);
   },
 };
 

@@ -1,0 +1,72 @@
+import BaseRepository from '../repositories/baseRepository';
+
+/**
+ * Base service class for all services
+ *
+ * @export
+ * @class BaseService
+ * @template T
+ * @template S
+ */
+export default abstract class BaseService<T, S> {
+  public abstract getRepository(): BaseRepository<T, S>
+
+  /**
+   * Get all entities of @type T
+   *
+   * @returns {Promise<T[]>}
+   * @memberof BaseService
+   */
+  public async findAll(): Promise<T[]> {
+    const entities = await this.getRepository().findAll();
+    return entities;
+  }
+
+  /**
+   * Get entity of @type T by id
+   *
+   * @param {number} id
+   * @returns {Promise<T>}
+   * @memberof BaseService
+   */
+  public async findById(id: number): Promise<T> {
+    const entity = await this.getRepository().findById(id);
+    return entity;
+  }
+
+  /**
+   * Create entity of @type S
+   *
+   * @param {S} entity
+   * @returns {Promise<S>}
+   * @memberof BaseService
+   */
+  public async create(entity: S): Promise<S> {
+    const result = await this.getRepository().create(entity);
+
+    return result;
+  }
+
+  /**
+   * Update entity of @type S
+   *
+   * @param {S} entity
+   * @returns {Promise<S>}
+   * @memberof BaseService
+   */
+  public async update(entity: S): Promise<S> {
+    const result = await this.getRepository().update(entity);
+    return result;
+  }
+
+  /**
+   * Delete entity of @type T
+   *
+   * @param {number} id
+   * @returns {Promise<void>}
+   * @memberof BaseService
+   */
+  public delete(id: number): Promise<void> {
+    return this.getRepository().delete(id);
+  }
+}
