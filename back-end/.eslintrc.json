@@ -1,7 +1,7 @@
 {
     "extends": "airbnb-base",
     "parser": "typescript-eslint-parser",
-    "plugins": ["typescript"],
+    "plugins": ["typescript", "jest"],
     "rules": {
         "no-console": 1,
         "strict": 0,
@@ -12,5 +12,19 @@
         "import/no-unresolved": "off",
         "import/extensions": "off",
         "no-unused-vars": "off"
-    }    
+    },
+  "env": {
+    "jest/globals": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  }
 }
