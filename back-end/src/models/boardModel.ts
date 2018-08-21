@@ -1,3 +1,5 @@
+import BaseModel from './baseModel';
+
 /* eslint camelcase: 0 */
 /**
  * Board object for database
@@ -17,7 +19,7 @@ export class RawBoard {
   public created_at?: Date
 
   constructor(builder: Board) {
-    this.id = builder.Id;
+    this.id = builder.getId();
     this.board_name = builder.Name;
     this.is_closed = builder.IsClosed;
     this.team_id = builder.TeamId;
@@ -31,7 +33,7 @@ export class RawBoard {
  * @export
  * @class Board
  */
-export class Board {
+export class Board implements BaseModel {
   private id?: number
 
   private boardName: string
@@ -52,7 +54,7 @@ export class Board {
     }
   }
 
-  public get Id(): number {
+  public getId(): number {
     return this.id;
   }
 
@@ -141,5 +143,15 @@ export class Board {
    */
   public toDatabaseObject(): RawBoard {
     return new RawBoard(this);
+  }
+
+  /**
+   * Convert Board model to JSON object
+   *
+   * @returns {Board}
+   * @memberof Board
+   */
+  public toJson(): Board {
+    return new Board(this);
   }
 }

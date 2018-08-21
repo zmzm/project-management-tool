@@ -30,6 +30,15 @@ export function up(db: knex) {
         first_name: 'Test',
         last_name: 'Testov',
       },
+      {
+        id: 2,
+        email: 'teast2@sdfsdf.sdfsdf',
+        password: 'asdasdasd123213',
+        role_id: 2,
+        team_id: 1,
+        first_name: 'Test2',
+        last_name: 'Testov2',
+      },
     ]));
 }
 

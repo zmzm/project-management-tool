@@ -1,3 +1,5 @@
+import BaseModel from './baseModel';
+
 /* eslint camelcase: 0 */
 /**
  * Role object for database
@@ -11,7 +13,7 @@ export class RawRole {
   public role_name?: string
 
   constructor(builder: Role) {
-    this.id = builder.Id;
+    this.id = builder.getId();
     this.role_name = builder.Name;
   }
 }
@@ -22,7 +24,7 @@ export class RawRole {
  * @export
  * @class Role
  */
-export class Role {
+export class Role implements BaseModel {
   private id?: number
 
   private roleName: string
@@ -37,7 +39,7 @@ export class Role {
     }
   }
 
-  public get Id(): number {
+  public getId(): number {
     return this.id;
   }
 
@@ -93,5 +95,15 @@ export class Role {
    */
   public toDatabaseObject(): RawRole {
     return new RawRole(this);
+  }
+
+  /**
+   * Convert Role model to JSON object
+   *
+   * @returns {Role}
+   * @memberof Role
+   */
+  public toJson(): Role {
+    return new Role(this);
   }
 }

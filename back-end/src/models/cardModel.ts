@@ -1,3 +1,5 @@
+import BaseModel from './baseModel';
+
 /* eslint camelcase: 0 */
 /**
  * Card object for database
@@ -19,7 +21,7 @@ export class RawCard {
   public created_at?: Date
 
   constructor(builder: Card) {
-    this.id = builder.Id;
+    this.id = builder.getId();
     this.card_name = builder.Name;
     this.about = builder.About;
     this.user_id = builder.UserId;
@@ -34,7 +36,7 @@ export class RawCard {
  * @export
  * @class Card
  */
-export class Card {
+export class Card implements BaseModel {
   private id?: number
 
   private cardName: string
@@ -57,7 +59,7 @@ export class Card {
     }
   }
 
-  public get Id(): number {
+  public getId(): number {
     return this.id;
   }
 
@@ -157,5 +159,15 @@ export class Card {
    */
   public toDatabaseObject(): RawCard {
     return new RawCard(this);
+  }
+
+  /**
+   * Convert Card model to JSON object
+   *
+   * @returns {Card}
+   * @memberof Card
+   */
+  public toJson(): Card {
+    return new Card(this);
   }
 }

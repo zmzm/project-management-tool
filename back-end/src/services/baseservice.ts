@@ -1,4 +1,6 @@
+import * as lodash from 'lodash';
 import BaseRepository from '../repositories/baseRepository';
+import BaseModel from '../models/baseModel';
 
 /**
  * Base service class for all services
@@ -29,7 +31,7 @@ export default abstract class BaseService<T, S> {
    * @returns {Promise<T>}
    * @memberof BaseService
    */
-  public async findById(id: number): Promise<T> {
+  public async findById(id: number): Promise<BaseModel> {
     const entity = await this.getRepository().findById(id);
     return entity;
   }
@@ -54,8 +56,10 @@ export default abstract class BaseService<T, S> {
    * @returns {Promise<S>}
    * @memberof BaseService
    */
-  public async update(entity: S): Promise<S> {
-    const result = await this.getRepository().update(entity);
+  public async update(entity: BaseModel): Promise<BaseModel> {
+    const newEntity = await this.findById(entity.getId());
+    const result = await this.getRepository()
+      .update(lodash.merge({}, newEntity, entity.toDatabaseObject()), entity.getId());
     return result;
   }
 

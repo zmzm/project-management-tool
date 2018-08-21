@@ -1,3 +1,5 @@
+import BaseModel from './baseModel';
+
 /* eslint camelcase: 0 */
 /**
  * User object for database
@@ -25,7 +27,7 @@ export class RawUser {
   public updated_at?: Date
 
   constructor(builder: User) {
-    this.id = builder.Id;
+    this.id = builder.getId();
     this.email = builder.Email;
     this.password = builder.Password;
     this.role_id = builder.RoleId;
@@ -43,7 +45,7 @@ export class RawUser {
  * @export
  * @class User
  */
-export class User {
+export class User implements BaseModel {
   private id?: number
 
   private email: string
@@ -72,7 +74,7 @@ export class User {
     }
   }
 
-  public get Id(): number {
+  public getId(): number {
     return this.id;
   }
 
@@ -205,5 +207,15 @@ export class User {
    */
   public toDatabaseObject(): RawUser {
     return new RawUser(this);
+  }
+
+  /**
+   * Convert User model to JSON object
+   *
+   * @returns {User}
+   * @memberof User
+   */
+  public toJson(): User {
+    return new User(this);
   }
 }

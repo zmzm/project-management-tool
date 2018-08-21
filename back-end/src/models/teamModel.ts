@@ -1,3 +1,5 @@
+import BaseModel from './baseModel';
+
 /* eslint camelcase: 0 */
 /**
  * Team object for database
@@ -11,7 +13,7 @@ export class RawTeam {
   public team_name?: string
 
   constructor(builder: Team) {
-    this.id = builder.Id;
+    this.id = builder.getId();
     this.team_name = builder.Name;
   }
 }
@@ -22,7 +24,7 @@ export class RawTeam {
  * @export
  * @class Team
  */
-export class Team {
+export class Team implements BaseModel {
   private id?: number
 
   private teamName: string
@@ -37,7 +39,7 @@ export class Team {
     }
   }
 
-  public get Id(): number {
+  public getId(): number {
     return this.id;
   }
 
@@ -93,5 +95,15 @@ export class Team {
    */
   public toDatabaseObject(): RawTeam {
     return new RawTeam(this);
+  }
+
+  /**
+   * Convert Team model to JSON object
+   *
+   * @returns {Team}
+   * @memberof Team
+   */
+  public toJson(): Team {
+    return new Team(this);
   }
 }

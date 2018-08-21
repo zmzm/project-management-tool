@@ -1,3 +1,5 @@
+import BaseModel from './baseModel';
+
 /* eslint camelcase: 0 */
 /**
  * Comment object for database
@@ -17,7 +19,7 @@ export class RawComment {
   public created_at?: Date
 
   constructor(builder: Comment) {
-    this.id = builder.Id;
+    this.id = builder.getId();
     this.comment_text = builder.Text;
     this.user_id = builder.UserId;
     this.card_id = builder.CardId;
@@ -31,7 +33,7 @@ export class RawComment {
  * @export
  * @class Comment
  */
-export class Comment {
+export class Comment implements BaseModel {
   private id?: number
 
   private commentText: string
@@ -52,7 +54,7 @@ export class Comment {
     }
   }
 
-  public get Id(): number {
+  public getId(): number {
     return this.id;
   }
 
@@ -141,5 +143,15 @@ export class Comment {
    */
   public toDatabaseObject(): RawComment {
     return new RawComment(this);
+  }
+
+  /**
+   * Convert Comment model to JSON object
+   *
+   * @returns {Comment}
+   * @memberof Comment
+   */
+  public toJson(): Comment {
+    return new Comment(this);
   }
 }

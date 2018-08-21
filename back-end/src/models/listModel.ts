@@ -1,3 +1,5 @@
+import BaseModel from './baseModel';
+
 /* eslint camelcase: 0 */
 /**
  * List object for database
@@ -13,7 +15,7 @@ export class RawList {
   public board_id?: number
 
   constructor(builder: List) {
-    this.id = builder.Id;
+    this.id = builder.getId();
     this.list_name = builder.Name;
     this.board_id = builder.BoardId;
   }
@@ -25,7 +27,7 @@ export class RawList {
  * @export
  * @class List
  */
-export class List {
+export class List implements BaseModel {
   private id?: number
 
   private listName: string
@@ -42,7 +44,7 @@ export class List {
     }
   }
 
-  public get Id(): number {
+  public getId(): number {
     return this.id;
   }
 
@@ -107,5 +109,15 @@ export class List {
    */
   public toDatabaseObject(): RawList {
     return new RawList(this);
+  }
+
+  /**
+   * Convert List model to JSON object
+   *
+   * @returns {List}
+   * @memberof List
+   */
+  public toJson(): List {
+    return new List(this);
   }
 }

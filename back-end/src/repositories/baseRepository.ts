@@ -1,4 +1,5 @@
 import Postgres from '../database';
+import BaseModel from '../models/baseModel';
 
 /**
  * Base repository class for all repositories
@@ -40,7 +41,7 @@ export default class BaseRepository<T, S> {
    * @returns {Promise<T>}
    * @memberof BaseRepository
    */
-  public async findById(id: number): Promise<T> {
+  public async findById(id: number): Promise<BaseModel> {
     const conn = await this.db.getConnection();
     const result = await conn
       .select()
@@ -72,17 +73,16 @@ export default class BaseRepository<T, S> {
   }
 
   /**
-   * Update entity of @type T in database
+   * Update entity of @type S in database
    *
-   * @param {T} entity
-   * @returns {Promise<T>}
+   * @param {S} entity
+   * @returns {Promise<BaseModel>}
    * @memberof BaseRepository
    */
-  public async update(entity: S): Promise<S> {
+  public async update(entity: S, id: number): Promise<BaseModel> {
     const conn = await this.db.getConnection();
-
-    const result = await conn.table(this.table).update(entity);
-    return result;
+    const result = await conn.update(entity).into(this.table).where('id', id);
+    return this.findById(result);
   }
 
   /**
