@@ -4,12 +4,30 @@ import * as Koa from 'koa';
 
 import Postgres from '../database';
 import Schema from '../schemas';
-import BCryptHasher from '../lib/hasher';
+import BCryptHasher from '../utils/hasher';
 import Context from '../context';
 import ServicesContext from '../context/servicesContext';
 import UserRepository from '../repositories/userRepository';
 import UserService from '../services/userService';
+import BoardService from '../services/boardService';
+import BoardRepository from '../repositories/boardRepository';
+import CardService from '../services/cardService';
+import CardRepository from '../repositories/cardRepository';
+import CommentService from '../services/commentService';
+import CommentRepository from '../repositories/commentRepository';
+import ListService from '../services/listService';
+import ListRepository from '../repositories/listRepository';
+import RoleService from '../services/roleService';
+import RoleRepository from '../repositories/roleRepository';
+import TeamService from '../services/teamService';
+import TeamRepository from '../repositories/teamRepository';
 
+/**
+ * Registering GraphQL routes and creating context for GraphQL
+ *
+ * @export
+ * @class GraphQLRoutes
+ */
 export default class GraphQLRoutes {
   static map(router: Router, app: Koa): void {
     GraphQLRoutes.buildContext();
@@ -37,9 +55,13 @@ export default class GraphQLRoutes {
       });
 
       ServicesContext.getInstance()
-        .setUserService(
-          new UserService(new UserRepository(db), new BCryptHasher(), null),
-        );
+        .setBoardService(new BoardService(new BoardRepository(db)))
+        .setCardService(new CardService(new CardRepository(db)))
+        .setCommentService(new CommentService(new CommentRepository(db)))
+        .setListService(new ListService(new ListRepository(db)))
+        .setRoleService(new RoleService(new RoleRepository(db)))
+        .setTeamService(new TeamService(new TeamRepository(db)))
+        .setUserService(new UserService(new UserRepository(db), new BCryptHasher()));
 
       db.schemaMigration();
     } catch (e) {

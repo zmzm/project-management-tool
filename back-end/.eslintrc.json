@@ -1,14 +1,18 @@
 {
-  "extends": "airbnb-base",
-  "parser": "typescript-eslint-parser",
-  "plugins": ["typescript", "jest"],
-  "rules": {
-    "no-console": 1,
-    "strict": 0,
-    "no-param-reassign": [2, { "props": false }],
-    "no-unused-vars": "off",
-    "no-undef": "off"
-  },
+    "extends": "airbnb-base",
+    "parser": "typescript-eslint-parser",
+    "plugins": ["typescript", "jest"],
+    "rules": {
+        "no-console": 1,
+        "strict": 0,
+        "no-undef": "off",
+        "no-param-reassign": [2, { "props": false }],
+        "class-methods-use-this": ["error", { "exceptMethods": ["transform", "hashPassword", "verifyPassword", "execute"] }],
+
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "no-unused-vars": "off"
+    },
   "env": {
     "jest/globals": true
   },

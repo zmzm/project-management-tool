@@ -1,12 +1,40 @@
-import User from '../../entities/user';
+import { GraphQLString, GraphQLList, GraphQLInt } from 'graphql';
+import UserType from '../types/userType';
 import Context from '../../context';
+import { User } from '../../models/userModel';
 
-export default class UsersQuery {
-  private context: Context<any>;
+const findAll = {
+  type: new GraphQLList(UserType),
+  async resolve(root: any, args: any, ctx: Context<any>): Promise<User[]> {
+    const users = await ctx.Services.UserService.findAll();
+    return users.map(user => new User(user));
+  },
+};
 
-  public async findUserByEmail(root: any, args: any, context: Context<any>): Promise<User> {
-    this.context = context;
-    const users = await this.context.Services.UserService.findByEmail(args.email);
-    return users;
-  }
-}
+const findById = {
+  type: UserType,
+  args: {
+    id: { type: GraphQLInt },
+  },
+  async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
+    const user = await ctx.Services.UserService.findById(args.id);
+    return new User(user);
+  },
+};
+
+const findUserByEmail = {
+  type: UserType,
+  args: {
+    email: { type: GraphQLString },
+  },
+  async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
+    const user = await ctx.Services.UserService.findByEmail(args.email);
+    return user;
+  },
+};
+
+export default {
+  findAll,
+  findById,
+  findUserByEmail,
+};

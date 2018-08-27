@@ -1,96 +1,39 @@
-import User from '../entities/user';
-import { NotFoundError, ValidationError } from '../errors';
+import { RawUser, User } from '../models/userModel';
+import { NotFoundError } from '../errors';
+import BaseRepository from './baseRepository';
 import Postgres from '../database';
 
-export default class UserRepository {
-  private readonly TABLE: string = 'user';
-
-  private db: Postgres;
-
-  private row: any;
-
+/**
+ * Repository for CRUD operations with User model
+ *
+ * @export
+ * @class UserRepository
+ * @extends {BaseRepository<User>}
+ */
+export default class UserRepository extends BaseRepository<User, RawUser> {
   constructor(db: Postgres) {
-    this.db = db;
+    super(db, 'user');
   }
 
+  /**
+   * Find user in database by email
+   *
+   * @param {string} email
+   * @returns {Promise<User>}
+   * @memberof UserRepository
+   */
   public async findByEmail(email: string): Promise<User> {
     const conn = await this.db.getConnection();
-    const row = await conn
-      .table(this.TABLE)
+    const result = await conn
+      .select()
+      .from(this.table)
       .where({ email })
       .first();
 
-    if (!row) {
+    if (!result) {
       throw new NotFoundError('User does not exist');
     }
 
-    return this.transform(row);
-  }
-
-  public async insert(user: User): Promise<User> {
-    user.created = '29.06.2018';
-    user.updated = '29.06.2018';
-
-    const conn = await this.db.getConnection();
-
-    try {
-      const result = await conn.table(this.TABLE).insert({
-        email: user.email,
-        password: user.password,
-        role: user.role,
-        first_name: user.firstName,
-        last_name: user.lastName,
-        created: user.created,
-        updated: user.updated,
-      });
-
-      const { id } = result[0];
-      user.id = id;
-
-      return user;
-    } catch (err) {
-      if (err.code === 'ER_DUP_ENTRY') {
-        throw new ValidationError(`Email ${user.email} already exists`, err);
-      }
-
-      throw err;
-    }
-  }
-
-  public async update(user: User): Promise<User> {
-    user.updated = '29.06.2018';
-
-    const conn = await this.db.getConnection();
-
-    await conn.table(this.TABLE).update({
-      first_name: user.firstName,
-      last_name: user.lastName,
-      password: user.password,
-    });
-
-    return user;
-  }
-
-  public async delete(userId: number): Promise<void> {
-    const conn = await this.db.getConnection();
-
-    await conn
-      .from(this.TABLE)
-      .delete()
-      .where({ id: userId });
-  }
-
-  private transform(row: any): User {
-    this.row = row;
-    return {
-      id: this.row.id,
-      email: this.row.email,
-      password: this.row.password,
-      role: this.row.role,
-      firstName: this.row.first_name,
-      lastName: this.row.last_name,
-      created: this.row.created,
-      updated: this.row.updated,
-    };
+    return new User(result);
   }
 }

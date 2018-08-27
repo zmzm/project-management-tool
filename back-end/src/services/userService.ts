@@ -1,49 +1,53 @@
-import User from '../entities/user';
-import { ValidationError } from '../errors';
-import Authenticator from '../lib/auth';
-import { Hasher } from '../lib/hasher';
+import BaseService from './baseservice';
 import UserRepository from '../repositories/userRepository';
+import { Hasher } from '../utils/hasher';
+import { User, RawUser } from '../models/userModel';
+import { ValidationError } from '../errors';
+import BaseRepository from '../repositories/baseRepository';
 
-export default class UserService {
+
+export default class UserService extends BaseService<User, RawUser> {
   private repo: UserRepository;
 
   private hasher: Hasher;
 
-  private auth: Authenticator;
+  public getRepository(): BaseRepository<User, RawUser> {
+    return this.repo;
+  }
 
-  constructor(repo: UserRepository, hasher: Hasher, auth: Authenticator) {
+  constructor(repo: UserRepository, hasher: Hasher) {
+    super();
     this.repo = repo;
     this.hasher = hasher;
-    this.auth = auth;
   }
 
+  /**
+   * Find user by email
+   *
+   * @param {string} email
+   * @returns {Promise<User>}
+   * @memberof UserService
+   */
   public async findByEmail(email: string): Promise<User> {
-    return this.repo.findByEmail(email);
+    const user = await this.repo.findByEmail(email);
+    return user;
   }
 
-  public async create(user: User): Promise<User> {
-    const hashPassword = await this.hasher.hashPassword(user.password);
-
-    user.password = hashPassword;
-
-    return this.repo.insert(user);
-  }
-
-  public async login(email: string, password: string): Promise<string> {
+  /**
+   * Login existed user
+   *
+   * @param {string} email
+   * @param {string} password
+   * @returns {Promise<User>}
+   * @memberof UserService
+   */
+  public async login(email: string, password: string): Promise<User> {
     const user = await this.repo.findByEmail(email);
 
-    if (await this.hasher.verifyPassword(password, user.password)) {
-      return '';
+    if (await this.hasher.verifyPassword(password, user.Password)) {
+      return user;
     }
 
     throw new ValidationError('Wrong credentials');
-  }
-
-  public update(user: User): Promise<User> {
-    return this.repo.update(user);
-  }
-
-  public delete(userId: number): Promise<void> {
-    return this.repo.delete(userId);
   }
 }
