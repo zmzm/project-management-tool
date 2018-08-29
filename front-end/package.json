@@ -3,22 +3,30 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.4",
+    "@fortawesome/free-solid-svg-icons": "^5.3.1",
+    "@fortawesome/react-fontawesome": "^0.1.2",
+    "@types/react-fontawesome": "^1.6.4",
     "apollo-boost": "^0.1.10",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "graphql": "^0.13.2",
+    "polished": "^2.0.3",
     "react": "^16.4.1",
     "react-apollo": "^2.1.9",
     "react-docgen-typescript": "^1.6.2",
     "react-dom": "^16.4.1",
-    "react-scripts-ts": "2.16.0"
+    "react-router": "^4.3.1",
+    "react-scripts-ts": "2.16.0",
+    "react-styleguidist": "^7.1.0",
+    "styled-components": "^3.3.3"
   },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "eslint": "eslint src/. --ext tsx,ts",
+    "eslint": "eslint src/. --ext tsx,ts --ignore-pattern register-service-worker.ts",
     "precommit": "npm run eslint",
     "sg": "npx styleguidist server"
   },
@@ -40,7 +48,6 @@
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-typescript": "^0.12.0",
     "husky": "^0.14.3",
-    "react-styleguidist": "^7.1.0",
     "typescript": "^2.9.2",
     "typescript-eslint-parser": "^16.0.1"
   }
