@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ThemeProvider } from '.';
-import theme from './themes/default';
+import { ThemeProvider } from '../libs/styled-components-with-them-anotation';
+import theme from '../themes/default';
 
 interface IThemeWrapper {
   children: React.ReactChild;

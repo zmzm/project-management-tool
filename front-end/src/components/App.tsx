@@ -1,12 +1,8 @@
 import * as React from 'react';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { Button, ButtonWithIcon } from './ui';
+import { Button, ButtonWithIcon } from './core';
 
-interface IApp {
-  children?: React.ReactChild;
-}
-
-const App: React.SFC<IApp> = () => (
+const App: React.SFC<{}> = () => (
   <React.Fragment>
     <Button size="big" type="primary">
       Push Me
