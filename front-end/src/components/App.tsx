@@ -7,7 +7,7 @@ const App: React.SFC<{}> = () => (
     <Button size="big" type="primary">
       Push Me
     </Button>
-    <Button size="medium" type="alert">
+    <Button size="medium" type="alert" block>
       Push Me
     </Button>
     <Button>
@@ -16,7 +16,7 @@ const App: React.SFC<{}> = () => (
     <ButtonWithIcon icon={faCoffee} position="left" iconColor="red">
       Push Me
     </ButtonWithIcon>
-    <ButtonWithIcon icon={faCoffee} position="right" type="primary" size="big">
+    <ButtonWithIcon icon={faCoffee} position="right" type="primary" size="big" block>
       Push Me
     </ButtonWithIcon>
   </React.Fragment>

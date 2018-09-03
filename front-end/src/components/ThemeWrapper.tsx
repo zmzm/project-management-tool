@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeProvider } from '../libs/styled-components-with-them-anotation';
+import { ThemeProvider } from '../libs/styled-components-with-theme-anotation';
 import theme from '../themes/default';
 
 interface IThemeWrapper {

@@ -1,5 +1,5 @@
 import { darken } from 'polished';
-import styled from '../../../libs/styled-components-with-them-anotation';
+import styled from '../../../libs/styled-components-with-theme-anotation';
 import ITheme from '../../../themes/theme-interface';
 
 /**
@@ -44,14 +44,20 @@ const generateStylesBasedOnSize = ({ size }: { size?: string }): string => {
   return styles;
 };
 
-interface IButton {
+export interface IButton {
   type?: string,
   size?: string,
+  block?: boolean,
 }
+
+const generateStylesBasedOnBlock = ({ block }: { block?: boolean }) => (block
+  ? 'width: 100%'
+  : '');
 
 const Button = styled<IButton, 'button'>('button')`
   ${generateStylesBasedOnSize}
   ${generateStylesBasedOnType}
+  ${generateStylesBasedOnBlock}
   cursor: pointer;
   border-radius: 5px;
   outline: 0;
