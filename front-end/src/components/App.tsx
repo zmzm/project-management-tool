@@ -1,25 +1,9 @@
 import * as React from 'react';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
-import { Button, ButtonWithIcon } from './core';
 
 const App: React.SFC<{}> = () => (
-  <React.Fragment>
-    <Button size="big" type="primary">
-      Push Me
-    </Button>
-    <Button size="medium" type="alert" block>
-      Push Me
-    </Button>
-    <Button>
-      Push Me
-    </Button>
-    <ButtonWithIcon icon={faCoffee} position="left" iconColor="red">
-      Push Me
-    </ButtonWithIcon>
-    <ButtonWithIcon icon={faCoffee} position="right" type="primary" size="big" block>
-      Push Me
-    </ButtonWithIcon>
-  </React.Fragment>
+  <p>
+    Trello
+  </p>
 );
 
 export default App;

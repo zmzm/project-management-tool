@@ -22,6 +22,12 @@ const defaultTheme: ITheme = {
     primary: '#f7f7f7',
     secondary: 'black',
   },
+  modalWindow: {
+    // modal window background set through rgba property, so it's needed to use rgb color(it
+    // looks like the most convinient way to set opacity)
+    color: '255, 255, 255',
+    opacity: '0.7',
+  },
 };
 
 export default defaultTheme;

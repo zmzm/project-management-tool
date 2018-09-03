@@ -14,6 +14,10 @@ interface ITheme {
     primary: string,
     secondary: string,
   },
+  modalWindow: {
+    color: string,
+    opacity: string,
+  },
 }
 
 export default ITheme;
