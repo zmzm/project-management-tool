@@ -1,10 +1,9 @@
-import styled from '../../libs/styled-components-with-theme-anotation';
-import ITheme from '../../themes/theme-interface';
+import styled, { ITheme } from '../../libs/styled-components-with-theme-anotation';
 
 /**
  * Returns modal-window sizes depends on type
  */
-const getStylesBasedOnType = ({ type }: { type?: string }): string => {
+const generateStylesBasedOnType = ({ type }: { type?: string }): string => {
   const sizingList = {
     absolute: `
       width: 100vw;
@@ -26,7 +25,7 @@ const getStylesBasedOnType = ({ type }: { type?: string }): string => {
 /**
  * Extracts needed values for setting background-color property from theme
  */
-const extractBgColorFromTheme = ({ theme }: { theme: ITheme }) => {
+const generateStylesBasedOnTheme = ({ theme }: { theme: ITheme }) => {
   const { color, opacity } = theme.modalWindow;
 
   return `
@@ -39,15 +38,15 @@ interface IModalWindow {
 }
 
 const ModalWindow = styled<IModalWindow, 'div'>('div')`
+  ${generateStylesBasedOnType}
+  ${generateStylesBasedOnTheme}
   position: absolute;
   left: 0;
   top: 0;
-  ${getStylesBasedOnType}
   z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
-  ${extractBgColorFromTheme}
 `;
 
 export default ModalWindow;

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import Button from './Button';
 import styled from '../../../libs/styled-components-with-theme-anotation';
 import { IButton } from './Button';
 
 interface IButtonWithIcon extends IButton {
   iconColor?: string,
-  icon: IconDefinition,
+  icon: string,
   position: 'left' | 'right',
 }
 
@@ -22,7 +22,7 @@ const ButtonWithIcon: React.SFC<IButtonWithIcon> = (props) => {
   return (
     <Button type={type} size={size} block={block}>
       {position === 'left' && children}
-      <IconWithPaddings icon={icon} color={iconColor} />
+      <IconWithPaddings icon={icon as IconProp} color={iconColor} />
       {position === 'right' && children}
     </Button>
   );

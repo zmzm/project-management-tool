@@ -18,6 +18,11 @@ interface ITheme {
     color: string,
     opacity: string,
   },
+  spinner: {
+    bg: string,
+    roller: string,
+    stub: string,
+  },
 }
 
 export default ITheme;
