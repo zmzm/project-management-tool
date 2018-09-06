@@ -1,5 +1,5 @@
-import ITheme from '../theme-interface';
 import colors from './colors';
+import ITheme from '../theme-interface';
 
 const {
   black,
@@ -33,6 +33,18 @@ const defaultTheme: ITheme = {
   colors: {
     primary: grayLight,
     secondary: black,
+  },
+  input: {
+    default: {
+      bg: '#ffffff',
+      border: '2px solid palevioletred',
+      textColor: '#000000',
+    },
+    inverted: {
+      bg: 'palevioletred',
+      border: '2px solid palevioletred',
+      textColor: '#ffffff',
+    },
   },
   modalWindow: {
     // modal window background set through rgba property, so it's needed to use rgb color(it

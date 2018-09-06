@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { darken } from 'polished';
 import styled, { ITheme } from '../../../libs/styled-components-with-theme-anotation';
 
@@ -65,5 +66,7 @@ const Button = styled<IButton, 'button'>('button')`
   outline: 0;
 `;
 
+const StyledButton = (props: IButton) => <Button {...props} />;
+
 /** @component */
-export default Button;
+export default StyledButton;

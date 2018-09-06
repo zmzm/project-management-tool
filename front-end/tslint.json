@@ -11,6 +11,7 @@
       "import-sources-order": "any",
       "named-imports-order": "case-insensitive"
     }],
+    "no-console": false,
     "jsx-boolean-value": false
   }
 }

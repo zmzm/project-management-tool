@@ -1,4 +1,5 @@
-import styled, { ITheme } from '../../libs/styled-components-with-theme-anotation';
+import * as React from 'react';
+import styled, { ITheme } from '../../../libs/styled-components-with-theme-anotation';
 
 /**
  * Returns modal-window sizes depends on type
@@ -49,4 +50,6 @@ const ModalWindow = styled<IModalWindow, 'div'>('div')`
   align-items: center;
 `;
 
-export default ModalWindow;
+const StyledModalWindow = (props: IModalWindow) => <ModalWindow {...props} />;
+
+export default StyledModalWindow;

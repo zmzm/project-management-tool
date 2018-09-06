@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled, { ITheme, keyframes } from '../../libs/styled-components-with-theme-anotation';
+import styled, { ITheme, keyframes } from '../../../libs/styled-components-with-theme-anotation';
 
 /**
  * Extracts needed values for setting background-color property from theme
