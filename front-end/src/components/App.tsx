@@ -1,11 +1,9 @@
-import { Component } from 'react';
+import * as React from 'react';
 
-class App extends Component<{}, {}> {
-  public render() {
-    return (
-      'Hello, Trello!'
-    );
-  }
-}
+const App: React.SFC<{}> = () => (
+  <p>
+    Trello
+  </p>
+);
 
 export default App;
