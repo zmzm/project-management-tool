@@ -1,6 +1,6 @@
 import * as styledComponents from 'styled-components';
 import { ThemedStyledComponentsModule } from 'styled-components';
-import ITheme from './themes/theme-interface';
+import ITheme from '../themes/theme-interface';
 
 // by defalut theme prop set to any type, code below set custom type for theme
 const {
@@ -12,6 +12,6 @@ const {
 } = styledComponents as ThemedStyledComponentsModule<ITheme>;
 
 export {
-  css, injectGlobal, keyframes, ThemeProvider,
+  css, injectGlobal, keyframes, ThemeProvider, ITheme,
 };
 export default styled;
