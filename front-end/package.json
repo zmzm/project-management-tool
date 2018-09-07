@@ -26,7 +26,6 @@
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
     "eslint": "eslint src/. --ext tsx,ts --ignore-pattern register-service-worker.ts",
-    "precommit": "npm run eslint",
     "sg": "npx styleguidist server"
   },
   "devDependencies": {
