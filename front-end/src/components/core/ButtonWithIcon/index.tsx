@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faCogs } from '@fortawesome/free-solid-svg-icons';
 import Button from '../Button';
 import styled from '../../../libs/styled-components-with-theme-anotation';
 import { IButton } from '../Button';
@@ -17,7 +16,6 @@ const IconWithPaddings = styled(FontAwesomeIcon)`
 `;
 
 const ButtonWithIcon: React.SFC<IButtonWithIcon> = (props) => {
-  console.log(faCogs);
   const {
     type, size, block, children, icon, position, iconColor,
   } = props;

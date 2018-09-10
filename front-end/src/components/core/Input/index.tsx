@@ -9,7 +9,8 @@ export const InputVariants = {
 };
 
 interface InputProps {
-    type: string,
+    type: 'text' | 'number' | 'email' | 'search' | 'tel' | 'url' | 'password' | 'textarea',
+    variant: string,
     label?: string,
     className?: string,
     width?: number,
@@ -40,6 +41,11 @@ class Input extends React.PureComponent<InputProps, {}> {
     }
   }
 
+  public handleChange = (event: any): void => {
+    const { onChange } = this.props;
+    onChange(event.target.value, event);
+  }
+
   public setInput = (element: any): void => {
     this.input = element;
   };
@@ -52,7 +58,7 @@ class Input extends React.PureComponent<InputProps, {}> {
     }
 
     return (
-      <StyledLabel>{label}</StyledLabel>
+      <InputLabel>{label}</InputLabel>
     );
   }
 
@@ -62,19 +68,36 @@ class Input extends React.PureComponent<InputProps, {}> {
       placeholder,
       value,
       disabled,
+      type,
     } = this.props;
     return (
       <div>
         {this.renderLabel()}
-        <StyledInputWrapper>
-          <input
-            className={className}
-            placeholder={placeholder}
-            value={value}
-            ref={this.setInput}
-            disabled={disabled}
-          />
-        </StyledInputWrapper>
+        <InputWrapper>
+          { type === 'textarea'
+            ? (
+              <textarea
+                className={className}
+                placeholder={placeholder}
+                value={value}
+                ref={this.setInput}
+                disabled={disabled}
+                onChange={this.handleChange}
+              />
+            )
+            : (
+              <input
+                className={className}
+                type={type}
+                placeholder={placeholder}
+                value={value}
+                ref={this.setInput}
+                disabled={disabled}
+                onChange={this.handleChange}
+              />
+            )
+          }
+        </InputWrapper>
       </div>
     );
   }
@@ -87,27 +110,28 @@ const disableStyle = css`
   outline:none;
 `;
 
-const StyledLabel = styled('label')`
+const InputLabel = styled('label')`
     color: #808080;
-    lineHeight: 1.4;
+    line-height: 1.4;
     display: inline-block;
     cursor: pointer;
     font-size: 16px;
 `;
 
-const StyledInputWrapper = styled('div')`
+const InputWrapper = styled('div')`
     display: flex;
     flexDirection: row;
 `;
 
 const Styles = styled(Input)`
-    color: ${({ type, theme }) => theme.input[type].textColor};
+    color: ${({ variant, theme }) => theme.input[variant].textColor};
     font-size: 1em;
-    background: ${({ type, theme }) => theme.input[type].bg};
-    border: ${({ type, theme }) => theme.input[type].border};
+    background: ${({ variant, theme }) => theme.input[variant].bg};
+    border: ${({ variant, theme }) => theme.input[variant].border};
     border-radius: 3px;
     width: 100%;
     padding: 10px;
+    line-height: 26px;
     ${({ disabled }) => disabled && disableStyle}
 `;
 
