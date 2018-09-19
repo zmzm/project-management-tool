@@ -11,7 +11,20 @@
       "import-sources-order": "any",
       "named-imports-order": "case-insensitive"
     }],
-    "no-console": false,
+    "semicolon": [true, "always", "ignore-interfaces"],
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "objects": "always",
+          "arrays": "always",
+          "functions": "never",
+          "typeLiterals": "ignore"
+        },
+        "esSpecCompliant": true
+      }
+    ],
+    "no-console": true,
     "jsx-boolean-value": false
   }
 }

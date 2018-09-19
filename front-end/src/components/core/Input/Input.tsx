@@ -1,5 +1,7 @@
 import * as React from 'react';
-import styled, { css } from '../../../libs/styled-components-with-theme-anotation';
+
+import styled, { css, cx } from 'react-emotion';
+import { withTheme } from 'emotion-theming';
 
 type HTMLAbstractInputElement = HTMLInputElement | HTMLTextAreaElement;
 
@@ -8,21 +10,56 @@ export const InputVariants = {
   Inverted: 'inverted',
 };
 
-interface InputProps {
-    type: 'text' | 'number' | 'email' | 'search' | 'tel' | 'url' | 'password' | 'textarea',
-    variant: string,
-    label?: string,
-    className?: string,
-    width?: number,
-    value?: string | number,
-    placeholder?: string,
-    disabled?: boolean,
-    autoFocus?: boolean,
-    onChange: (value: string, e: React.SyntheticEvent<HTMLAbstractInputElement>) => any,
+const disableStyle = css`
+  color: #cbcbcb;    
+  cursor: not-allowed;
+  border: 2px solid #cbcbcb;
+  outline:none;
+`;
+
+const InputLabel = styled('label')`
+  color: #808080;
+  line-height: 1.4;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 16px;
+`;
+
+const InputWrapper = styled('div')`
+  display: flex;
+  flexDirection: row;
+`;
+
+const inputCss = ({ input }, variant, disabled) => css`
+  color: ${input[variant].textColor};
+  font-size: 1em;
+  background: ${input[variant].bg};
+  border: ${input[variant].border};
+  border-radius: 3px;
+  width: 100%;
+  padding: 10px;
+  line-height: 26px;
+  ${disabled && disableStyle}
+`;
+
+export interface InputProps {
+  type: 'text' | 'number' | 'email' | 'search' | 'tel' | 'url' | 'password' | 'textarea',
+  variant: string,
+  label?: string,
+  className?: string,
+  width?: number,
+  value?: string | number,
+  placeholder?: string,
+  disabled?: boolean,
+  autoFocus?: boolean,
+  theme?: any;
+  onChange: (value: string, e: React.SyntheticEvent<HTMLAbstractInputElement>) => any,
 }
 
-class Input extends React.PureComponent<InputProps, {}> {
-  public input: HTMLInputElement | HTMLTextAreaElement;
+// @ts-ignore
+@withTheme
+export class Input extends React.PureComponent<InputProps> {
+  public input: HTMLAbstractInputElement;
 
   public componentDidMount(): void {
     this.autoFocus();
@@ -33,7 +70,7 @@ class Input extends React.PureComponent<InputProps, {}> {
     return Boolean(autoFocus) && !disabled;
   }
 
-  public autoFocus(): void {
+  public autoFocus = (): void => {
     if (this.isAutoFocus() && this.input) {
       if (document.activeElement !== this.input) {
         this.input.focus();
@@ -48,7 +85,7 @@ class Input extends React.PureComponent<InputProps, {}> {
 
   public setInput = (element: any): void => {
     this.input = element;
-  };
+  }
 
   public renderLabel() {
     const { label } = this.props;
@@ -69,15 +106,17 @@ class Input extends React.PureComponent<InputProps, {}> {
       value,
       disabled,
       type,
+      theme,
+      variant,
     } = this.props;
     return (
-      <div>
+      <React.Fragment>
         {this.renderLabel()}
         <InputWrapper>
           { type === 'textarea'
             ? (
               <textarea
-                className={className}
+                className={cx(className, inputCss(theme, variant, disabled))}
                 placeholder={placeholder}
                 value={value}
                 ref={this.setInput}
@@ -87,7 +126,7 @@ class Input extends React.PureComponent<InputProps, {}> {
             )
             : (
               <input
-                className={className}
+                className={cx(className, inputCss(theme, variant, disabled))}
                 type={type}
                 placeholder={placeholder}
                 value={value}
@@ -98,43 +137,7 @@ class Input extends React.PureComponent<InputProps, {}> {
             )
           }
         </InputWrapper>
-      </div>
+      </React.Fragment>
     );
   }
 }
-
-const disableStyle = css`
-  color: #cbcbcb;    
-  cursor: not-allowed;
-  border: 2px solid #cbcbcb;
-  outline:none;
-`;
-
-const InputLabel = styled('label')`
-    color: #808080;
-    line-height: 1.4;
-    display: inline-block;
-    cursor: pointer;
-    font-size: 16px;
-`;
-
-const InputWrapper = styled('div')`
-    display: flex;
-    flexDirection: row;
-`;
-
-const Styles = styled(Input)`
-    color: ${({ variant, theme }) => theme.input[variant].textColor};
-    font-size: 1em;
-    background: ${({ variant, theme }) => theme.input[variant].bg};
-    border: ${({ variant, theme }) => theme.input[variant].border};
-    border-radius: 3px;
-    width: 100%;
-    padding: 10px;
-    line-height: 26px;
-    ${({ disabled }) => disabled && disableStyle}
-`;
-
-const StyledInput = (props: InputProps) => <Styles {...props} />;
-
-export default StyledInput;
