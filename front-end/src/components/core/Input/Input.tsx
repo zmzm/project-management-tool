@@ -5,10 +5,18 @@ import { withTheme } from 'emotion-theming';
 
 type HTMLAbstractInputElement = HTMLInputElement | HTMLTextAreaElement;
 
-export const InputVariants = {
-  Default: 'default',
-  Inverted: 'inverted',
-};
+export enum InputVariants {
+  Default = 'default',
+  Inverted = 'inverted',
+}
+
+export enum InputTypes {
+  Text = 'text',
+  Number = 'number',
+  Email = 'email',
+  Password = 'password',
+  TextArea = 'textarea',
+}
 
 const disableStyle = css`
   color: #cbcbcb;    
@@ -43,7 +51,7 @@ const inputCss = ({ input }, variant, disabled) => css`
 `;
 
 export interface InputProps {
-  type: 'text' | 'number' | 'email' | 'search' | 'tel' | 'url' | 'password' | 'textarea',
+  type: InputTypes,
   variant: string,
   label?: string,
   className?: string,
