@@ -1,10 +1,13 @@
+import * as React from 'react';
+
 import { darken } from 'polished';
-import styled, { ITheme } from '../../../libs/styled-components-with-theme-anotation';
+
+import styled from 'react-emotion';
 
 /**
  * Generates styles based on type prop value
  */
-const generateStylesBasedOnType = ({ type, theme }: { type?: string, theme: ITheme }): string => {
+const generateStylesBasedOnType = ({ type, theme }: { type?: string, theme: any }): string => {
   const colorSource = type
     ? theme.buttons[type]
     : theme.buttons.regular;
@@ -56,7 +59,7 @@ export interface IButton {
   block?: boolean,
 }
 
-const Button = styled<IButton, 'button'>('button')`
+const StyledButton = styled('button')`
   ${generateStylesBasedOnSize}
   ${generateStylesBasedOnType}
   ${generateStylesBasedOnBlock}
@@ -64,6 +67,8 @@ const Button = styled<IButton, 'button'>('button')`
   border-radius: 5px;
   outline: 0;
 `;
+
+const Button = (props: IButton) => <StyledButton {...props} />;
 
 /** @component */
 export default Button;

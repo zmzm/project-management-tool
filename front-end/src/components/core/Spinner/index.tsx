@@ -1,10 +1,11 @@
 import * as React from 'react';
-import styled, { ITheme, keyframes } from '../../libs/styled-components-with-theme-anotation';
+
+import styled, { keyframes } from 'react-emotion';
 
 /**
  * Extracts needed values for setting background-color property from theme
  */
-const generateStylesBasedOnTheme = ({ theme }: { theme: ITheme }): string => {
+const generateStylesBasedOnTheme = ({ theme }: { theme: any }): string => {
   const { bg, stub, roller } = theme.spinner;
   const styles = `
     background-color: ${bg};

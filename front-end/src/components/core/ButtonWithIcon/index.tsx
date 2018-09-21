@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import Button from './Button';
-import styled from '../../../libs/styled-components-with-theme-anotation';
-import { IButton } from './Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import Button, { IButton } from '../Button/Button';
+import styled from 'react-emotion';
 
 interface IButtonWithIcon extends IButton {
   iconColor?: string,

@@ -7,6 +7,9 @@
     "@fortawesome/free-solid-svg-icons": "^5.3.1",
     "@fortawesome/react-fontawesome": "^0.1.2",
     "apollo-boost": "^0.1.10",
+    "babel-plugin-emotion": "^9.2.9",
+    "emotion": "^9.2.9",
+    "emotion-theming": "^9.2.9",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "graphql": "^0.13.2",
@@ -15,18 +18,17 @@
     "react-apollo": "^2.1.9",
     "react-docgen-typescript": "^1.6.2",
     "react-dom": "^16.4.1",
+    "react-emotion": "^9.2.9",
     "react-router": "^4.3.1",
     "react-scripts-ts": "2.16.0",
-    "react-styleguidist": "^7.1.0",
-    "styled-components": "^3.3.3"
+    "react-styleguidist": "^7.1.0"
   },
   "scripts": {
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "eslint": "eslint src/. --ext tsx,ts --ignore-pattern register-service-worker.ts",
-    "precommit": "npm run eslint",
+    "lint": "tslint './src/**/*.ts*'",
     "sg": "npx styleguidist server"
   },
   "devDependencies": {
@@ -40,15 +42,10 @@
     "babel-jest": "^23.4.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "eslint": "4.19.1",
-    "eslint-config-airbnb": "^17.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jest": "^21.21.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0",
-    "eslint-plugin-typescript": "^0.12.0",
     "husky": "^0.14.3",
-    "typescript": "^2.9.2",
-    "typescript-eslint-parser": "^16.0.1"
+    "typescript": "^3.0.3",
+    "ts-jest": "^23.1.4",
+    "ts-loader": "^5.1.1",
+    "tslint": "^5.11.0"
   }
 }

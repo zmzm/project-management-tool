@@ -1,9 +1,7 @@
 import * as React from 'react';
 
 const App: React.SFC<{}> = () => (
-  <p>
-    Trello
-  </p>
+  <h1>Hello</h1>
 );
 
 export default App;

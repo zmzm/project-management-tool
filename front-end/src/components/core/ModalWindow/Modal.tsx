@@ -1,4 +1,6 @@
-import styled, { ITheme } from '../../libs/styled-components-with-theme-anotation';
+import * as React from 'react';
+
+import styled from 'react-emotion';
 
 /**
  * Returns modal-window sizes depends on type
@@ -25,7 +27,7 @@ const generateStylesBasedOnType = ({ type }: { type?: string }): string => {
 /**
  * Extracts needed values for setting background-color property from theme
  */
-const generateStylesBasedOnTheme = ({ theme }: { theme: ITheme }) => {
+const generateStylesBasedOnTheme = ({ theme }: { theme: any }) => {
   const { color, opacity } = theme.modalWindow;
 
   return `
@@ -37,7 +39,7 @@ interface IModalWindow {
   type?: string,
 }
 
-const ModalWindow = styled<IModalWindow, 'div'>('div')`
+const ModalWindow = styled('div')`
   ${generateStylesBasedOnType}
   ${generateStylesBasedOnTheme}
   position: absolute;
@@ -49,4 +51,6 @@ const ModalWindow = styled<IModalWindow, 'div'>('div')`
   align-items: center;
 `;
 
-export default ModalWindow;
+const StyledModalWindow = (props: IModalWindow) => <ModalWindow {...props} />;
+
+export default StyledModalWindow;

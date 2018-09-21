@@ -1,17 +1,17 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import ThemeWrapper from './components/ThemeWrapper';
+
+import { ThemeProvider } from 'emotion-theming';
+
 import App from './components/App';
 import registerServiceWorker from './utils/register-service-worker';
-import injectGlobalStyles from './utils/inject-global-styles';
 import './utils/add-icons-to-lib';
-
-injectGlobalStyles();
+import theme from './themes/default';
 
 ReactDOM.render(
-  <ThemeWrapper>
+  <ThemeProvider theme={theme}>
     <App />
-  </ThemeWrapper>,
-  document.getElementById('root'),
+  </ThemeProvider>,
+  document.getElementById('root')
 );
 registerServiceWorker();
