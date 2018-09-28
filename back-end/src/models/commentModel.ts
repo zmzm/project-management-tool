@@ -55,7 +55,7 @@ export class Comment implements BaseModel {
   }
 
   public getId(): number {
-    return this.id;
+    return <number>this.id;
   }
 
   public get Text(): string {
@@ -63,15 +63,15 @@ export class Comment implements BaseModel {
   }
 
   public get UserId(): number {
-    return this.userId;
+    return <number>this.userId;
   }
 
   public get CardId(): number {
-    return this.cardId;
+    return <number>this.cardId;
   }
 
   public get CreatedAt(): Date {
-    return this.created;
+    return <Date>this.created;
   }
 
   public setId(id: number): Comment {

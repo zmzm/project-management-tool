@@ -46,12 +46,12 @@ export default class GraphQLRoutes {
   private static buildContext(): void {
     try {
       const db = new Postgres({
-        database: process.env.DB_DATABASE,
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD || '',
-        debug: process.env.ENV !== 'production',
+        database: String(process.env.DB_DATABASE),
+        host: String(process.env.DB_HOST),
+        port: String(process.env.DB_PORT),
+        user: String(process.env.DB_USER),
+        password: String(process.env.DB_PASSWORD || ''),
+        debug: Boolean(process.env.ENV !== 'production'),
       });
 
       ServicesContext.getInstance()
@@ -63,7 +63,7 @@ export default class GraphQLRoutes {
         .setTeamService(new TeamService(new TeamRepository(db)))
         .setUserService(new UserService(new UserRepository(db), new BCryptHasher()));
 
-      db.schemaMigration();
+      // db.schemaMigration();
     } catch (e) {
       // console.error(e, 'An error occurred while initializing application.');
     }

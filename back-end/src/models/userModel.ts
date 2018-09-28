@@ -75,7 +75,7 @@ export class User implements BaseModel {
   }
 
   public getId(): number {
-    return this.id;
+    return <number>this.id;
   }
 
   public get Email(): string {
@@ -87,11 +87,11 @@ export class User implements BaseModel {
   }
 
   public get RoleId(): number {
-    return this.roleId;
+    return <number>this.roleId;
   }
 
   public get TeamId(): number {
-    return this.teamId;
+    return <number>this.teamId;
   }
 
   public get FirstName(): string {
@@ -103,11 +103,11 @@ export class User implements BaseModel {
   }
 
   public get CreatedAt(): Date {
-    return this.created;
+    return <Date>this.created;
   }
 
   public get UpdatedAt(): Date {
-    return this.updated;
+    return <Date>this.updated;
   }
 
   public setId(id: number): User {

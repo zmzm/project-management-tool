@@ -60,7 +60,7 @@ export class Card implements BaseModel {
   }
 
   public getId(): number {
-    return this.id;
+    return <number>this.id;
   }
 
   public get Name(): string {
@@ -72,15 +72,15 @@ export class Card implements BaseModel {
   }
 
   public get UserId(): number {
-    return this.userId;
+    return <number>this.userId;
   }
 
   public get ListId(): number {
-    return this.listId;
+    return <number>this.listId;
   }
 
   public get CreatedAt(): Date {
-    return this.created;
+    return <Date>this.created;
   }
 
   public setId(id: number): Card {

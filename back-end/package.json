@@ -6,7 +6,6 @@
   "scripts": {
     "start": "tsc && node dist/index.js",
     "start-dev": "nodemon --exec ts-node -- ./src/index.ts",
-    "eslint": "eslint src/. test/. --ext ts,js",
     "ts": "tsc",
     "test": "jest",
     "precommit": "npm run eslint"
@@ -25,7 +24,6 @@
     "bcryptjs": "^2.4.3",
     "dotenv": "^6.0.0",
     "graphql": "^0.13.2",
-    "jest": "^23.4.1",
     "knex": "^0.15.1",
     "koa": "^2.5.1",
     "koa-graphql": "^0.7.5",
@@ -34,20 +32,20 @@
     "pg": "^7.4.3"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.0",
+    "@types/jest": "^23.3.2",
     "@types/node": "^10.5.2",
+    "@types/supertest": "^2.0.6",
     "chai": "^4.1.2",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jest": "^21.18.0",
-    "eslint-plugin-typescript": "^0.12.0",
     "husky": "^0.14.3",
+    "jest": "^23.6.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.17.5",
     "sinon": "^6.1.2",
     "supertest": "^3.1.0",
-    "ts-jest": "^23.0.1",
+    "ts-jest": "^23.10.2",
+    "ts-loader": "^5.2.1",
     "ts-node": "^7.0.0",
+    "tslint": "^5.11.0",
     "typescript": "^2.9.2",
     "typescript-eslint-parser": "^16.0.1"
   }

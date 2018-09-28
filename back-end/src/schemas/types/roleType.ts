@@ -2,7 +2,6 @@ import {
   GraphQLObjectType,
   GraphQLString,
   GraphQLID,
-  GraphQLInt,
 } from 'graphql';
 
 const RoleType = new GraphQLObjectType({

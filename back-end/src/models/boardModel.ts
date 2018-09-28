@@ -55,7 +55,7 @@ export class Board implements BaseModel {
   }
 
   public getId(): number {
-    return this.id;
+    return <number>this.id;
   }
 
   public get Name(): string {
@@ -67,11 +67,11 @@ export class Board implements BaseModel {
   }
 
   public get TeamId(): number {
-    return this.teamId;
+    return <number>this.teamId;
   }
 
   public get CreatedAt(): Date {
-    return this.created;
+    return <Date>this.created;
   }
 
   public setId(id: number): Board {
