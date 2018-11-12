@@ -6,9 +6,9 @@
   "scripts": {
     "start": "tsc && node dist/index.js",
     "start-dev": "nodemon --exec ts-node -- ./src/index.ts",
-    "ts": "tsc",
+    "lint": "tslint './src/**/*.ts'",
     "test": "jest",
-    "precommit": "npm run eslint"
+    "precommit": "npm run tslint"
   },
   "repository": {
     "type": "git",
@@ -21,11 +21,18 @@
   "author": "Bantsevich team",
   "license": "ISC",
   "dependencies": {
+    "@types/chai": "^4.1.6",
+    "@types/chai-http": "^3.0.5",
+    "@types/graphql": "^14.0.1",
+    "@types/koa-router": "^7.0.32",
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
+    "chai-http": "^4.2.0",
     "dotenv": "^6.0.0",
     "graphql": "^0.13.2",
     "knex": "^0.15.1",
     "koa": "^2.5.1",
+    "koa-bodyparser": "^2.5.0",
     "koa-graphql": "^0.7.5",
     "koa-router": "^7.4.0",
     "lodash": "^4.17.10",
@@ -35,7 +42,7 @@
     "@types/jest": "^23.3.2",
     "@types/node": "^10.5.2",
     "@types/supertest": "^2.0.6",
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "husky": "^0.14.3",
     "jest": "^23.6.0",
     "mocha": "^5.2.0",
