@@ -5,8 +5,8 @@ const {
   blueDark,
   blueLight,
   grayLight,
+  gray,
   primary,
-  redDark,
   rgbWhite,
   secondary,
 } = colors;
@@ -15,21 +15,14 @@ const defaultTheme = {
   body: {
     default: primary,
   },
-  buttons: {
-    alert: {
-      bg: redDark,
-      border: grayLight,
-      text: grayLight,
+  button: {
+    background: {
+      default: grayLight,
+      outline: 'transparent', 
     },
-    primary: {
-      bg: primary,
-      border: grayLight,
-      text: grayLight,
-    },
-    regular: {
-      bg: grayLight,
-      border: black,
-      text: black,
+    hover: {
+      default: gray,
+      outline: blueDark,
     },
   },
   colors: {

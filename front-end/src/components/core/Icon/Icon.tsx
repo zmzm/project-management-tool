@@ -8,20 +8,29 @@ export enum IconVariants {
   Inverted = 'inverted',
 }
 
+export enum IconSize {
+  Default = 2,
+  Big = 3,
+  Medium = 2.5,
+  Small = 1.5,
+}
+
 export interface IconProps {
   theme?: any;
   color?: string;
   name: string;
   className?: string;
+  left?: string;
+  size?: number;
 }
 
-const iconCss = (color) => css`
+const iconCss = (left, color, size) => css`
   color: ${color || 'white'};
   position: absolute;
   transform: translate(-50%, -50%);
-  left: 50%;
+  left: ${left || 50}%;
   top: 50%;
-  font-size: 2rem;
+  font-size: ${size || IconSize.Default}rem;
 `;
 
 // @ts-ignore
@@ -33,9 +42,11 @@ export class Icon extends React.PureComponent<IconProps> {
       name,
       className,
       color,
+      left,
+      size,
     } = this.props;
     return (
-      <i className={cx('material-icons', className, iconCss(color))}>{name}</i>
+      <i className={cx('material-icons', className, iconCss(left, color, size))}>{name}</i>
     );
   }
 }

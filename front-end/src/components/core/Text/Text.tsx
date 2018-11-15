@@ -14,8 +14,9 @@ const textCss = (
   params
 ) => css`
   color: ${params.color};
+  display: inline-block;
   margin: 0;
-  font-size: ${params.size ? `${params.size}rem` : 'inherit'};
+  font-size: ${params.fontSize ? `${params.fontSize}rem` : 'inherit'};
   font-weight: ${params.weight ? params.weight : 'inherit'};
   ${params.align ? `text-align: ${params.align};` : null}
   ${params.style ? `font-style: ${params.style};` : null}
@@ -24,7 +25,7 @@ const textCss = (
 export interface ITextProps {
   theme?: any;
   component?: string;
-  size?: string;
+  fontSize?: string;
   color?: string;
   weight?: TextWeight;
   align?: 'left' | 'center' | 'right';

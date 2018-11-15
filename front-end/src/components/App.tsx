@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import { Header, HeaderVariants } from './core/Header/Header';
-import { Icon } from './core/Icon/Icon';
-import { Text } from './core/Text/Text';
+import { Icon, IconSize } from './core/Icon/Icon';
+import { Text, TextWeight } from './core/Text/Text';
 import { Padding } from './core/Padding/Padding';
 import { Margin } from './core/Margin/Margin';
-import { Button } from './core/Button/Button';
+import { Button, ButtonSize } from './core/Button/Button';
 
 import { css } from 'react-emotion';
 import { globalCss } from '../themes/global';
@@ -15,8 +15,9 @@ globalCss();
 const logoCss = css`
   color: white;
   position absolute;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -10%);
+  transform: translate(-50%, -50%);
   text-align: center;
   font-size: 2.5rem;
   cursor: pointer;
@@ -37,41 +38,38 @@ const App: React.SFC<{}> = () => (
   <React.Fragment>
     <Header>
       <Margin margin='0 0.4rem 0 0'>
-        <Button size='3' >
-          <Icon name='home' color='white' />
-        </Button>
+        <Button size={ButtonSize.Big } icon={<Icon name='home' color='white' size={IconSize.Medium} />} />
       </Margin>
       <Margin margin='0 0.4rem 0 0'>
-        <Button size='3' >
-          <Padding padding='0 0.6rem'>
-            <Text component='span' size='1.5' color='white'>Boards</Text>
-          </Padding>
+        <Button size={ButtonSize.Big} >
+          <Text component='span' fontSize='1.6' color='white' weight={TextWeight.Bold}>Boards</Text>
         </Button>
       </Margin>
       <div className={logoCss} />
-      <Button size='3' >
-        <Padding padding='0 0.6rem'>
-          <Text size='1.5' color='white'>Profile</Text>
-        </Padding>
+      <Button size={ButtonSize.Big} >
+        <Text fontSize='1.6' color='white' weight={TextWeight.Bold}>Profile</Text>
       </Button>
     </Header>
-    <Header variant={HeaderVariants.Transparent}>
-      <Margin margin='0 0.4rem 0 0'>
-        <Button float='left' size='2' outline >
-          <Padding padding='0.7rem'>
-            <Text component='span' size='1.8' color='white'>Test</Text>
-          </Padding>
-        </Button>
-      </Margin>
-      <Margin margin='0 0.4rem 0 0'>
-        <Button size='2' className={css`padding: 0.7rem;`} outline >
-          <Padding padding='1rem'>
-            <Icon name='star_border' color='white' />
-          </Padding>
-        </Button>
-      </Margin>
-      <span className={buttonDivider} />
-    </Header>
+    <Margin margin='0.4rem'>
+      <Header variant={HeaderVariants.Transparent}>
+        <Margin margin='0 0.4rem 0 0'>
+          <Button size={ButtonSize.Default} outline >
+            <Text component='span' fontSize='1.8' color='white' weight={TextWeight.Bold}>Test</Text>
+          </Button>
+        </Margin>
+        <Margin margin='0 0.4rem 0 0'>
+          <Button size={ButtonSize.Default} icon={<Icon name='star_border' color='white' />} outline />
+        </Margin>
+        <span className={buttonDivider} />
+        <Margin margin='0 0.4rem 0 0'>
+          <Button size={ButtonSize.Default} icon={<Icon name='android' left='13' color='white' />} outline>
+            <Padding padding='0 0 0 2.3rem'>
+              <Text fontSize='1.5' color='white'>dream-team</Text>
+            </Padding>
+          </Button>
+        </Margin>
+      </Header>
+    </Margin>
   </React.Fragment>
 );
 

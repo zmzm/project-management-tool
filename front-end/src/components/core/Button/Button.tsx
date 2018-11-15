@@ -3,39 +3,51 @@ import * as React from 'react';
 import { css, cx } from 'react-emotion';
 import { withTheme } from 'emotion-theming';
 
-export enum ButtonWeight {
-  Light = 100,
-  Normal = 400,
-  Medium = 500,
-  Bold = 700,
+export enum ButtonSize {
+  Default = 'default',
+  Small = 'small',
+  Big = 'big',
+  Medium = 'medium',
 }
 
+const buttonPaddings = {
+  big: '0.65rem',
+  default: '0.55rem',
+  small: '',
+};
+
+const buttonSize = {
+  big: 3.5,
+  default: 3,
+  medium: 2,
+  small: 1,
+};
+
 const buttonCss = (
+  { button },
   outline,
-  float,
   size
 ) => css`
-  min-width: ${size}rem;
-  min-height: ${size}rem;
+  min-width: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
+  min-height: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
   cursor: pointer;
-  ${float && `float: ${float}`};
   position: relative;
-  padding: 0;
+  padding: ${buttonPaddings[size] || 0};
   border-radius: 0.3rem;
   border: none;
   ${outline ? `
-    background-color: transparent;
+    background-color: ${button.background.outline};
   ` : `
-    background-color: hsla(0,0%,100%,.3);
+    background-color: ${button.background.default};
   `}
   display: inline-block;
   margin-left: auto;
 
   &:hover {
     ${outline ? `
-      background:  #026aa7;
+      background-color:  ${button.hover.outline};
     ` : `
-      background-color: hsla(0,0%,100%,.2);
+      background-color: ${button.hover.default};
   `}
   }
 `;
@@ -44,9 +56,9 @@ export interface IButtonProps {
   theme?: any;
   component?: string;
   outline?: boolean;
-  float?: string;
-  size: string;
+  size: ButtonSize;
   className?: string;
+  icon?: any;
 }
 
 // @ts-ignore
@@ -54,19 +66,23 @@ export interface IButtonProps {
 export class Button extends React.PureComponent<IButtonProps> {
   public render() {
     const {
+      theme,
       children,
       outline,
       component,
-      float,
       size,
       className,
+      icon,
     } = this.props;
     const Element = Boolean(component) ? component as string : 'button';
 
     return (
-      <Element className={cx(buttonCss(outline, float, size), className)}>
-        {children}
-      </Element>
+      <Element className={cx(buttonCss(theme, outline, size), className)}>
+      {
+        icon && (icon)
+      }
+      {children}
+    </Element>
     );
   }
 }
