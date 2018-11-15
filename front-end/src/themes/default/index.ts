@@ -1,5 +1,4 @@
 import colors from './colors';
-import ITheme from '../theme-interface';
 
 const {
   black,
@@ -12,7 +11,10 @@ const {
   secondary,
 } = colors;
 
-const defaultTheme: ITheme = {
+const defaultTheme = {
+  body: {
+    default: primary,
+  },
   buttons: {
     alert: {
       bg: redDark,
@@ -33,6 +35,12 @@ const defaultTheme: ITheme = {
   colors: {
     primary: grayLight,
     secondary: black,
+  },
+  header: {
+    background: {
+      default: blueDark,
+      transparent: 'transparent', 
+    },
   },
   input: {
     default: {

@@ -1,74 +1,72 @@
 import * as React from 'react';
 
-import { darken } from 'polished';
+import { css, cx } from 'react-emotion';
+import { withTheme } from 'emotion-theming';
 
-import styled from 'react-emotion';
-
-/**
- * Generates styles based on type prop value
- */
-const generateStylesBasedOnType = ({ type, theme }: { type?: string, theme: any }): string => {
-  const colorSource = type
-    ? theme.buttons[type]
-    : theme.buttons.regular;
-
-  const { bg, text, border } = colorSource;
-  const styles = `
-    background-color: ${bg};
-    color: ${text};
-    border: 1px solid ${border};
-
-    &:active {
-      color: ${darken('0.2', text)};
-      background-color: ${darken('0.2', bg)};
-    }
-  `;
-  return styles;
-};
-
-/**
- * Generates styles based on size prop value
- */
-const generateStylesBasedOnSize = ({ size }: { size?: string }): string => {
-  const sizeList = {
-    big: '40px',
-    medium: '30px',
-    small: '20px',
-  };
-
-  const sizeValue = size
-    ? sizeList[size]
-    : sizeList.small;
-
-  const styles = `
-    font-size: ${sizeValue};
-  `;
-  return styles;
-};
-
-/**
- * Generates styles based on block prop value
- */
-const generateStylesBasedOnBlock = ({ block }: { block?: boolean }) => (block
-  ? 'width: 100%'
-  : '');
-
-export interface IButton {
-  type?: string,
-  size?: string,
-  block?: boolean,
+export enum ButtonWeight {
+  Light = 100,
+  Normal = 400,
+  Medium = 500,
+  Bold = 700,
 }
 
-const StyledButton = styled('button')`
-  ${generateStylesBasedOnSize}
-  ${generateStylesBasedOnType}
-  ${generateStylesBasedOnBlock}
+const buttonCss = (
+  outline,
+  float,
+  size
+) => css`
+  min-width: ${size}rem;
+  min-height: ${size}rem;
   cursor: pointer;
-  border-radius: 5px;
-  outline: 0;
+  ${float && `float: ${float}`};
+  position: relative;
+  padding: 0;
+  border-radius: 0.3rem;
+  border: none;
+  ${outline ? `
+    background-color: transparent;
+  ` : `
+    background-color: hsla(0,0%,100%,.3);
+  `}
+  display: inline-block;
+  margin-left: auto;
+
+  &:hover {
+    ${outline ? `
+      background:  #026aa7;
+    ` : `
+      background-color: hsla(0,0%,100%,.2);
+  `}
+  }
 `;
 
-const Button = (props: IButton) => <StyledButton {...props} />;
+export interface IButtonProps {
+  theme?: any;
+  component?: string;
+  outline?: boolean;
+  float?: string;
+  size: string;
+  className?: string;
+}
 
-/** @component */
-export default Button;
+// @ts-ignore
+@withTheme
+export class Button extends React.PureComponent<IButtonProps> {
+  public render() {
+    const {
+      children,
+      outline,
+      component,
+      float,
+      size,
+      className,
+    } = this.props;
+    const Element = Boolean(component) ? component as string : 'button';
+
+    return (
+      <Element className={cx(buttonCss(outline, float, size), className)}>
+        {children}
+      </Element>
+    );
+  }
+}
