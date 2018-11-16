@@ -12,7 +12,7 @@ export enum IconSize {
   Default = 2,
   Big = 3,
   Medium = 2.5,
-  Small = 1.5,
+  Small = 1.6,
 }
 
 export interface IconProps {

@@ -36,7 +36,7 @@ export const globalCss = () => injectGlobal`
     font-feature-settings: 'liga';
   }
 
-  html, body {
+  html, body, #root {
     margin:0;
     font-size: 62.5%;
     width: 100%;
@@ -44,5 +44,7 @@ export const globalCss = () => injectGlobal`
     padding: 0;
     background-color: rgb(0, 121, 191);
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
   }
 `;

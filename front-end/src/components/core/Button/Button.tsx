@@ -13,7 +13,8 @@ export enum ButtonSize {
 const buttonPaddings = {
   big: '0.65rem',
   default: '0.55rem',
-  small: '',
+  medium: '0.45rem',
+  small: '0.35rem',
 };
 
 const buttonSize = {
@@ -25,30 +26,26 @@ const buttonSize = {
 
 const buttonCss = (
   { button },
-  outline,
-  size
+  params
 ) => css`
-  min-width: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
-  min-height: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
+  min-width: ${buttonSize[params.size] || buttonSize[ButtonSize.Default]}rem;
+  min-height: ${buttonSize[params.size] || buttonSize[ButtonSize.Default]}rem;
+  ${params.block && 'width: 100%;'}
   cursor: pointer;
   position: relative;
-  padding: ${buttonPaddings[size] || 0};
+  padding: ${buttonPaddings[params.size] || 0};
   border-radius: 0.3rem;
   border: none;
-  ${outline ? `
-    background-color: ${button.background.outline};
-  ` : `
-    background-color: ${button.background.default};
-  `}
+  background-color: ${button.background.default};
+  ${params.outline && `background-color: ${button.background.outline};`}
+  ${params.transparent && `background-color: ${button.background.transparent};`}
   display: inline-block;
   margin-left: auto;
 
   &:hover {
-    ${outline ? `
-      background-color:  ${button.hover.outline};
-    ` : `
-      background-color: ${button.hover.default};
-  `}
+    background-color: ${button.hover.default};
+    ${params.outline && ` background-color:  ${button.hover.outline};`}
+    ${params.transparent && `background-color: ${button.hover.transparent};`}
   }
 `;
 
@@ -56,6 +53,8 @@ export interface IButtonProps {
   theme?: any;
   component?: string;
   outline?: boolean;
+  block?: boolean;
+  transparent?: boolean;
   size: ButtonSize;
   className?: string;
   icon?: any;
@@ -67,17 +66,16 @@ export class Button extends React.PureComponent<IButtonProps> {
   public render() {
     const {
       theme,
-      children,
-      outline,
       component,
-      size,
+      children,
       className,
       icon,
+      ...rest
     } = this.props;
     const Element = Boolean(component) ? component as string : 'button';
 
     return (
-      <Element className={cx(buttonCss(theme, outline, size), className)}>
+      <Element className={cx(buttonCss(theme, rest), className)}>
       {
         icon && (icon)
       }

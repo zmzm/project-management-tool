@@ -12,7 +12,7 @@ export enum HeaderVariants {
 const headerCss = ({ header }, variant) => css`
   background-color: ${variant ? header.background[variant] : header.background.default};
   position: relative;
-  min-height: 3.1rem;
+  min-height: 3.5rem;
   padding: 0.4rem;
   display: flex;
   flex-direction: row;

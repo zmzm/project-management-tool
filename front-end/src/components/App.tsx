@@ -9,6 +9,8 @@ import { Button, ButtonSize } from './core/Button/Button';
 
 import { css } from 'react-emotion';
 import { globalCss } from '../themes/global';
+import { CardList } from './core/CardList/CardList';
+import { BoardContent } from './core/BoardContent/BoardContent';
 
 globalCss();
 
@@ -47,7 +49,7 @@ const App: React.SFC<{}> = () => (
       </Margin>
       <div className={logoCss} />
       <Button size={ButtonSize.Big} >
-        <Text fontSize='1.6' color='white' weight={TextWeight.Bold}>Profile</Text>
+        <Text component='span' fontSize='1.6' color='white' weight={TextWeight.Bold}>Profile</Text>
       </Button>
     </Header>
     <Margin margin='0.4rem'>
@@ -70,6 +72,9 @@ const App: React.SFC<{}> = () => (
         </Margin>
       </Header>
     </Margin>
+    <BoardContent>
+      <CardList listName='List name' />
+    </BoardContent>
   </React.Fragment>
 );
 
