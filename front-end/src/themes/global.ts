@@ -13,6 +13,10 @@ export const globalCss = () => injectGlobal`
       url(fonts/MaterialIcons-Regular.ttf) format('truetype');
   }
 
+  .rsg--para-33 {
+    font-size: 18px; 
+  }
+
   .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
