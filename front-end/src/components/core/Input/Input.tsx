@@ -19,18 +19,18 @@ export enum InputTypes {
 }
 
 const disableStyle = css`
-  color: #cbcbcb;    
+  color: #fff;    
   cursor: not-allowed;
-  border: 2px solid #cbcbcb;
+  background-color: #cbcbcbcb;
   outline:none;
 `;
 
 const InputLabel = styled('label')`
-  color: #808080;
+  color: #fff;
   line-height: 1.4;
   display: inline-block;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.6rem;
 `;
 
 const InputWrapper = styled('div')`
@@ -40,14 +40,18 @@ const InputWrapper = styled('div')`
 
 const inputCss = ({ input }, variant, disabled) => css`
   color: ${input[variant].textColor};
-  font-size: 1em;
-  background: ${input[variant].bg};
-  border: ${input[variant].border};
-  border-radius: 3px;
+  font-size: 1.4rem;
+  background-color: ${input[variant].bg};
+  border: none;
+  border-radius: 0.3rem;
   width: 100%;
-  padding: 10px;
-  line-height: 26px;
+  padding: 1rem;
   ${disabled && disableStyle}
+
+  :: placeholder {
+    color: #fff;
+    opacity: 0.7;
+  }
 `;
 
 export interface InputProps {

@@ -14,30 +14,35 @@ export interface ISelectOption {
 }
 
 const disableStyle = css`
-  color: #cbcbcb;    
+  color: #fff;    
   cursor: not-allowed;
-  border: 2px solid #cbcbcb;
+  background-color: #cbcbcbcb;
   outline:none;
 `;
 
 const SelectLabel = styled('label')`
-  color: #808080;
+  color: #fff;
   line-height: 1.4;
   display: inline-block;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.6rem;
 `;
 
 const selectCss = ({ input }, variant, disabled) => css`
   color: ${input[variant].textColor};
-  font-size: 1em;
-  background: ${input[variant].bg};
-  border: ${input[variant].border};
-  border-radius: 4px;
+  font-size: 1.4rem;
+  background-color: ${input[variant].bg};
+  border: none;
+  border-radius: 0.4rem;
   width: 100%;
-  padding: 10px;
-  line-height: 26px;
+  padding: 1rem;
+  line-height: 2.6rem;
   ${disabled && disableStyle}
+
+  :: placeholder {
+    color: #fff;
+    opacity: 0.7;
+  }
 `;
 
 interface ISelectProps {

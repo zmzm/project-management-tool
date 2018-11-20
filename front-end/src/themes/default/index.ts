@@ -39,14 +39,13 @@ const defaultTheme = {
   },
   input: {
     default: {
-      bg: '#ffffff',
-      border: '2px solid palevioletred',
-      textColor: '#000000',
+      bg: gray,
+      textColor: black,
     },
     inverted: {
       bg: 'palevioletred',
       border: '2px solid palevioletred',
-      textColor: '#ffffff',
+      textColor: secondary,
     },
   },
   modalWindow: {
