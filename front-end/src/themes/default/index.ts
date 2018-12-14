@@ -1,49 +1,51 @@
 import colors from './colors';
-import ITheme from '../theme-interface';
 
 const {
   black,
   blueDark,
   blueLight,
   grayLight,
+  gray,
   primary,
-  redDark,
   rgbWhite,
   secondary,
 } = colors;
 
-const defaultTheme: ITheme = {
-  buttons: {
-    alert: {
-      bg: redDark,
-      border: grayLight,
-      text: grayLight,
+const defaultTheme = {
+  body: {
+    default: primary,
+  },
+  button: {
+    background: {
+      default: grayLight,
+      outline: 'transparent',
+      transparent: 'transparent', 
     },
-    primary: {
-      bg: primary,
-      border: grayLight,
-      text: grayLight,
-    },
-    regular: {
-      bg: grayLight,
-      border: black,
-      text: black,
+    hover: {
+      default: gray,
+      outline: blueDark,
+      transparent: 'rgba(9,45,66,.13)',
     },
   },
   colors: {
     primary: grayLight,
     secondary: black,
   },
+  header: {
+    background: {
+      default: blueDark,
+      transparent: 'transparent', 
+    },
+  },
   input: {
     default: {
-      bg: '#ffffff',
-      border: '2px solid palevioletred',
-      textColor: '#000000',
+      bg: gray,
+      textColor: black,
     },
     inverted: {
       bg: 'palevioletred',
       border: '2px solid palevioletred',
-      textColor: '#ffffff',
+      textColor: secondary,
     },
   },
   modalWindow: {

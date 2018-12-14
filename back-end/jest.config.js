@@ -1,5 +1,5 @@
 const transform = { '^.+\\.ts$': 'ts-jest' };
-const testRegex = '(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$';
+const testRegex = '(/__tests__/.*|(\\.|/)(test|spec))\\.(ts|tsx)$';
 const moduleFileExtensions = [
   'ts',
   'js',

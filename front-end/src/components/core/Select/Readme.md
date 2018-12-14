@@ -10,13 +10,15 @@ initialState = {
   }]
 };
 
-<Select
+<div style={{ padding: '1rem', color: '#17394d', backgroundColor: '#0079bf', minHeight: '3rem', position: 'relative' }}>
+  <Select
     placeholder="Basic placeholder"
     variant="default"
     value={state.value}
     onChange={(value) => setState({ value })}
     options={state.options}
-/>
+  />
+</div>
 ```    
 
 Select with label:
@@ -33,13 +35,15 @@ initialState = {
   }]
 };
 
-<Select
+<div style={{ padding: '1rem', color: '#17394d', backgroundColor: '#0079bf', minHeight: '3rem', position: 'relative' }}>
+  <Select
     label="Basic"
     variant="default"
     value={state.value}
     onChange={(value) => setState({ value })}
     options={state.options}
-/>
+  />
+</div>
 ``` 
 
 Disabled select:
@@ -56,11 +60,13 @@ initialState = {
   }]
 };
 
-<Select
+<div style={{ padding: '1rem', color: '#17394d', backgroundColor: '#0079bf', minHeight: '3rem', position: 'relative' }}>
+  <Select
     value="Disabled input text"
     variant="default"
     disabled
     onChange={value => console.log(value)}
     options={state.options}
-/>
+  />
+</div>
  ```

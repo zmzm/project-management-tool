@@ -40,7 +40,7 @@ export class Team implements BaseModel {
   }
 
   public getId(): number {
-    return this.id;
+    return <number>this.id;
   }
 
   public get Name(): string {

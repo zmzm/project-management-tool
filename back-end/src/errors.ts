@@ -7,7 +7,7 @@ export class AppError extends Error {
     super(message);
 
     this.code = code;
-    this.error = error;
+    this.error = error ? error : new Error();
   }
 
   public toModel() {

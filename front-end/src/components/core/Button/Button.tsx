@@ -1,74 +1,86 @@
 import * as React from 'react';
 
-import { darken } from 'polished';
+import { css, cx } from 'react-emotion';
+import { withTheme } from 'emotion-theming';
 
-import styled from 'react-emotion';
-
-/**
- * Generates styles based on type prop value
- */
-const generateStylesBasedOnType = ({ type, theme }: { type?: string, theme: any }): string => {
-  const colorSource = type
-    ? theme.buttons[type]
-    : theme.buttons.regular;
-
-  const { bg, text, border } = colorSource;
-  const styles = `
-    background-color: ${bg};
-    color: ${text};
-    border: 1px solid ${border};
-
-    &:active {
-      color: ${darken('0.2', text)};
-      background-color: ${darken('0.2', bg)};
-    }
-  `;
-  return styles;
-};
-
-/**
- * Generates styles based on size prop value
- */
-const generateStylesBasedOnSize = ({ size }: { size?: string }): string => {
-  const sizeList = {
-    big: '40px',
-    medium: '30px',
-    small: '20px',
-  };
-
-  const sizeValue = size
-    ? sizeList[size]
-    : sizeList.small;
-
-  const styles = `
-    font-size: ${sizeValue};
-  `;
-  return styles;
-};
-
-/**
- * Generates styles based on block prop value
- */
-const generateStylesBasedOnBlock = ({ block }: { block?: boolean }) => (block
-  ? 'width: 100%'
-  : '');
-
-export interface IButton {
-  type?: string,
-  size?: string,
-  block?: boolean,
+export enum ButtonSize {
+  Default = 'default',
+  Small = 'small',
+  Big = 'big',
+  Medium = 'medium',
 }
 
-const StyledButton = styled('button')`
-  ${generateStylesBasedOnSize}
-  ${generateStylesBasedOnType}
-  ${generateStylesBasedOnBlock}
+const buttonPaddings = {
+  big: '0.65rem',
+  default: '0.55rem',
+  medium: '0.45rem',
+  small: '0.35rem',
+};
+
+const buttonSize = {
+  big: 3.5,
+  default: 3,
+  medium: 2,
+  small: 1,
+};
+
+const buttonCss = (
+  { button },
+  params
+) => css`
+  min-width: ${buttonSize[params.size] || buttonSize[ButtonSize.Default]}rem;
+  min-height: ${buttonSize[params.size] || buttonSize[ButtonSize.Default]}rem;
+  ${params.block && 'width: 100%;'}
   cursor: pointer;
-  border-radius: 5px;
-  outline: 0;
+  position: relative;
+  padding: ${buttonPaddings[params.size] || 0};
+  border-radius: 0.3rem;
+  border: none;
+  background-color: ${button.background.default};
+  ${params.outline && `background-color: ${button.background.outline};`}
+  ${params.transparent && `background-color: ${button.background.transparent};`}
+  display: inline-block;
+  margin-left: auto;
+
+  &:hover {
+    background-color: ${button.hover.default};
+    ${params.outline && ` background-color:  ${button.hover.outline};`}
+    ${params.transparent && `background-color: ${button.hover.transparent};`}
+  }
 `;
 
-const Button = (props: IButton) => <StyledButton {...props} />;
+export interface IButtonProps {
+  theme?: any;
+  component?: string;
+  outline?: boolean;
+  block?: boolean;
+  transparent?: boolean;
+  size: ButtonSize;
+  className?: string;
+  icon?: any;
+}
 
-/** @component */
-export default Button;
+// @ts-ignore
+@withTheme
+export class Button extends React.PureComponent<IButtonProps> {
+  public render() {
+    const {
+      theme,
+      component,
+      children,
+      className,
+      icon,
+      ...rest
+    } = this.props;
+    const Element = Boolean(component) ? component as string : 'button';
+
+    return (
+      <Element className={cx(buttonCss(theme, rest), className)}>
+      {
+        icon && (icon)
+      }
+      {children}
+    </Element>
+    );
+  }
+}

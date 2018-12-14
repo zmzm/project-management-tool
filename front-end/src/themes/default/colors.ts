@@ -1,9 +1,10 @@
 const colors = {
   black: '#000000',
-  blueDark: '#04386b',
+  blueDark: '#026aa7',
   blueLight: '#c9d9ed',
-  grayLight: '#f7f7f7',
-  primary: '#075db3',
+  gray: 'hsla(0,0%,100%,.3)',
+  grayLight: 'hsla(0,0%,100%,.2)',
+  primary: 'rgb(0,121,191)',
   redDark: '#b70a0a',
   rgbWhite: '255, 255, 255',
   secondary: '#ffffff',

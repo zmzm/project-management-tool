@@ -45,7 +45,7 @@ export class List implements BaseModel {
   }
 
   public getId(): number {
-    return this.id;
+    return <number>this.id;
   }
 
   public get Name(): string {
