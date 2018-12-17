@@ -34,6 +34,17 @@ export default class UserService extends BaseService<User, RawUser> {
   }
 
   /**
+   * Hash password for newly created user
+   * 
+   * @param {string} password
+   * @returns {Promise<string>}
+   * @memberof UserService
+   */
+  public async hashPassword(password: string) {
+    return await this.hasher.hashPassword(password);
+  }
+
+  /**
    * Login existed user
    *
    * @param {string} email

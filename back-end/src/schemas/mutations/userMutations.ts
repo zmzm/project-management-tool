@@ -8,6 +8,33 @@ import { User } from '../../models/userModel';
 import UserType from '../types/userType';
 import Context from '../../context';
 
+const createUser = {
+  type: UserType,
+  args: {
+    id: { type: GraphQLID },
+    email: { type: GraphQLString },
+    password: { type: GraphQLString },
+    roleId: { type: GraphQLID },
+    teamId: { type: GraphQLID },
+    firstName: { type: GraphQLString },
+    lastName: { type: GraphQLString },
+    created: { type: GraphQLString },
+    updated: { type: GraphQLString },
+  },
+  async resolve(root: any, args: any, ctx: Context<any>) {
+    const hashedPassword = await ctx.Services.UserService.hashPassword(args.password);
+    const userAttributes = Object.assign({}, args, { password: hashedPassword });
+
+    const userModel = new User(userAttributes, false);
+
+    const fieldsToReturn = Object.keys(userModel.toDatabaseObject());
+    const result = await ctx.Services.UserService.create(userModel, fieldsToReturn);
+    const returnedFields = result[0];
+
+    return new User(returnedFields);
+  },
+};
+
 const deleteUser = {
   type: UserType,
   args: {
@@ -37,5 +64,6 @@ const updateUser = {
 
 export default {
   deleteUser,
+  createUser,
   updateUser,
 };

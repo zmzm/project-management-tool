@@ -63,7 +63,8 @@ export default class GraphQLRoutes {
         .setTeamService(new TeamService(new TeamRepository(db)))
         .setUserService(new UserService(new UserRepository(db), new BCryptHasher()));
 
-      // db.schemaMigration();
+        // TODO: move migration control to separate script and make command to run it
+        // db.schemaMigration();
     } catch (e) {
       // console.error(e, 'An error occurred while initializing application.');
     }

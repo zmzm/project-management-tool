@@ -56,13 +56,14 @@ export default class BaseRepository<T, S> {
    * Create entity of @type S in database
    *
    * @param {S} entity
-   * @returns {Promise<S>}
+   * @param {string[]} fieldsToReturn
+   * @returns {Promise<BaseModelS>}
    * @memberof BaseRepository
    */
-  public async create(entity: S): Promise<S> {
+  public async create(entity: S, fieldsToReturn?: string[]): Promise<BaseModel> {
     const conn = await this.db.getConnection();
     try {
-      const result = await conn.table(this.table).insert(entity);
+      const result = await conn.table(this.table).returning(fieldsToReturn).insert(entity);
       return result;
     } catch (err) {
       if (err.code === 'ER_DUP_ENTRY') {

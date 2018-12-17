@@ -18,7 +18,7 @@ export class AppServer extends Server {
 
   public listenPort(port: string): Server {
     this.server = this.app.listen(port);
-    console.log('Server listening...');
+    console.log(`Server listening on port ${port}...`);
     return this.server;
   }
 
