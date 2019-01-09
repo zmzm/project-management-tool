@@ -59,6 +59,12 @@ export class PermissionError extends AppError {
   }
 }
 
+export class MissingEnvironmentVariable extends AppError {
+  constructor(variableName: string, error?: Error) {
+    super(30004, `Missing environment variable "${variableName}"`, error);
+  }
+}
+
 export interface FieldError {
   message: string;
   type: string;

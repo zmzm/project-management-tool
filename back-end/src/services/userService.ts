@@ -1,6 +1,7 @@
 import BaseService from './baseservice';
 import UserRepository from '../repositories/userRepository';
 import { Hasher } from '../utils/hasher';
+import { ITokenHandler } from '../utils/tokenHandler';
 import { User, RawUser } from '../models/userModel';
 import { ValidationError } from '../errors';
 import BaseRepository from '../repositories/baseRepository';
@@ -11,14 +12,17 @@ export default class UserService extends BaseService<User, RawUser> {
 
   private hasher: Hasher;
 
+  private tokenHandler: ITokenHandler;
+
   public getRepository(): BaseRepository<User, RawUser> {
     return this.repo;
   }
 
-  constructor(repo: UserRepository, hasher: Hasher) {
+  constructor(repo: UserRepository, hasher: Hasher, tokenHandler: ITokenHandler) {
     super();
     this.repo = repo;
     this.hasher = hasher;
+    this.tokenHandler = tokenHandler;
   }
 
   /**
@@ -42,6 +46,10 @@ export default class UserService extends BaseService<User, RawUser> {
    */
   public async hashPassword(password: string) {
     return await this.hasher.hashPassword(password);
+  }
+
+  public async generateJwt(email: string, expiresIn?: number | string) {
+    return this.tokenHandler.createToken(email, expiresIn);
   }
 
   /**

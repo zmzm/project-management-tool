@@ -6,20 +6,16 @@ import {
 } from 'graphql';
 import { User } from '../../models/userModel';
 import UserType from '../types/userType';
+import SignUpResponseType from '../types/signUpResponseType';
 import Context from '../../context';
 
 const createUser = {
-  type: UserType,
+  type: SignUpResponseType,
   args: {
-    id: { type: GraphQLID },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
-    roleId: { type: GraphQLID },
-    teamId: { type: GraphQLID },
     firstName: { type: GraphQLString },
     lastName: { type: GraphQLString },
-    created: { type: GraphQLString },
-    updated: { type: GraphQLString },
   },
   async resolve(root: any, args: any, ctx: Context<any>) {
     const hashedPassword = await ctx.Services.UserService.hashPassword(args.password);
@@ -30,8 +26,9 @@ const createUser = {
     const fieldsToReturn = Object.keys(userModel.toDatabaseObject());
     const result = await ctx.Services.UserService.create(userModel, fieldsToReturn);
     const returnedFields = result[0];
+    const jwt = await ctx.Services.UserService.generateJwt(returnedFields.email);
 
-    return new User(returnedFields);
+    return Object.assign(new User(returnedFields), { token: jwt });
   },
 };
 
