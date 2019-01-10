@@ -22,7 +22,7 @@ const findById = {
   },
 };
 
-const findUserByEmail = {
+const findByEmail = {
   type: UserType,
   args: {
     email: { type: GraphQLString },
@@ -36,5 +36,5 @@ const findUserByEmail = {
 export default {
   findAll,
   findById,
-  findUserByEmail,
+  findByEmail,
 };

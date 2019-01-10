@@ -22,7 +22,6 @@ export function up(db: knex) {
     })
     .then(() => db(' user').insert([
       {
-        id: 1,
         email: 'teastd@sdfsdf.sdfsdf',
         password: 'asdasdasd123213',
         role_id: 1,
@@ -31,7 +30,6 @@ export function up(db: knex) {
         last_name: 'Testov',
       },
       {
-        id: 2,
         email: 'teast2@sdfsdf.sdfsdf',
         password: 'asdasdasd123213',
         role_id: 2,

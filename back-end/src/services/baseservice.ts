@@ -37,23 +37,25 @@ export default abstract class BaseService<T, S> {
   }
 
   /**
-   * Create entity of @type S
+   * Create entity of @type BaseModel
    *
-   * @param {S} entity
-   * @returns {Promise<S>}
+   * @param {BaseModel} entity
+   * @param {string[]} fieldsToReturn
+   * @returns {Promise<BaseModel>}
    * @memberof BaseService
    */
-  public async create(entity: S): Promise<S> {
-    const result = await this.getRepository().create(entity);
+  public async create(entity: BaseModel, fieldsToReturn?: string[]): Promise<BaseModel> {
+    const result = await this.getRepository()
+      .create(entity.toDatabaseObject(), fieldsToReturn);
 
     return result;
   }
 
   /**
-   * Update entity of @type S
+   * Update entity of @type BaseModel
    *
-   * @param {S} entity
-   * @returns {Promise<S>}
+   * @param {BaseModel} entity
+   * @returns {Promise<BaseModel>}
    * @memberof BaseService
    */
   public async update(entity: BaseModel): Promise<BaseModel> {

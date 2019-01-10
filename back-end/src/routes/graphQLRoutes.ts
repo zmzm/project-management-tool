@@ -5,6 +5,7 @@ import * as Koa from 'koa';
 import Postgres from '../database';
 import Schema from '../schemas';
 import BCryptHasher from '../utils/hasher';
+import TokenHandler from '../utils/tokenHandler';
 import Context from '../context';
 import ServicesContext from '../context/servicesContext';
 import UserRepository from '../repositories/userRepository';
@@ -61,9 +62,10 @@ export default class GraphQLRoutes {
         .setListService(new ListService(new ListRepository(db)))
         .setRoleService(new RoleService(new RoleRepository(db)))
         .setTeamService(new TeamService(new TeamRepository(db)))
-        .setUserService(new UserService(new UserRepository(db), new BCryptHasher()));
+        .setUserService(new UserService(new UserRepository(db), new BCryptHasher(), new TokenHandler()));
 
-      // db.schemaMigration();
+        // TODO: move migration control to separate script and make command to run it
+        // db.schemaMigration();
     } catch (e) {
       // console.error(e, 'An error occurred while initializing application.');
     }

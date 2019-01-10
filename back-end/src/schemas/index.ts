@@ -15,9 +15,9 @@ export default class Schema {
   private rootQuery: GraphQLObjectType = new GraphQLObjectType({
     name: 'Query',
     fields: {
-      findAll: UsersQuery.findAll,
-      findById: UsersQuery.findById,
-      findUserByEmail: UsersQuery.findUserByEmail,
+      findAllUsers: UsersQuery.findAll,
+      findUserById: UsersQuery.findById,
+      findUserByEmail: UsersQuery.findByEmail,
     },
   });
 
@@ -25,6 +25,7 @@ export default class Schema {
     name: 'Mutation',
     fields: {
       deleteUser: UserMutation.deleteUser,
+      createUser: UserMutation.createUser,
       updateUser: UserMutation.updateUser,
     },
   });

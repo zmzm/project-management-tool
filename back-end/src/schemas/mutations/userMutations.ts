@@ -6,7 +6,31 @@ import {
 } from 'graphql';
 import { User } from '../../models/userModel';
 import UserType from '../types/userType';
+import SignUpResponseType from '../types/signUpResponseType';
 import Context from '../../context';
+
+const createUser = {
+  type: SignUpResponseType,
+  args: {
+    email: { type: GraphQLString },
+    password: { type: GraphQLString },
+    firstName: { type: GraphQLString },
+    lastName: { type: GraphQLString },
+  },
+  async resolve(root: any, args: any, ctx: Context<any>) {
+    const hashedPassword = await ctx.Services.UserService.hashPassword(args.password);
+    const userAttributes = Object.assign({}, args, { password: hashedPassword });
+
+    const userModel = new User(userAttributes, false);
+
+    const fieldsToReturn = Object.keys(userModel.toDatabaseObject());
+    const result = await ctx.Services.UserService.create(userModel, fieldsToReturn);
+    const returnedFields = result[0];
+    const jwt = await ctx.Services.UserService.generateJwt(returnedFields.email);
+
+    return Object.assign(new User(returnedFields), { token: jwt });
+  },
+};
 
 const deleteUser = {
   type: UserType,
@@ -37,5 +61,6 @@ const updateUser = {
 
 export default {
   deleteUser,
+  createUser,
   updateUser,
 };
