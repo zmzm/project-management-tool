@@ -72,7 +72,7 @@ export class Button extends React.PureComponent<IButtonProps> {
       icon,
       ...rest
     } = this.props;
-    const Element = Boolean(component) ? component as string : 'button';
+    const Element = Boolean(component) ? component as any : 'button';
 
     return (
       <Element className={cx(buttonCss(theme, rest), className)}>

@@ -42,7 +42,7 @@ export class Text extends React.PureComponent<ITextProps> {
       component,
       ...rest
     } = this.props;
-    const Element = Boolean(component) ? component as string : 'p';
+    const Element = Boolean(component) ? component as any : 'p';
 
     return (
       <Element className={textCss(rest)}>
