@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import { mountWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme'
+import { mountWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme';
 import * as React from 'react';
 import { Card } from './Card';
 import { Text } from '../Text/Text';
@@ -22,8 +22,8 @@ describe('Card core component:', () => {
     const colorMarkSpans = mountedCard.find(Margin).first().find('div').first().find('span');
 
     expect(textComponents.length).toEqual(2);
-    expect(textComponents.first().props()['children']).toEqual(props.cardName);
     expect(colorMarkSpans.length).toEqual(0);
+    expect(textComponents.first().props().children).toEqual(props.cardName);
   });
 
   it('mount with "cardName", "colorMark", and "commentsCount" props ', () => {

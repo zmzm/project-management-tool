@@ -1,4 +1,4 @@
-import { shallowWithTheme, renderWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme'
+import { renderWithTheme, shallowWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme';
 import * as React from 'react';
 import { Text } from './Text';
 

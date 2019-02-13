@@ -1,4 +1,4 @@
-import { shallow, render } from 'enzyme';
+import { render, shallow } from 'enzyme';
 import * as React from 'react';
 import { BoardContent } from './BoardContent';
 
