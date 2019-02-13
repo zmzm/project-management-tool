@@ -16,14 +16,6 @@ describe('Card core component:', () => {
     shallow(<Card {...props} />);
   });
 
-  it('mount with only one passed prop, which is required - "cardName" prop', () => {
-    const mountedCard = mountWithTheme(<Card cardName={props.cardName} />);
-    const textComponents = mountedCard.find(Text);
-
-    expect(textComponents.length).toEqual(2);
-    expect(textComponents.first().props()['children'] === props.cardName);
-  });
-
   it('mount with only "cardName" prop, which is required', () => {
     const mountedCard = mountWithTheme(<Card cardName={props.cardName} />);
     const textComponents = mountedCard.find(Text);
@@ -34,7 +26,7 @@ describe('Card core component:', () => {
     expect(colorMarkSpans.length).toEqual(0);
   });
 
-  it('mount with "cardName", "colorMark", and "commentsCount"', () => {
+  it('mount with "cardName", "colorMark", and "commentsCount" props ', () => {
     const mountedCard = mountWithTheme(<Card {...props} />);
     const colorMarkSpans = mountedCard.find(Margin).first().find('div').first().find('span');
     const commentsCountTextComponent = mountedCard.find(Text).at(1);
