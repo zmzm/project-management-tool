@@ -1,12 +1,9 @@
 import { shallow } from 'enzyme';
 import { mountWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme'
 import * as React from 'react';
-import { matchers } from 'jest-emotion'
 import { Card } from './Card';
 import { Text } from '../Text/Text';
 import { Margin } from '../Margin/Margin';
-
-expect.extend(matchers);
 
 const props = {
   cardName: 'test card',
