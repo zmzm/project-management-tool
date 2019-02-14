@@ -34,8 +34,8 @@ describe('Select core component:', () => {
 
   it(`passes event.target.value to onChange prop as a parameter, when select changed`, () => {
     const mockValue = 'mockValue';
-    const shallowWrapper = mountWithTheme(<Select {...requiredProps} />);
-    shallowWrapper.find('select').first().simulate('change', { target: { value: mockValue} });
+    const mountWrapper = mountWithTheme(<Select {...requiredProps} />);
+    mountWrapper.find('select').first().simulate('change', { target: { value: mockValue} });
 
     expect(state.value).toEqual(mockValue);
   });
@@ -49,7 +49,7 @@ describe('Select core component:', () => {
   it('disable select when "disabled" prop set to true', () => {
     const mountWrapper = mountWithTheme(<Select {...requiredProps} disabled={optionalProps.disabled} />);
 
-    expect(mountWrapper.find('select').first().props().disabled).toEqual(optionalProps.disabled);
+    expect(mountWrapper.find('select').first().props().disabled);
   });
 
   it('sets default select value based on "value" prop', () => {
@@ -68,5 +68,17 @@ describe('Select core component:', () => {
     const mountWrapper = mountWithTheme(<Select {...requiredProps} />);
 
     expect(mountWrapper.find('label').length).toEqual(0);
+  });
+
+  it('renders all options with appropriate values', () => {
+    const mountWrapper = mountWithTheme(<Select {...requiredProps} />);
+    const options = mountWrapper.find('select').first().find('option');
+
+    expect(options.length).toEqual(requiredProps.options.length);
+
+    options.forEach((element, index) => {
+      expect(element.props().value).toEqual(requiredProps.options[index].value);
+      expect(element.props().children).toEqual(requiredProps.options[index].label);
+    });
   });
 });
