@@ -67,7 +67,7 @@ export class Team implements BaseModel {
   public mapJson(attributes: any): Team {
     if (attributes !== undefined) {
       this.setId(attributes.id);
-      this.setName(attributes.name);
+      this.setName(attributes.teamName);
     }
     return this;
   }
@@ -82,7 +82,7 @@ export class Team implements BaseModel {
   public mapDatabaseObject(attributes: any): Team {
     if (attributes !== undefined) {
       this.setId(attributes.id);
-      this.setName(attributes.name);
+      this.setName(attributes.team_name);
     }
     return this;
   }
