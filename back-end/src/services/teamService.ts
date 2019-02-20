@@ -14,4 +14,16 @@ export default class TeamService extends BaseService<Team, RawTeam> {
   public getRepository(): BaseRepository<Team, RawTeam> {
     return this.repo;
   }
+
+  /**
+   * Find team by teamName
+   *
+   * @param {string} teamName
+   * @returns {Promise<Team>}
+   * @memberof TeamService
+   */
+  public async findByTeamName(teamName: string): Promise<Team> {
+    const team = await this.repo.findByTeamName(teamName);
+    return team;
+  }
 }

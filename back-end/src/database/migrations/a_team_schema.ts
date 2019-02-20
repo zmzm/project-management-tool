@@ -9,7 +9,6 @@ export function up(db: knex) {
     })
     .then(() => db('team').insert([
       {
-        id: 1,
         team_name: 'Test team',
       },
     ]));

@@ -63,6 +63,7 @@ export default class BaseRepository<T, S> {
   public async create(entity: S, fieldsToReturn?: string[]): Promise<IBaseModel> {
     const conn = await this.db.getConnection();
     try {
+      // TODO: looks like so presice selection of returning fields is not needed here, switch to '*' - to return all fields instead
       const result = await conn.table(this.table).returning(fieldsToReturn).insert(entity);
       return result;
     } catch (err) {
@@ -82,8 +83,10 @@ export default class BaseRepository<T, S> {
    */
   public async update(entity: S, id: number): Promise<IBaseModel> {
     const conn = await this.db.getConnection();
-    const result = await conn.update(entity).into(this.table).where('id', id);
-    return this.findById(result);
+    
+    // TODO: find way to get updated entity as a response, to avoid making extra call
+    await conn.update(entity).into(this.table).where('id', id);
+    return await this.findById(id);
   }
 
   /**
