@@ -1,4 +1,4 @@
-import BaseModel from './baseModel';
+import IBaseModel from './baseModel';
 
 /* eslint camelcase: 0 */
 /**
@@ -8,17 +8,17 @@ import BaseModel from './baseModel';
  * @class RawCard
  */
 export class RawCard {
-  public id?: number
+  public id?: number;
 
-  public card_name?: string
+  public card_name?: string;
 
-  public about?: string
+  public about?: string;
 
-  public user_id?: number
+  public user_id?: number;
 
-  public list_id?: number
+  public list_id?: number;
 
-  public created_at?: Date
+  public created_at?: Date;
 
   constructor(builder: Card) {
     this.id = builder.getId();
@@ -36,18 +36,18 @@ export class RawCard {
  * @export
  * @class Card
  */
-export class Card implements BaseModel {
-  private id?: number
+export class Card implements IBaseModel {
+  private id?: number;
 
-  private cardName: string
+  private cardName: string;
 
-  private about: string
+  private about: string;
 
-  private userId?: number
+  private userId?: number;
 
-  private listId?: number
+  private listId?: number;
 
-  private created?: Date
+  private created?: Date;
 
   constructor(attributes?: any, isRaw: boolean = true) {
     if (attributes) {
@@ -60,7 +60,7 @@ export class Card implements BaseModel {
   }
 
   public getId(): number {
-    return <number>this.id;
+    return this.id as number;
   }
 
   public get Name(): string {
@@ -72,15 +72,15 @@ export class Card implements BaseModel {
   }
 
   public get UserId(): number {
-    return <number>this.userId;
+    return this.userId as number;
   }
 
   public get ListId(): number {
-    return <number>this.listId;
+    return this.listId as number;
   }
 
   public get CreatedAt(): Date {
-    return <Date>this.created;
+    return this.created as Date;
   }
 
   public setId(id: number): Card {

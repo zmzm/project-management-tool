@@ -20,10 +20,10 @@ export function up(db: knex) {
     })
     .then(() => db('comment').insert([
       {
-        id: 1,
-        comment_text: 'Test comment',
-        user_id: 1,
         card_id: 1,
+        comment_text: 'Test comment',
+        id: 1,
+        user_id: 1,
       },
     ]));
 }

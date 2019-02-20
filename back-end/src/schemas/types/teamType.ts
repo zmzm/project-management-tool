@@ -1,16 +1,17 @@
 import {
+  GraphQLID,
   GraphQLObjectType,
   GraphQLString,
-  GraphQLID,
 } from 'graphql';
 
+// tslint:disable-next-line
 const TeamType = new GraphQLObjectType({
-  name: 'Team',
   description: 'A single team.',
   fields: {
     id: { type: GraphQLID },
     teamName: { type: GraphQLString },
   },
+  name: 'Team',
 });
 
 export default TeamType;

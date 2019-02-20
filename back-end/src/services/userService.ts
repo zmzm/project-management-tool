@@ -1,24 +1,27 @@
-import BaseService from './baseservice';
+import { ValidationError } from '../errors';
+import { RawUser, User } from '../models/userModel';
+import BaseRepository from '../repositories/baseRepository';
 import UserRepository from '../repositories/userRepository';
 import { Hasher } from '../utils/hasher';
-import { User, RawUser } from '../models/userModel';
-import { ValidationError } from '../errors';
-import BaseRepository from '../repositories/baseRepository';
-
+import { ITokenHandler } from '../utils/tokenHandler';
+import BaseService from './baseservice';
 
 export default class UserService extends BaseService<User, RawUser> {
   private repo: UserRepository;
 
   private hasher: Hasher;
 
-  public getRepository(): BaseRepository<User, RawUser> {
-    return this.repo;
-  }
+  private tokenHandler: ITokenHandler;
 
-  constructor(repo: UserRepository, hasher: Hasher) {
+  constructor(repo: UserRepository, hasher: Hasher, tokenHandler: ITokenHandler) {
     super();
     this.repo = repo;
     this.hasher = hasher;
+    this.tokenHandler = tokenHandler;
+  }
+
+  public getRepository(): BaseRepository<User, RawUser> {
+    return this.repo;
   }
 
   /**
@@ -31,6 +34,21 @@ export default class UserService extends BaseService<User, RawUser> {
   public async findByEmail(email: string): Promise<User> {
     const user = await this.repo.findByEmail(email);
     return user;
+  }
+
+  /**
+   * Hash password for newly created user
+   *
+   * @param {string} password
+   * @returns {Promise<string>}
+   * @memberof UserService
+   */
+  public async hashPassword(password: string) {
+    return await this.hasher.hashPassword(password);
+  }
+
+  public async generateJwt(email: string, expiresIn?: number | string) {
+    return this.tokenHandler.createToken(email, expiresIn);
   }
 
   /**

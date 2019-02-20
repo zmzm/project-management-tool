@@ -1,6 +1,6 @@
-import { Team, RawTeam } from '../models/teamModel';
-import BaseRepository from './baseRepository';
 import Postgres from '../database';
+import { RawTeam, Team } from '../models/teamModel';
+import BaseRepository from './baseRepository';
 
 /**
  * Repository for CRUD operations with Team model

@@ -17,8 +17,8 @@ export function up(db: knex) {
     })
     .then(() => db(' board').insert([
       {
-        id: 1,
         board_name: 'Test  board',
+        id: 1,
         is_closed: false,
         team_id: 1,
       },

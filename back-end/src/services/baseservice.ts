@@ -1,6 +1,6 @@
 import * as lodash from 'lodash';
+import IBaseModel from '../models/baseModel';
 import BaseRepository from '../repositories/baseRepository';
-import BaseModel from '../models/baseModel';
 
 /**
  * Base service class for all services
@@ -11,7 +11,7 @@ import BaseModel from '../models/baseModel';
  * @template S
  */
 export default abstract class BaseService<T, S> {
-  public abstract getRepository(): BaseRepository<T, S>
+  public abstract getRepository(): BaseRepository<T, S>;
 
   /**
    * Get all entities of @type T
@@ -31,32 +31,34 @@ export default abstract class BaseService<T, S> {
    * @returns {Promise<T>}
    * @memberof BaseService
    */
-  public async findById(id: number): Promise<BaseModel> {
+  public async findById(id: number): Promise<IBaseModel> {
     const entity = await this.getRepository().findById(id);
     return entity;
   }
 
   /**
-   * Create entity of @type S
+   * Create entity of @type IBaseModel
    *
-   * @param {S} entity
-   * @returns {Promise<S>}
+   * @param {IBaseModel} entity
+   * @param {string[]} fieldsToReturn
+   * @returns {Promise<IBaseModel>}
    * @memberof BaseService
    */
-  public async create(entity: S): Promise<S> {
-    const result = await this.getRepository().create(entity);
+  public async create(entity: IBaseModel, fieldsToReturn?: string[]): Promise<IBaseModel> {
+    const result = await this.getRepository()
+      .create(entity.toDatabaseObject(), fieldsToReturn);
 
     return result;
   }
 
   /**
-   * Update entity of @type S
+   * Update entity of @type IBaseModel
    *
-   * @param {S} entity
-   * @returns {Promise<S>}
+   * @param {IBaseModel} entity
+   * @returns {Promise<IBaseModel>}
    * @memberof BaseService
    */
-  public async update(entity: BaseModel): Promise<BaseModel> {
+  public async update(entity: IBaseModel): Promise<IBaseModel> {
     const newEntity = await this.findById(entity.getId());
     const result = await this.getRepository()
       .update(lodash.merge({}, newEntity, entity.toDatabaseObject()), entity.getId());

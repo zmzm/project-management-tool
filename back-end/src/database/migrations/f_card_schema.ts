@@ -21,18 +21,18 @@ export function up(db: knex) {
     })
     .then(() => db('card').insert([
       {
-        id: 1,
-        card_name: 'Test card',
         about: 'Test test test test test',
-        user_id: 1,
+        card_name: 'Test card',
+        id: 1,
         list_id: 1,
+        user_id: 1,
       },
       {
-        id: 2,
-        card_name: 'Test2 card',
         about: 'Test2 test2 test2 test2 test2',
-        user_id: 1,
+        card_name: 'Test2 card',
+        id: 2,
         list_id: 1,
+        user_id: 1,
       },
     ]));
 }

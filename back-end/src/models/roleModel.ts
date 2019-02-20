@@ -1,4 +1,4 @@
-import BaseModel from './baseModel';
+import IBaseModel from './baseModel';
 
 /* eslint camelcase: 0 */
 /**
@@ -8,9 +8,9 @@ import BaseModel from './baseModel';
  * @class RawRole
  */
 export class RawRole {
-  public id?: number
+  public id?: number;
 
-  public role_name?: string
+  public role_name?: string;
 
   constructor(builder: Role) {
     this.id = builder.getId();
@@ -24,10 +24,10 @@ export class RawRole {
  * @export
  * @class Role
  */
-export class Role implements BaseModel {
-  private id?: number
+export class Role implements IBaseModel {
+  private id?: number;
 
-  private roleName: string
+  private roleName: string;
 
   constructor(attributes?: any, isRaw: boolean = true) {
     if (attributes) {
@@ -40,7 +40,7 @@ export class Role implements BaseModel {
   }
 
   public getId(): number {
-    return <number>this.id;
+    return this.id as number;
   }
 
   public get Name(): string {

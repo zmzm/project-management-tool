@@ -22,22 +22,20 @@ export function up(db: knex) {
     })
     .then(() => db(' user').insert([
       {
-        id: 1,
         email: 'teastd@sdfsdf.sdfsdf',
+        first_name: 'Test',
+        last_name: 'Testov',
         password: 'asdasdasd123213',
         role_id: 1,
         team_id: 1,
-        first_name: 'Test',
-        last_name: 'Testov',
       },
       {
-        id: 2,
         email: 'teast2@sdfsdf.sdfsdf',
+        first_name: 'Test2',
+        last_name: 'Testov2',
         password: 'asdasdasd123213',
         role_id: 2,
         team_id: 1,
-        first_name: 'Test2',
-        last_name: 'Testov2',
       },
     ]));
 }

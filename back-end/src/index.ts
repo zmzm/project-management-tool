@@ -1,10 +1,10 @@
+import * as dotenv from 'dotenv';
+import { Server } from 'http';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
-import { Server } from 'http';
 import GraphQLRoutes from './routes/graphQLRoutes';
 
-
-require('dotenv').config();
+dotenv.config();
 
 export class AppServer extends Server {
   private app: Koa;
@@ -18,7 +18,6 @@ export class AppServer extends Server {
 
   public listenPort(port: string): Server {
     this.server = this.app.listen(port);
-    console.log('Server listening...');
     return this.server;
   }
 
@@ -41,7 +40,7 @@ function createServer(): AppServer {
 
   GraphQLRoutes.map(router, app);
 
-  return <AppServer>appSrv.listenPort(String(process.env.PORT));
+  return appSrv.listenPort(String(process.env.PORT)) as AppServer;
 }
 
 const server = createServer();

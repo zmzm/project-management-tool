@@ -1,18 +1,17 @@
-import BaseService from './baseservice';
+import { RawTeam, Team } from '../models/teamModel';
 import BaseRepository from '../repositories/baseRepository';
 import TeamRepository from '../repositories/teamRepository';
-import { Team, RawTeam } from '../models/teamModel';
-
+import BaseService from './baseservice';
 
 export default class TeamService extends BaseService<Team, RawTeam> {
   private repo: TeamRepository;
 
-  public getRepository(): BaseRepository<Team, RawTeam> {
-    return this.repo;
-  }
-
   constructor(repo: TeamRepository) {
     super();
     this.repo = repo;
+  }
+
+  public getRepository(): BaseRepository<Team, RawTeam> {
+    return this.repo;
   }
 }

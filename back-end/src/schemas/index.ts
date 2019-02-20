@@ -1,7 +1,7 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
-import UsersQuery from './queries/userQueries';
 import UserMutation from './mutations/userMutations';
+import UsersQuery from './queries/userQueries';
 
 /**
  * Creating GraphQL schema
@@ -10,34 +10,35 @@ import UserMutation from './mutations/userMutations';
  * @class Schema
  */
 export default class Schema {
-  private static instance: Schema;
 
-  private rootQuery: GraphQLObjectType = new GraphQLObjectType({
-    name: 'Query',
-    fields: {
-      findAll: UsersQuery.findAll,
-      findById: UsersQuery.findById,
-      findUserByEmail: UsersQuery.findUserByEmail,
-    },
-  });
-
-  private rootMutation: GraphQLObjectType = new GraphQLObjectType({
-    name: 'Mutation',
-    fields: {
-      deleteUser: UserMutation.deleteUser,
-      updateUser: UserMutation.updateUser,
-    },
-  });
-
-  private schema: GraphQLSchema = new GraphQLSchema({
-    query: this.rootQuery,
-    mutation: this.rootMutation,
-  });
-
-  static get(): GraphQLSchema {
+  public static get(): GraphQLSchema {
     if (!Schema.instance) {
       Schema.instance = new Schema();
     }
     return Schema.instance.schema;
   }
+  private static instance: Schema;
+
+  private rootQuery: GraphQLObjectType = new GraphQLObjectType({
+    fields: {
+      findAllUsers: UsersQuery.findAll,
+      findUserByEmail: UsersQuery.findByEmail,
+      findUserById: UsersQuery.findById,
+    },
+    name: 'Query',
+  });
+
+  private rootMutation: GraphQLObjectType = new GraphQLObjectType({
+    fields: {
+      createUser: UserMutation.createUser,
+      deleteUser: UserMutation.deleteUser,
+      updateUser: UserMutation.updateUser,
+    },
+    name: 'Mutation',
+  });
+
+  private schema: GraphQLSchema = new GraphQLSchema({
+    mutation: this.rootMutation,
+    query: this.rootQuery,
+  });
 }
