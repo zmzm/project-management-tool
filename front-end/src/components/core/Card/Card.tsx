@@ -65,8 +65,8 @@ export class Card extends React.PureComponent<ICardProps> {
               colorMark && colorMark.length && (
                 <div className={labelWrapper}>
                   {
-                    colorMark.map((color) => (
-                      <span className={cardLabelCss(color)}>
+                    colorMark.map((color, index) => (
+                      <span key={index} className={cardLabelCss(color)}>
                         &nbsp;
                       </span>
                     ))

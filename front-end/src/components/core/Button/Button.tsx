@@ -26,30 +26,33 @@ const buttonSize = {
 
 const buttonCss = (
   { button },
-  params
-) => css`
-  min-width: ${buttonSize[params.size] || buttonSize[ButtonSize.Default]}rem;
-  min-height: ${buttonSize[params.size] || buttonSize[ButtonSize.Default]}rem;
-  ${params.block && 'width: 100%;'}
+  size,
+  outline,
+  block,
+  transparent
+  ) => css`
+  min-width: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
+  min-height: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
+  ${block && 'width: 100%;'}
   cursor: pointer;
   position: relative;
-  padding: ${buttonPaddings[params.size] || 0};
+  padding: ${buttonPaddings[size] || 0};
   border-radius: 0.3rem;
   border: none;
   background-color: ${button.background.default};
-  ${params.outline && `background-color: ${button.background.outline};`}
-  ${params.transparent && `background-color: ${button.background.transparent};`}
+  ${outline && `background-color: ${button.background.outline};`}
+  ${transparent && `background-color: ${button.background.transparent};`}
   display: inline-block;
   margin-left: auto;
 
   &:hover {
     background-color: ${button.hover.default};
-    ${params.outline && ` background-color:  ${button.hover.outline};`}
-    ${params.transparent && `background-color: ${button.hover.transparent};`}
+    ${outline && ` background-color:  ${button.hover.outline};`}
+    ${transparent && `background-color: ${button.hover.transparent};`}
   }
 `;
 
-export interface IButtonProps {
+export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: any;
   component?: string;
   outline?: boolean;
@@ -70,16 +73,23 @@ export class Button extends React.PureComponent<IButtonProps> {
       children,
       className,
       icon,
+      size,
+      outline,
+      block,
+      transparent,
       ...rest
     } = this.props;
     const Element = Boolean(component) ? component as string : 'button';
 
     return (
-      <Element className={cx(buttonCss(theme, rest), className)}>
-      {
-        icon && (icon)
-      }
-      {children}
+      <Element 
+        className={cx(buttonCss(theme, size, outline, block, transparent), className)}
+        {...rest}
+      >
+        {
+          icon && (icon)
+        }
+        {children}
     </Element>
     );
   }

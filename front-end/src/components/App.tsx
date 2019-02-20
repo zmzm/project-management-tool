@@ -36,46 +36,55 @@ const buttonDivider = css`
   margin: 8px 4px 0 0;
 `;
 
-const App: React.SFC<{}> = () => (
-  <React.Fragment>
-    <Header>
-      <Margin margin='0 0.4rem 0 0'>
-        <Button size={ButtonSize.Big } icon={<Icon name='home' color='white' size={IconSize.Medium} />} />
-      </Margin>
-      <Margin margin='0 0.4rem 0 0'>
-        <Button size={ButtonSize.Big} >
-          <Text component='span' fontSize='1.6' color='white' weight={TextWeight.Bold}>Boards</Text>
-        </Button>
-      </Margin>
-      <div className={logoCss} />
-      <Button size={ButtonSize.Big} >
-        <Text component='span' fontSize='1.6' color='white' weight={TextWeight.Bold}>Profile</Text>
-      </Button>
-    </Header>
-    <Margin margin='0.4rem'>
-      <Header variant={HeaderVariants.Transparent}>
-        <Margin margin='0 0.4rem 0 0'>
-          <Button size={ButtonSize.Default} outline >
-            <Text component='span' fontSize='1.8' color='white' weight={TextWeight.Bold}>Test</Text>
-          </Button>
-        </Margin>
-        <Margin margin='0 0.4rem 0 0'>
-          <Button size={ButtonSize.Default} icon={<Icon name='star_border' color='white' />} outline />
-        </Margin>
-        <span className={buttonDivider} />
-        <Margin margin='0 0.4rem 0 0'>
-          <Button size={ButtonSize.Default} icon={<Icon name='android' left='13' color='white' />} outline>
-            <Padding padding='0 0 0 2.3rem'>
-              <Text fontSize='1.5' color='white'>dream-team</Text>
-            </Padding>
-          </Button>
-        </Margin>
-      </Header>
-    </Margin>
-    <BoardContent>
-      <CardList listName='List name' />
-    </BoardContent>
-  </React.Fragment>
-);
+export default class App extends React.Component<{}> {
+  public state = {
+    cards: [
+      {cardName: 'card 1', commentCount: 10, colorMark: ['#f2d600', 'red', 'green', 'pink', 'coral', 'aqua']},
+      {cardName: 'card 2'},
+    ],
+  };
 
-export default App;
+  public render() {
+    return (
+      <React.Fragment>
+        <Header>
+          <Margin margin='0 0.4rem 0 0'>
+            <Button size={ButtonSize.Big } icon={<Icon name='home' color='white' size={IconSize.Medium} />} />
+          </Margin>
+          <Margin margin='0 0.4rem 0 0'>
+            <Button size={ButtonSize.Big} >
+              <Text component='span' fontSize='1.6' color='white' weight={TextWeight.Bold}>Boards</Text>
+            </Button>
+          </Margin>
+          <div className={logoCss} />
+          <Button size={ButtonSize.Big} >
+            <Text component='span' fontSize='1.6' color='white' weight={TextWeight.Bold}>Profile</Text>
+          </Button>
+        </Header>
+        <Margin margin='0.4rem'>
+          <Header variant={HeaderVariants.Transparent}>
+            <Margin margin='0 0.4rem 0 0'>
+              <Button size={ButtonSize.Default} outline >
+                <Text component='span' fontSize='1.8' color='white' weight={TextWeight.Bold}>Test</Text>
+              </Button>
+            </Margin>
+            <Margin margin='0 0.4rem 0 0'>
+              <Button size={ButtonSize.Default} icon={<Icon name='star_border' color='white' />} outline />
+            </Margin>
+            <span className={buttonDivider} />
+            <Margin margin='0 0.4rem 0 0'>
+              <Button size={ButtonSize.Default} icon={<Icon name='android' left='13' color='white' />} outline>
+                <Padding padding='0 0 0 2.3rem'>
+                  <Text fontSize='1.5' color='white'>dream-team</Text>
+                </Padding>
+              </Button>
+            </Margin>
+          </Header>
+        </Margin>
+        <BoardContent>
+          <CardList listName='List name' cards={this.state.cards} />
+        </BoardContent>
+      </React.Fragment>
+    );
+  }
+}
