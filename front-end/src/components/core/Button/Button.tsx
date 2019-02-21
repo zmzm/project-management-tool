@@ -79,7 +79,7 @@ export class Button extends React.PureComponent<IButtonProps> {
       transparent,
       ...rest
     } = this.props;
-    const Element = Boolean(component) ? component as string : 'button';
+    const Element = Boolean(component) ? component as any : 'button';
 
     return (
       <Element 

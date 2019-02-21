@@ -17,11 +17,13 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "experimentalDecorators": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules",
     "build",
+    "coverage",
     "scripts",
     "acceptance-tests",
     "webpack",
