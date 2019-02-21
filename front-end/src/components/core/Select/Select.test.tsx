@@ -1,4 +1,4 @@
-import { shallowWithTheme, mountWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme';
+import { mountWithTheme, shallowWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme';
 import * as React from 'react';
 import { Select, SelectVariants } from './Select';
 
@@ -7,27 +7,27 @@ const state = {
 };
 
 const requiredProps = {
-  variant: SelectVariants.Default,
+  onChange: value => {
+    state.value = value;
+  },
   options: [
     { value: '1', label: '1' },
     { value: '2', label: '2' },
     { value: '3', label: '3' },
   ],
-  onChange: value => {
-    state.value = value;
-  },
+  variant: SelectVariants.Default,
 };
 
 const optionalProps = {
-  placeholder: 'test-placeholder',
   disabled: true,
-  value: 'stub value',
   label: 'test label',
+  placeholder: 'test-placeholder',
+  value: 'stub value',
 };
 
 afterEach(() => state.value = null);
 
-describe('Select core component:', () => {
+describe('<Select />', () => {
   it('shallow renders without crashing', () => {
     shallowWithTheme(<Select {...requiredProps} />);
   });

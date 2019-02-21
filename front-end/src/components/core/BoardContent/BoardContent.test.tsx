@@ -4,7 +4,7 @@ import { BoardContent } from './BoardContent';
 
 const textStub = 'TextTextTextTextTextTextTextTextTextTextText';
 
-describe('BoardContent core component:', () => {
+describe('<BoardContent />', () => {
   it('shallow renders without crashing', () => {
     shallow(<BoardContent />);
   });

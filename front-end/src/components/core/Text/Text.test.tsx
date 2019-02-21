@@ -4,7 +4,7 @@ import { Text } from './Text';
 
 const textStub = 'TextTextTextTextTextTextTextTextTextTextText';
 
-describe('Text core component:', () => {
+describe('<Text />', () => {
   it('shallow renders without crashing', () => {
     shallowWithTheme(<Text />);
   });

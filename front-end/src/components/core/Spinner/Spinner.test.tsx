@@ -12,7 +12,7 @@ const theme = {
   stub: 'blue',
 };
 
-describe('Spinner core component:', () => {
+describe('<Spinner />', () => {
   it('shallow renders without crashing', () => {
     shallowWithTheme(<Spinner theme={theme} />);
   });

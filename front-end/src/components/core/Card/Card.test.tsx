@@ -11,7 +11,7 @@ const props = {
   commentsCount: 7,
 };
 
-describe('Card core component:', () => {
+describe('<Card />', () => {
   it('shallow renders without crashing', () => {
     shallow(<Card {...props} />);
   });

@@ -6,7 +6,7 @@ const props = {
   listName: 'Test list',
 };
 
-describe('CardList core component:', () => {
+describe('<CardList />', () => {
   it('shallow renders without crashing', () => {
     shallowWithTheme(<CardList { ...props } />);
   });

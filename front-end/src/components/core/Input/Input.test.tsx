@@ -1,4 +1,4 @@
-import { shallowWithTheme, mountWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme';
+import { mountWithTheme, shallowWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme';
 import * as React from 'react';
 import { Input, InputTypes, InputVariants } from './Input';
 
@@ -7,23 +7,23 @@ const state = {
 };
 
 const requiredProps = {
-  type: InputTypes.Text,
-  variant: InputVariants.Default,
   onChange: value => {
     state.value = value;
   },
+  type: InputTypes.Text,
+  variant: InputVariants.Default,
 };
 
 const optionalProps = {
-  placeholder: 'test placeholder',
   disabled: true,
-  value: 'test value',
   label: 'test label',
+  placeholder: 'test placeholder',
+  value: 'test value',
 };
 
 afterEach(() => state.value = null);
 
-describe('Input core component:', () => {
+describe('<Input />', () => {
   it('shallow renders without crashing', () => {
     shallowWithTheme(<Input {...requiredProps} />);
   });
