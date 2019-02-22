@@ -7,8 +7,12 @@
     "start": "tsc && node dist/index.js",
     "start-dev": "nodemon --exec ts-node -- ./src/index.ts",
     "lint": "tslint './src/**/*.ts'",
-    "test": "jest",
-    "precommit": "npm run tslint"
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "repository": {
     "type": "git",

@@ -86,8 +86,6 @@ export class CardList extends React.PureComponent<ICardListProps> {
   }
 
   private toggleDilog = (value) => () => {
-    // tslint:disable-next-line:no-console
-    console.log('HELLO');
     this.setState({ showDialog: value });
   }
 }

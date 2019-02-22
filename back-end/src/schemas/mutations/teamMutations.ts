@@ -4,15 +4,15 @@ import {
   GraphQLNonNull,
   GraphQLString,
 } from 'graphql';
+import Context from '../../context';
 import { Team } from '../../models/teamModel';
 import TeamType from '../types/teamType';
-import Context from '../../context';
 
 const createTeam = {
-  type: TeamType,
   args: {
     teamName: { type: GraphQLString },
   },
+  type: TeamType,
   async resolve(root: any, args: any, ctx: Context<any>) {
     const teamModel = new Team(args, false);
 
@@ -25,21 +25,21 @@ const createTeam = {
 };
 
 const deleteTeam = {
-  type: TeamType,
   args: {
     id: { type: GraphQLID },
   },
+  type: TeamType,
   async resolve(root: any, args: any, ctx: Context<any>) {
     await ctx.Services.TeamService.delete(args.id);
   },
 };
 
 const updateTeam = {
-  type: TeamType,
   args: {
     id: { type: new GraphQLNonNull(GraphQLInt) },
     teamName: { type: new GraphQLNonNull(GraphQLString) },
   },
+  type: TeamType,
   async resolve(root: any, args: any, ctx: Context<any>) {
     const teamModel = new Team()
       .setId(args.id)
