@@ -1,4 +1,4 @@
-import BaseModel from './baseModel';
+import IBaseModel from './baseModel';
 
 /* eslint camelcase: 0 */
 /**
@@ -8,11 +8,11 @@ import BaseModel from './baseModel';
  * @class RawList
  */
 export class RawList {
-  public id?: number
+  public id?: number;
 
-  public list_name?: string
+  public list_name?: string;
 
-  public board_id?: number
+  public board_id?: number;
 
   constructor(builder: List) {
     this.id = builder.getId();
@@ -27,12 +27,12 @@ export class RawList {
  * @export
  * @class List
  */
-export class List implements BaseModel {
-  private id?: number
+export class List implements IBaseModel {
+  private id?: number;
 
-  private listName: string
+  private listName: string;
 
-  private boardId: number
+  private boardId: number;
 
   constructor(attributes?: any, isRaw: boolean = true) {
     if (attributes) {
@@ -45,7 +45,7 @@ export class List implements BaseModel {
   }
 
   public getId(): number {
-    return <number>this.id;
+    return this.id as number;
   }
 
   public get Name(): string {

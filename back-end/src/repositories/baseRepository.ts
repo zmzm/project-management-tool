@@ -1,5 +1,5 @@
 import Postgres from '../database';
-import BaseModel from '../models/baseModel';
+import IBaseModel from '../models/baseModel';
 
 /**
  * Base repository class for all repositories
@@ -41,7 +41,7 @@ export default class BaseRepository<T, S> {
    * @returns {Promise<T>}
    * @memberof BaseRepository
    */
-  public async findById(id: number): Promise<BaseModel> {
+  public async findById(id: number): Promise<IBaseModel> {
     const conn = await this.db.getConnection();
     const result = await conn
       .select()
@@ -57,13 +57,14 @@ export default class BaseRepository<T, S> {
    *
    * @param {S} entity
    * @param {string[]} fieldsToReturn
-   * @returns {Promise<BaseModelS>}
+   * @returns {Promise<IBaseModelS>}
    * @memberof BaseRepository
    */
-  public async create(entity: S, fieldsToReturn?: string[]): Promise<BaseModel> {
+  public async create(entity: S, fieldsToReturn?: string[]): Promise<IBaseModel> {
     const conn = await this.db.getConnection();
     try {
-      // TODO: looks like so presice selection of returning fields is not needed here, switch to '*' - to return all fields instead
+      // TODO: looks like so presice selection of returning fields is not needed here,
+      // switch to '*' - to return all fields instead
       const result = await conn.table(this.table).returning(fieldsToReturn).insert(entity);
       return result;
     } catch (err) {
@@ -78,12 +79,12 @@ export default class BaseRepository<T, S> {
    * Update entity of @type S in database
    *
    * @param {S} entity
-   * @returns {Promise<BaseModel>}
+   * @returns {Promise<IBaseModel>}
    * @memberof BaseRepository
    */
-  public async update(entity: S, id: number): Promise<BaseModel> {
+  public async update(entity: S, id: number): Promise<IBaseModel> {
     const conn = await this.db.getConnection();
-    
+
     // TODO: find way to get updated entity as a response, to avoid making extra call
     await conn.update(entity).into(this.table).where('id', id);
     return await this.findById(id);

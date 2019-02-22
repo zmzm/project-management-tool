@@ -1,27 +1,27 @@
+import * as Koa from 'koa';
 import * as GraphQLHTTP from 'koa-graphql';
 import * as Router from 'koa-router';
-import * as Koa from 'koa';
 
-import Postgres from '../database';
-import Schema from '../schemas';
-import BCryptHasher from '../utils/hasher';
-import TokenHandler from '../utils/tokenHandler';
 import Context from '../context';
 import ServicesContext from '../context/servicesContext';
-import UserRepository from '../repositories/userRepository';
-import UserService from '../services/userService';
-import BoardService from '../services/boardService';
+import Postgres from '../database';
 import BoardRepository from '../repositories/boardRepository';
-import CardService from '../services/cardService';
 import CardRepository from '../repositories/cardRepository';
-import CommentService from '../services/commentService';
 import CommentRepository from '../repositories/commentRepository';
-import ListService from '../services/listService';
 import ListRepository from '../repositories/listRepository';
-import RoleService from '../services/roleService';
 import RoleRepository from '../repositories/roleRepository';
-import TeamService from '../services/teamService';
 import TeamRepository from '../repositories/teamRepository';
+import UserRepository from '../repositories/userRepository';
+import Schema from '../schemas';
+import BoardService from '../services/boardService';
+import CardService from '../services/cardService';
+import CommentService from '../services/commentService';
+import ListService from '../services/listService';
+import RoleService from '../services/roleService';
+import TeamService from '../services/teamService';
+import UserService from '../services/userService';
+import BCryptHasher from '../utils/hasher';
+import TokenHandler from '../utils/tokenHandler';
 
 /**
  * Registering GraphQL routes and creating context for GraphQL
@@ -30,15 +30,15 @@ import TeamRepository from '../repositories/teamRepository';
  * @class GraphQLRoutes
  */
 export default class GraphQLRoutes {
-  static map(router: Router, app: Koa): void {
+  public static map(router: Router, app: Koa): void {
     GraphQLRoutes.buildContext();
 
     router.all(
       '/graphql',
       GraphQLHTTP({
-        schema: Schema.get(),
-        graphiql: true,
         context: new Context(ServicesContext.getInstance()),
+        graphiql: true,
+        schema: Schema.get(),
       }),
     );
     app.use(router.routes()).use(router.allowedMethods());
@@ -48,11 +48,11 @@ export default class GraphQLRoutes {
     try {
       const db = new Postgres({
         database: String(process.env.DB_DATABASE),
+        debug: Boolean(process.env.ENV !== 'production'),
         host: String(process.env.DB_HOST),
+        password: String(process.env.DB_PASSWORD || ''),
         port: String(process.env.DB_PORT),
         user: String(process.env.DB_USER),
-        password: String(process.env.DB_PASSWORD || ''),
-        debug: Boolean(process.env.ENV !== 'production'),
       });
 
       ServicesContext.getInstance()

@@ -1,6 +1,6 @@
+import Postgres from '../database';
 import { Comment, RawComment } from '../models/commentModel';
 import BaseRepository from './baseRepository';
-import Postgres from '../database';
 
 /**
  * Repository for CRUD operations with Comment model

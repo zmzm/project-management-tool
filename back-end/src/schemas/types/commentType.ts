@@ -1,20 +1,21 @@
 import {
-  GraphQLObjectType,
-  GraphQLString,
   GraphQLID,
   GraphQLInt,
+  GraphQLObjectType,
+  GraphQLString,
 } from 'graphql';
 
+// tslint:disable-next-line
 const CommentType = new GraphQLObjectType({
-  name: 'Comment',
   description: 'A single comment.',
   fields: {
-    id: { type: GraphQLID },
-    commentText: { type: GraphQLString },
-    userId: { type: GraphQLInt },
     cardId: { type: GraphQLInt },
+    commentText: { type: GraphQLString },
     created: { type: GraphQLString },
+    id: { type: GraphQLID },
+    userId: { type: GraphQLInt },
   },
+  name: 'Comment',
 });
 
 export default CommentType;

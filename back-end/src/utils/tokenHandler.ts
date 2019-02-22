@@ -11,31 +11,30 @@ export default class TokenHandler implements ITokenHandler {
 
   constructor() {
     if (!process.env.JWT_SECRET) {
-      new MissingEnvironmentVariable('JWT_TOKEN');
-      return;
+      throw new MissingEnvironmentVariable('JWT_TOKEN');
     }
     this.secret = process.env.JWT_SECRET;
   }
 
   public createToken(email: string, expiresIn?: number | string): Promise<string> {
     return new Promise((resolve, reject) => {
-      jwt.sign({ email }, this.secret, { algorithm: 'HS256', expiresIn: expiresIn || '30d' },  function(err, token) {
+      jwt.sign({ email }, this.secret, { algorithm: 'HS256', expiresIn: expiresIn || '30d' },  (err, token) => {
         if (err) {
           reject(err);
         }
         resolve(token);
       });
-    })
+    });
   }
 
   public isTokenValid(token: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      jwt.verify(token, this.secret, function(err, decoded) {
+      jwt.verify(token, this.secret, (err, decoded) => {
         if (err) {
           reject(err);
         }
         resolve(decoded);
       });
-    })
+    });
   }
 }

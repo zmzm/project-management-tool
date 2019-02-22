@@ -1,4 +1,4 @@
-interface BaseModel {
+interface IIBaseModel {
     getId(): number;
 
     toJson(): any;
@@ -6,4 +6,4 @@ interface BaseModel {
     toDatabaseObject(): any;
 }
 
-export default BaseModel;
+export default IIBaseModel;

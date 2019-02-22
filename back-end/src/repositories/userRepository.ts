@@ -1,7 +1,7 @@
-import { RawUser, User } from '../models/userModel';
-import { NotFoundError } from '../errors';
-import BaseRepository from './baseRepository';
 import Postgres from '../database';
+import { NotFoundError } from '../errors';
+import { RawUser, User } from '../models/userModel';
+import BaseRepository from './baseRepository';
 
 /**
  * Repository for CRUD operations with User model

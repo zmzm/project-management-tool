@@ -15,14 +15,14 @@ export function up(db: knex) {
     })
     .then(() => db('list').insert([
       {
+        board_id: 1,
         id: 1,
         list_name: 'List 1',
-        board_id: 1,
       },
       {
+        board_id: 1,
         id: 2,
         list_name: 'List 2',
-        board_id: 1,
       },
     ]));
 }

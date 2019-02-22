@@ -1,6 +1,6 @@
+import Postgres from '../database';
 import { List, RawList } from '../models/listModel';
 import BaseRepository from './baseRepository';
-import Postgres from '../database';
 
 /**
  * Repository for CRUD operations with List model

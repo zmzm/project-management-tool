@@ -31,9 +31,9 @@ export class ValidationError extends AppError {
 }
 
 export class FieldValidationError extends AppError {
-  public fields: FieldError[];
+  public fields: IFieldError[];
 
-  constructor(message: string, fields: FieldError[], error?: Error) {
+  constructor(message: string, fields: IFieldError[], error?: Error) {
     super(30001, message, error);
     this.fields = fields;
   }
@@ -41,8 +41,8 @@ export class FieldValidationError extends AppError {
   public toModel() {
     return {
       code: this.code,
-      message: this.message,
       fields: this.fields,
+      message: this.message,
     };
   }
 }
@@ -65,7 +65,7 @@ export class MissingEnvironmentVariable extends AppError {
   }
 }
 
-export interface FieldError {
+export interface IFieldError {
   message: string;
   type: string;
   path: string[];

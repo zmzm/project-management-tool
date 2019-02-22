@@ -1,4 +1,4 @@
-import BaseModel from './baseModel';
+import IBaseModel from './baseModel';
 
 /* eslint camelcase: 0 */
 /**
@@ -8,23 +8,23 @@ import BaseModel from './baseModel';
  * @class RawUser
  */
 export class RawUser {
-  public id?: number
+  public id?: number;
 
-  public email?: string
+  public email?: string;
 
-  public password?: string
+  public password?: string;
 
-  public role_id?: number
+  public role_id?: number;
 
-  public team_id?: number
+  public team_id?: number;
 
-  public first_name?: string
+  public first_name?: string;
 
-  public last_name?: string
+  public last_name?: string;
 
-  public created_at?: Date
+  public created_at?: Date;
 
-  public updated_at?: Date
+  public updated_at?: Date;
 
   constructor(builder: User) {
     this.id = builder.getId();
@@ -45,24 +45,24 @@ export class RawUser {
  * @export
  * @class User
  */
-export class User implements BaseModel {
-  private id?: number
+export class User implements IBaseModel {
+  private id?: number;
 
-  private email: string
+  private email: string;
 
-  private password: string
+  private password: string;
 
-  private roleId?: number
+  private roleId?: number;
 
-  private teamId?: number
+  private teamId?: number;
 
-  private firstName: string
+  private firstName: string;
 
-  private lastName: string
+  private lastName: string;
 
-  private created?: Date
+  private created?: Date;
 
-  private updated?: Date
+  private updated?: Date;
 
   constructor(attributes?: any, isRaw: boolean = true) {
     if (attributes) {
@@ -75,7 +75,7 @@ export class User implements BaseModel {
   }
 
   public getId(): number {
-    return <number>this.id;
+    return this.id as number;
   }
 
   public get Email(): string {
@@ -87,11 +87,11 @@ export class User implements BaseModel {
   }
 
   public get RoleId(): number {
-    return <number>this.roleId;
+    return this.roleId as number;
   }
 
   public get TeamId(): number {
-    return <number>this.teamId;
+    return this.teamId as number;
   }
 
   public get FirstName(): string {
@@ -103,11 +103,11 @@ export class User implements BaseModel {
   }
 
   public get CreatedAt(): Date {
-    return <Date>this.created;
+    return this.created as Date;
   }
 
   public get UpdatedAt(): Date {
-    return <Date>this.updated;
+    return this.updated as Date;
   }
 
   public setId(id: number): User {

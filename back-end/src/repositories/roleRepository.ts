@@ -1,6 +1,6 @@
-import { Role, RawRole } from '../models/roleModel';
-import BaseRepository from './baseRepository';
 import Postgres from '../database';
+import { RawRole, Role } from '../models/roleModel';
+import BaseRepository from './baseRepository';
 
 /**
  * Repository for CRUD operations with Role model

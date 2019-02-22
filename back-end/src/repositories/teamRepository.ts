@@ -1,7 +1,7 @@
-import { Team, RawTeam } from '../models/teamModel';
-import { NotFoundError } from '../errors';
-import BaseRepository from './baseRepository';
 import Postgres from '../database';
+import { NotFoundError } from '../errors';
+import { RawTeam, Team } from '../models/teamModel';
+import BaseRepository from './baseRepository';
 
 /**
  * Repository for CRUD operations with Team model
@@ -34,6 +34,6 @@ export default class TeamRepository extends BaseRepository<Team, RawTeam> {
       throw new NotFoundError('Team doesn\'t exist');
     }
 
-    return new Team(result); 
+    return new Team(result);
   }
 }

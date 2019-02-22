@@ -1,7 +1,7 @@
 import * as knex from 'knex';
 import * as path from 'path';
 
-export interface Configuration {
+export interface IConfiguration {
   host: string;
   port: string;
   user: string;
@@ -11,11 +11,11 @@ export interface Configuration {
 }
 
 export default class Postgres {
-  private config: Configuration;
+  private config: IConfiguration;
 
   private connection: knex;
 
-  constructor(config: Configuration) {
+  constructor(config: IConfiguration) {
     this.config = config;
   }
 
@@ -60,11 +60,11 @@ export default class Postgres {
     const config: knex.Config = {
       client: 'postgres',
       connection: {
+        database: this.config.database,
         host: this.config.host,
+        password: this.config.password,
         port: this.config.port,
         user: this.config.user,
-        password: this.config.password,
-        database: this.config.database,
       },
       debug: this.config.debug,
       migrations: {

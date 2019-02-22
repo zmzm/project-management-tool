@@ -1,18 +1,17 @@
-import BaseService from './baseservice';
+import { List, RawList } from '../models/listModel';
 import BaseRepository from '../repositories/baseRepository';
 import ListRepository from '../repositories/listRepository';
-import { List, RawList } from '../models/listModel';
-
+import BaseService from './baseservice';
 
 export default class ListService extends BaseService<List, RawList> {
   private repo: ListRepository;
 
-  public getRepository(): BaseRepository<List, RawList> {
-    return this.repo;
-  }
-
   constructor(repo: ListRepository) {
     super();
     this.repo = repo;
+  }
+
+  public getRepository(): BaseRepository<List, RawList> {
+    return this.repo;
   }
 }

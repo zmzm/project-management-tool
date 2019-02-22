@@ -1,21 +1,21 @@
-import { GraphQLString, GraphQLList, GraphQLInt } from 'graphql';
-import UserType from '../types/userType';
+import { GraphQLInt, GraphQLList, GraphQLString } from 'graphql';
 import Context from '../../context';
 import { User } from '../../models/userModel';
+import UserType from '../types/userType';
 
 const findAll = {
   type: new GraphQLList(UserType),
   async resolve(root: any, args: any, ctx: Context<any>): Promise<User[]> {
     const users = await ctx.Services.UserService.findAll();
-    return users.map(user => new User(user));
+    return users.map((user) => new User(user));
   },
 };
 
 const findById = {
-  type: UserType,
   args: {
     id: { type: GraphQLInt },
   },
+  type: UserType,
   async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
     const user = await ctx.Services.UserService.findById(args.id);
     return new User(user);
@@ -23,10 +23,10 @@ const findById = {
 };
 
 const findByEmail = {
-  type: UserType,
   args: {
     email: { type: GraphQLString },
   },
+  type: UserType,
   async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
     const user = await ctx.Services.UserService.findByEmail(args.email);
     return user;
@@ -35,6 +35,6 @@ const findByEmail = {
 
 export default {
   findAll,
-  findById,
   findByEmail,
+  findById,
 };

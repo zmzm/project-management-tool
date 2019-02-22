@@ -1,6 +1,6 @@
 import * as lodash from 'lodash';
+import IBaseModel from '../models/baseModel';
 import BaseRepository from '../repositories/baseRepository';
-import BaseModel from '../models/baseModel';
 
 /**
  * Base service class for all services
@@ -11,7 +11,7 @@ import BaseModel from '../models/baseModel';
  * @template S
  */
 export default abstract class BaseService<T, S> {
-  public abstract getRepository(): BaseRepository<T, S>
+  public abstract getRepository(): BaseRepository<T, S>;
 
   /**
    * Get all entities of @type T
@@ -31,20 +31,20 @@ export default abstract class BaseService<T, S> {
    * @returns {Promise<T>}
    * @memberof BaseService
    */
-  public async findById(id: number): Promise<BaseModel> {
+  public async findById(id: number): Promise<IBaseModel> {
     const entity = await this.getRepository().findById(id);
     return entity;
   }
 
   /**
-   * Create entity of @type BaseModel
+   * Create entity of @type IBaseModel
    *
-   * @param {BaseModel} entity
+   * @param {IBaseModel} entity
    * @param {string[]} fieldsToReturn
-   * @returns {Promise<BaseModel>}
+   * @returns {Promise<IBaseModel>}
    * @memberof BaseService
    */
-  public async create(entity: BaseModel, fieldsToReturn?: string[]): Promise<BaseModel> {
+  public async create(entity: IBaseModel, fieldsToReturn?: string[]): Promise<IBaseModel> {
     const result = await this.getRepository()
       .create(entity.toDatabaseObject(), fieldsToReturn);
 
@@ -52,13 +52,13 @@ export default abstract class BaseService<T, S> {
   }
 
   /**
-   * Update entity of @type BaseModel
+   * Update entity of @type IBaseModel
    *
-   * @param {BaseModel} entity
-   * @returns {Promise<BaseModel>}
+   * @param {IBaseModel} entity
+   * @returns {Promise<IBaseModel>}
    * @memberof BaseService
    */
-  public async update(entity: BaseModel): Promise<BaseModel> {
+  public async update(entity: IBaseModel): Promise<IBaseModel> {
     const newEntity = await this.findById(entity.getId());
     const result = await this.getRepository()
       .update(lodash.merge({}, newEntity, entity.toDatabaseObject()), entity.getId());

@@ -1,4 +1,4 @@
-import BaseModel from './baseModel';
+import IBaseModel from './baseModel';
 
 /* eslint camelcase: 0 */
 /**
@@ -8,15 +8,15 @@ import BaseModel from './baseModel';
  * @class RawBoard
  */
 export class RawBoard {
-  public id?: number
+  public id?: number;
 
-  public board_name?: string
+  public board_name?: string;
 
-  public is_closed?: boolean
+  public is_closed?: boolean;
 
-  public team_id?: number
+  public team_id?: number;
 
-  public created_at?: Date
+  public created_at?: Date;
 
   constructor(builder: Board) {
     this.id = builder.getId();
@@ -33,16 +33,16 @@ export class RawBoard {
  * @export
  * @class Board
  */
-export class Board implements BaseModel {
-  private id?: number
+export class Board implements IBaseModel {
+  private id?: number;
 
-  private boardName: string
+  private boardName: string;
 
-  private isClosed: boolean
+  private isClosed: boolean;
 
-  private teamId?: number
+  private teamId?: number;
 
-  private created?: Date
+  private created?: Date;
 
   constructor(attributes?: any, isRaw: boolean = true) {
     if (attributes) {
@@ -55,7 +55,7 @@ export class Board implements BaseModel {
   }
 
   public getId(): number {
-    return <number>this.id;
+    return this.id as number;
   }
 
   public get Name(): string {
@@ -67,11 +67,11 @@ export class Board implements BaseModel {
   }
 
   public get TeamId(): number {
-    return <number>this.teamId;
+    return this.teamId as number;
   }
 
   public get CreatedAt(): Date {
-    return <Date>this.created;
+    return this.created as Date;
   }
 
   public setId(id: number): Board {

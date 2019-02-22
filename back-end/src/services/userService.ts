@@ -1,28 +1,27 @@
-import BaseService from './baseservice';
-import UserRepository from '../repositories/userRepository';
-import { Hasher } from '../utils/hasher';
-import { ITokenHandler } from '../utils/tokenHandler';
-import { User, RawUser } from '../models/userModel';
 import { ValidationError } from '../errors';
+import { RawUser, User } from '../models/userModel';
 import BaseRepository from '../repositories/baseRepository';
-
+import UserRepository from '../repositories/userRepository';
+import { IHasher } from '../utils/hasher';
+import { ITokenHandler } from '../utils/tokenHandler';
+import BaseService from './baseservice';
 
 export default class UserService extends BaseService<User, RawUser> {
   private repo: UserRepository;
 
-  private hasher: Hasher;
+  private hasher: IHasher;
 
   private tokenHandler: ITokenHandler;
 
-  public getRepository(): BaseRepository<User, RawUser> {
-    return this.repo;
-  }
-
-  constructor(repo: UserRepository, hasher: Hasher, tokenHandler: ITokenHandler) {
+  constructor(repo: UserRepository, hasher: IHasher, tokenHandler: ITokenHandler) {
     super();
     this.repo = repo;
     this.hasher = hasher;
     this.tokenHandler = tokenHandler;
+  }
+
+  public getRepository(): BaseRepository<User, RawUser> {
+    return this.repo;
   }
 
   /**
@@ -39,7 +38,7 @@ export default class UserService extends BaseService<User, RawUser> {
 
   /**
    * Hash password for newly created user
-   * 
+   *
    * @param {string} password
    * @returns {Promise<string>}
    * @memberof UserService

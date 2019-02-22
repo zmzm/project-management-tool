@@ -1,10 +1,10 @@
 import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
-import UserQuery from './queries/userQueries';
 import TeamQuery from './queries/teamQueries';
+import UserQuery from './queries/userQueries';
 
-import UserMutation from './mutations/userMutations';
 import TeamMutation from './mutations/teamMutations';
+import UserMutation from './mutations/userMutations';
 
 /**
  * Creating GraphQL schema
@@ -13,23 +13,29 @@ import TeamMutation from './mutations/teamMutations';
  * @class Schema
  */
 export default class Schema {
+
+  public static get(): GraphQLSchema {
+    if (!Schema.instance) {
+      Schema.instance = new Schema();
+    }
+    return Schema.instance.schema;
+  }
   private static instance: Schema;
 
   private rootQuery: GraphQLObjectType = new GraphQLObjectType({
-    name: 'Query',
     fields: {
       findAllUsers: UserQuery.findAll,
-      findUserById: UserQuery.findById,
       findUserByEmail: UserQuery.findByEmail,
+      findUserById: UserQuery.findById,
 
       findAllTeams: TeamQuery.findAll,
       findTeamById: TeamQuery.findById,
       findTeamByTeamName: TeamQuery.findByTeamName,
     },
+    name: 'Query',
   });
 
   private rootMutation: GraphQLObjectType = new GraphQLObjectType({
-    name: 'Mutation',
     fields: {
       createUser: UserMutation.createUser,
       deleteUser: UserMutation.deleteUser,
@@ -39,17 +45,11 @@ export default class Schema {
       deleteTeam: TeamMutation.deleteTeam,
       updateTeam: TeamMutation.updateTeam,
     },
+    name: 'Mutation',
   });
 
   private schema: GraphQLSchema = new GraphQLSchema({
-    query: this.rootQuery,
     mutation: this.rootMutation,
+    query: this.rootQuery,
   });
-
-  static get(): GraphQLSchema {
-    if (!Schema.instance) {
-      Schema.instance = new Schema();
-    }
-    return Schema.instance.schema;
-  }
 }

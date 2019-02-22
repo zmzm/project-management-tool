@@ -1,4 +1,4 @@
-import BaseModel from './baseModel';
+import IBaseModel from './baseModel';
 
 /* eslint camelcase: 0 */
 /**
@@ -8,15 +8,15 @@ import BaseModel from './baseModel';
  * @class RawComment
  */
 export class RawComment {
-  public id?: number
+  public id?: number;
 
-  public comment_text?: string
+  public comment_text?: string;
 
-  public user_id?: number
+  public user_id?: number;
 
-  public card_id?: number
+  public card_id?: number;
 
-  public created_at?: Date
+  public created_at?: Date;
 
   constructor(builder: Comment) {
     this.id = builder.getId();
@@ -33,16 +33,16 @@ export class RawComment {
  * @export
  * @class Comment
  */
-export class Comment implements BaseModel {
-  private id?: number
+export class Comment implements IBaseModel {
+  private id?: number;
 
-  private commentText: string
+  private commentText: string;
 
-  private userId?: number
+  private userId?: number;
 
-  private cardId?: number
+  private cardId?: number;
 
-  private created?: Date
+  private created?: Date;
 
   constructor(attributes?: any, isRaw: boolean = true) {
     if (attributes) {
@@ -55,7 +55,7 @@ export class Comment implements BaseModel {
   }
 
   public getId(): number {
-    return <number>this.id;
+    return this.id as number;
   }
 
   public get Text(): string {
@@ -63,15 +63,15 @@ export class Comment implements BaseModel {
   }
 
   public get UserId(): number {
-    return <number>this.userId;
+    return this.userId as number;
   }
 
   public get CardId(): number {
-    return <number>this.cardId;
+    return this.cardId as number;
   }
 
   public get CreatedAt(): Date {
-    return <Date>this.created;
+    return this.created as Date;
   }
 
   public setId(id: number): Comment {

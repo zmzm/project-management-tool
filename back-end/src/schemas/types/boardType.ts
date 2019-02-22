@@ -1,21 +1,22 @@
 import {
-  GraphQLObjectType,
-  GraphQLString,
+  GraphQLBoolean,
   GraphQLID,
   GraphQLInt,
-  GraphQLBoolean,
+  GraphQLObjectType,
+  GraphQLString,
 } from 'graphql';
 
+// tslint:disable-next-line
 const BoardType = new GraphQLObjectType({
-  name: 'Board',
   description: 'A single board.',
   fields: {
-    id: { type: GraphQLID },
     bardName: { type: GraphQLString },
+    created: { type: GraphQLString },
+    id: { type: GraphQLID },
     isClosed: { type: GraphQLBoolean },
     teamId: { type: GraphQLInt },
-    created: { type: GraphQLString },
   },
+  name: 'Board',
 });
 
 export default BoardType;

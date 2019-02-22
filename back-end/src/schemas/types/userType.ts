@@ -1,24 +1,25 @@
 import {
-  GraphQLObjectType,
-  GraphQLString,
   GraphQLID,
   GraphQLInt,
+  GraphQLObjectType,
+  GraphQLString,
 } from 'graphql';
 
+// tslint:disable-next-line
 const UserType = new GraphQLObjectType({
-  name: 'User',
   description: 'A single user.',
   fields: {
-    id: { type: GraphQLID },
+    created: { type: GraphQLString },
     email: { type: GraphQLString },
+    firstName: { type: GraphQLString },
+    id: { type: GraphQLID },
+    lastName: { type: GraphQLString },
     password: { type: GraphQLString },
     roleId: { type: GraphQLInt },
     teamId: { type: GraphQLInt },
-    firstName: { type: GraphQLString },
-    lastName: { type: GraphQLString },
-    created: { type: GraphQLString },
     updated: { type: GraphQLString },
   },
+  name: 'User',
 });
 
 export default UserType;

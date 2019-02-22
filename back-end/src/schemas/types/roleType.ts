@@ -1,16 +1,17 @@
 import {
+  GraphQLID,
   GraphQLObjectType,
   GraphQLString,
-  GraphQLID,
 } from 'graphql';
 
+// tslint:disable-next-line
 const RoleType = new GraphQLObjectType({
-  name: 'Role',
   description: 'A single role.',
   fields: {
     id: { type: GraphQLID },
     roleName: { type: GraphQLString },
   },
+  name: 'Role',
 });
 
 export default RoleType;

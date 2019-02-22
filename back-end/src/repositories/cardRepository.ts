@@ -1,6 +1,6 @@
+import Postgres from '../database';
 import { Card, RawCard } from '../models/cardModel';
 import BaseRepository from './baseRepository';
-import Postgres from '../database';
 
 /**
  * Repository for CRUD operations with Card model
