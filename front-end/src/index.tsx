@@ -3,7 +3,7 @@ import * as ReactDOM from 'react-dom';
 
 import { ThemeProvider } from 'emotion-theming';
 
-import App from './components/App';
+import App from './containers/App';
 import registerServiceWorker from './utils/register-service-worker';
 import './utils/add-icons-to-lib';
 import theme from './themes/default';

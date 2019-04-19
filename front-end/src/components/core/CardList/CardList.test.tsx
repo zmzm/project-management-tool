@@ -3,6 +3,7 @@ import * as React from 'react';
 import { CardList } from './CardList';
 
 const props = {
+  cards: [],
   listName: 'Test list',
 };
 
