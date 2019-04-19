@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import styled, { css, cx } from 'react-emotion';
+import { css, cx } from 'emotion';
+import styled from '@emotion/styled'
 import { withTheme } from 'emotion-theming';
 
 type HTMLAbstractInputElement = HTMLInputElement | HTMLTextAreaElement;
@@ -71,7 +72,7 @@ export interface InputProps {
 // @ts-ignore
 @withTheme
 export class Input extends React.PureComponent<InputProps> {
-  public input: HTMLAbstractInputElement;
+  public input: HTMLAbstractInputElement | undefined;
 
   public componentDidMount(): void {
     this.autoFocus();

@@ -44,7 +44,7 @@ export default class Postgres {
   public async closeDatabase(): Promise<void> {
     if (this.connection) {
       await this.connection.destroy();
-      this.connection = undefined;
+      // this.connection = undefined;
     }
   }
 

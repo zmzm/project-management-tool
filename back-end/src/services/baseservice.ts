@@ -44,7 +44,7 @@ export default abstract class BaseService<T, S> {
    * @returns {Promise<IBaseModel>}
    * @memberof BaseService
    */
-  public async create(entity: IBaseModel, fieldsToReturn?: string[]): Promise<IBaseModel> {
+  public async create(entity: IBaseModel, fieldsToReturn: string[]): Promise<IBaseModel> {
     const result = await this.getRepository()
       .create(entity.toDatabaseObject(), fieldsToReturn);
 

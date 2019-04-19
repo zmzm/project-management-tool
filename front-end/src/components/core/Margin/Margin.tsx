@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const marginCss = (margin) => css`
   ${margin ? `margin: ${margin};` : null}

@@ -4,6 +4,7 @@ import { CardList } from './CardList';
 
 const props = {
   listName: 'Test list',
+  cards: []
 };
 
 describe('<CardList />', () => {
