@@ -46,7 +46,7 @@ export const globalCss = () => injectGlobal`
     width: 100%;
     height: 100%;
     padding: 0;
-    background-color: rgb(0, 121, 191);
+    background: linear-gradient(to right, #005c97, #363795);;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

@@ -7,6 +7,9 @@ import App from './containers/App';
 import registerServiceWorker from './utils/register-service-worker';
 import './utils/add-icons-to-lib';
 import theme from './themes/default';
+import { globalCss } from './themes/global';
+
+globalCss();
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
