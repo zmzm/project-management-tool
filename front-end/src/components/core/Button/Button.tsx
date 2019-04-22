@@ -46,6 +46,15 @@ const buttonCss = (
   display: inline-block;
   margin-left: auto;
 
+  &[disabled] {
+    background-color: ${button.background.disabled};
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: ${button.background.disabled};
+    }
+  }
+
   &:hover {
     background-color: ${button.hover.default};
     ${outline && ` background-color:  ${button.hover.outline};`}

@@ -38,7 +38,7 @@ const InputWrapper = styled('div')`
   flex-direction: column;
 `;
 
-const inputCss = ({ input }, variant, disabled) => css`
+const inputCss = ({ input }, variant: string, disabled: any) => css`
   color: ${input[variant].textColor};
   font-size: 1.4rem;
   background-color: ${input[variant].bg};
@@ -53,18 +53,18 @@ const inputCss = ({ input }, variant, disabled) => css`
   }
 `;
 
-export interface InputProps {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type: InputTypes,
+  name: string,
   variant: string,
   label?: any,
   className?: string,
   width?: number,
-  value?: string | number,
+  value?: any,
   placeholder?: string,
   disabled?: boolean,
   autoFocus?: boolean,
   theme?: any;
-  onChange: (value: string, e: React.SyntheticEvent<HTMLAbstractInputElement>) => any,
 }
 
 // @ts-ignore
@@ -87,11 +87,6 @@ export class Input extends React.PureComponent<InputProps> {
         this.input.focus();
       }
     }
-  }
-
-  public handleChange = (event: any): void => {
-    const { onChange } = this.props;
-    onChange(event.target.value, event);
   }
 
   public setInput = (element: any): void => {
@@ -119,6 +114,8 @@ export class Input extends React.PureComponent<InputProps> {
       type,
       theme,
       variant,
+      name,
+      ...rest
     } = this.props;
     return (
       <InputWrapper>
@@ -126,23 +123,23 @@ export class Input extends React.PureComponent<InputProps> {
         { type === 'textarea'
           ? (
             <textarea
+              id={name}
               className={cx(className, inputCss(theme, variant, disabled))}
               placeholder={placeholder}
               value={value}
               ref={this.setInput}
               disabled={disabled}
-              onChange={this.handleChange}
             />
           )
           : (
             <input
+              id={name}
               className={cx(className, inputCss(theme, variant, disabled))}
               type={type}
               placeholder={placeholder}
-              value={value}
               ref={this.setInput}
               disabled={disabled}
-              onChange={this.handleChange}
+              {...rest}
             />
           )
         }

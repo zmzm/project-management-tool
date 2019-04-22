@@ -18,11 +18,13 @@ const defaultTheme = {
   button: {
     background: {
       default: grayLight,
+      disabled: '#868686',
       outline: 'transparent',
-      transparent: 'transparent', 
+      transparent: 'transparent',
     },
     hover: {
       default: gray,
+      disabled: '#868686',
       outline: blueDark,
       transparent: 'rgba(9,45,66,.13)',
     },

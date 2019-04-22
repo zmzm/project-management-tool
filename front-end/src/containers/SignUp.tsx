@@ -1,21 +1,53 @@
 import * as React from 'react';
+
+import { Formik } from 'formik';
+
 import { Text, TextWeight } from 'src/components/core/Text/Text';
 import { Padding } from 'src/components/core/Padding/Padding';
 import { PageSection } from 'src/components/core/PageSection/PageSection';
+import { ISignUpFormValues, SignUpForm } from 'src/components/core/Forms/SignUp/SignUpForm';
+import { signupValidationSchema } from 'src/components/core/Forms/SignUp/Validation';
+import { Margin } from 'src/components/core/Margin/Margin';
 
-export default class SignUp extends React.PureComponent<{}> {
+export default class SignUp extends React.PureComponent {
+  private initialValues: ISignUpFormValues = {
+    email: '',
+    name: '',
+    password: '',
+  };
+  
   public render() {
     return (
-      <section>
+      <PageSection>
         <Padding padding='10rem 1rem'>
           <PageSection margin='0 auto' maxWidth={400}>
             <Text component='h1' fontSize='4.5' color='#fff' weight={TextWeight.Bold}>
               Create Account
             </Text>
-            
+            <Formik
+              initialValues={this.initialValues}
+              onSubmit={this.handleSubmit}
+              render={SignUpForm}
+              validationSchema={signupValidationSchema}
+            />
+            <Margin margin="3rem 0 0 0">
+              <Text
+                component='div'
+                fontSize='3'
+                weight={TextWeight.Medium}
+              >
+                Already have an account?{' '}
+                Log in
+            </Text>
+          </Margin>
           </PageSection>
         </Padding>
-      </section>
+      </PageSection>
     );
+  }
+
+  public handleSubmit = (values:any) => {
+    // tslint:disable-next-line:no-console
+    console.log(values);
   }
 }

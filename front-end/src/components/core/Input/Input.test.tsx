@@ -7,6 +7,7 @@ const state = {
 };
 
 const requiredProps = {
+  name: 'name',
   onChange: value => {
     state.value = value;
   },
