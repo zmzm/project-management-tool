@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import { withTheme } from 'emotion-theming';
 import { Text, TextWeight } from '../Text/Text';
 import { Button, ButtonSize } from '../Button/Button';

@@ -16,19 +16,19 @@
       theme: defaultTheme,
     };
 
-    function wrapWithTheme (fn: (component: React.ReactChild, mergedOptions: any) => any, component: React.ReactChild, options: any): any {
+    function wrapWithTheme (fn: (component: React.ReactElement, mergedOptions: any) => any, component: React.ReactElement, options: any): any {
       const mergedOptions = Object.assign({}, defaultOptions, options);
       return fn(component, mergedOptions);
     }
 
-    export function shallowWithTheme (component: React.ReactChild, options?: any): any {
+    export function shallowWithTheme (component: React.ReactElement, options?: any): any {
       return wrapWithTheme(shallow, component, options);
     }
 
-    export function mountWithTheme (component: React.ReactChild, options?: any): any {
+    export function mountWithTheme (component: React.ReactElement, options?: any): any {
       return wrapWithTheme(mount, component, options);
     }
 
-    export function renderWithTheme (component: React.ReactChild, options?: any): any {
+    export function renderWithTheme (component: React.ReactElement, options?: any): any {
       return wrapWithTheme(render, component, options);
     }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import { withTheme } from 'emotion-theming';
 
 export enum TextWeight {

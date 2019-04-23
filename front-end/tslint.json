@@ -11,6 +11,7 @@
       "import-sources-order": "any",
       "named-imports-order": "case-insensitive"
     }],
+    "interface-name": [false, "never-prefix"],
     "semicolon": [true, "always", "ignore-interfaces"],
     "trailing-comma": [
       true,

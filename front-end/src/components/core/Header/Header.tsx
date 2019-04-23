@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { css, cx } from 'react-emotion';
+import { css, cx } from 'emotion';
 import { withTheme } from 'emotion-theming';
 
 export enum HeaderVariants {

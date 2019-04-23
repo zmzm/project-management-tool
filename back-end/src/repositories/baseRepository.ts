@@ -60,7 +60,7 @@ export default class BaseRepository<T, S> {
    * @returns {Promise<IBaseModelS>}
    * @memberof BaseRepository
    */
-  public async create(entity: S, fieldsToReturn?: string[]): Promise<IBaseModel> {
+  public async create(entity: S, fieldsToReturn: string[]): Promise<IBaseModel> {
     const conn = await this.db.getConnection();
     try {
       // TODO: looks like so presice selection of returning fields is not needed here,

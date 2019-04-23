@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const paddingCss = (padding) => css`
   ${padding ? `padding: ${padding};` : null}

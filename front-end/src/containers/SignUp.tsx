@@ -1,13 +1,12 @@
 import * as React from 'react';
 
 import { Formik } from 'formik';
-
-import { Text, TextWeight } from 'src/components/core/Text/Text';
-import { Padding } from 'src/components/core/Padding/Padding';
-import { PageSection } from 'src/components/core/PageSection/PageSection';
-import { ISignUpFormValues, SignUpForm } from 'src/components/core/Forms/SignUp/SignUpForm';
-import { signupValidationSchema } from 'src/components/core/Forms/SignUp/Validation';
-import { Margin } from 'src/components/core/Margin/Margin';
+import { ISignUpFormValues, SignUpForm } from '../components/core/Forms/SignUp/SignUpForm';
+import { PageSection } from '../components/core/PageSection/PageSection';
+import { Padding } from '../components/core/Padding/Padding';
+import { Text, TextWeight } from '../components/core/Text/Text';
+import { signupValidationSchema } from '../components/core/Forms/SignUp/Validation';
+import { Margin } from '../components/core/Margin/Margin';
 
 export default class SignUp extends React.PureComponent {
   private initialValues: ISignUpFormValues = {
