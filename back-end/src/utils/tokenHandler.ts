@@ -11,7 +11,7 @@ export default class TokenHandler implements ITokenHandler {
 
   constructor() {
     if (!process.env.JWT_SECRET) {
-      throw new MissingEnvironmentVariable('JWT_TOKEN');
+      throw new MissingEnvironmentVariable('JWT_SECRET');
     }
     this.secret = process.env.JWT_SECRET;
   }
@@ -33,7 +33,7 @@ export default class TokenHandler implements ITokenHandler {
         if (err) {
           reject(err);
         }
-        resolve(decoded);
+        resolve(Boolean(decoded));
       });
     });
   }
