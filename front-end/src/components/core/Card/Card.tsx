@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 import { Text, TextWeight } from '../Text/Text';
 import { Margin } from '../Margin/Margin';

@@ -7,7 +7,7 @@ import { Padding } from './core/Padding/Padding';
 import { Margin } from './core/Margin/Margin';
 import { Button, ButtonSize } from './core/Button/Button';
 
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 import { globalCss } from '../themes/global';
 import { CardList } from './core/CardList/CardList';
 import { BoardContent } from './core/BoardContent/BoardContent';

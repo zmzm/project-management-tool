@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import { css } from 'react-emotion';
+import { css } from 'emotion';
 
 const dialogContainerCss = css`
   display: flex;
