@@ -24,7 +24,7 @@ export const SignUpForm = ({ values, handleSubmit, handleChange, handleBlur, isV
         onBlur={handleBlur}
         value={values.name}
       />
-      { errors.name && touched.name ? <Text component='span' fontSize='1.5' color='red' weight={TextWeight.Bold}>{errors.name}</Text> : null }
+      { errors.name && touched.name ? <Text component='span' fontSize='1.5' color='#ffde03' weight={TextWeight.Bold}>{errors.name}</Text> : null }
     </Margin>
     <Margin margin='2rem 0'>
       <Input
@@ -37,7 +37,7 @@ export const SignUpForm = ({ values, handleSubmit, handleChange, handleBlur, isV
         onBlur={handleBlur}
         value={values.email}
       />
-      { errors.email && touched.email ? <Text component='span' fontSize='1.5' color='red' weight={TextWeight.Bold}>{errors.email}</Text> : null }
+      { errors.email && touched.email ? <Text component='span' fontSize='1.5' color='#ffde03' weight={TextWeight.Bold}>{errors.email}</Text> : null }
     </Margin>
     <Margin margin='2rem 0'>
       <Input
@@ -50,7 +50,7 @@ export const SignUpForm = ({ values, handleSubmit, handleChange, handleBlur, isV
         onBlur={handleBlur}
         value={values.password}
       />
-      { errors.password && touched.password ? <Text component='span' fontSize='1.5' color='red' weight={TextWeight.Bold}>{errors.password}</Text> : null }
+      { errors.password && touched.password ? <Text component='span' fontSize='1.5' color='#ffde03' weight={TextWeight.Bold}>{errors.password}</Text> : null }
     </Margin>
     <Margin margin='1rem 0 0 0'>
       <Button disabled={!isValid} type='submit' size={ButtonSize.Big} color='#61BD4F' block >
