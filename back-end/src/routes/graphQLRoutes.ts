@@ -1,6 +1,7 @@
 import * as Koa from 'koa';
 import * as GraphQLHTTP from 'koa-graphql';
 import * as Router from 'koa-router';
+import { AppError } from './../errors';
 
 import Context from '../context';
 import ServicesContext from '../context/servicesContext';
@@ -63,11 +64,8 @@ export default class GraphQLRoutes {
         .setRoleService(new RoleService(new RoleRepository(db)))
         .setTeamService(new TeamService(new TeamRepository(db)))
         .setUserService(new UserService(new UserRepository(db), new BCryptHasher(), new TokenHandler()));
-
-        // TODO: move migration control to separate script and make command to run it
-        // db.schemaMigration();
     } catch (e) {
-      // console.error(e, 'An error occurred while initializing application.');
+      throw new AppError(e.code, e.message, e);
     }
   }
 }

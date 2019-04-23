@@ -58,7 +58,7 @@ export default class Postgres {
 
   private async createConnection(): Promise<knex> {
     const config: knex.Config = {
-      client: 'postgres',
+      client: 'pg',
       connection: {
         database: this.config.database,
         host: this.config.host,
