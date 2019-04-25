@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { keyframes } from 'emotion';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 /**
  * Extracts needed values for setting background-color property from theme
@@ -19,6 +19,7 @@ const generateStylesBasedOnTheme = ({ theme }: { theme: any }): string => {
       background-color: ${roller};
     }
   `;
+
   return styles;
 };
 
@@ -92,7 +93,7 @@ const StyledSpinner = styled(Spinner)`
     height: 40px;
     z-index: 0;
     animation: ${rotate360} 1s linear infinite;
-    
+
     & div {
       width: 100%;
     }

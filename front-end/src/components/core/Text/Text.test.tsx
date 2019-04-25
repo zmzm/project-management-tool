@@ -1,5 +1,8 @@
-import { renderWithTheme, shallowWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme';
 import * as React from 'react';
+import {
+  renderWithTheme,
+  shallowWithTheme,
+} from '../../../utils/enzymeHelpersWithPassedTheme';
 import { Text } from './Text';
 
 const textStub = 'TextTextTextTextTextTextTextTextTextTextText';

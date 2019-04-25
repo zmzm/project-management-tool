@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { css, cx } from 'emotion';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { withTheme } from 'emotion-theming';
 
 type HTMLAbstractInputElement = HTMLInputElement | HTMLTextAreaElement;
@@ -20,10 +20,10 @@ export enum InputTypes {
 }
 
 const disableStyle = css`
-  color: #fff;    
+  color: #fff;
   cursor: not-allowed;
   background-color: #cbcbcbcb;
-  outline:none;
+  outline: none;
 `;
 
 const InputLabel = styled('label')`
@@ -36,7 +36,7 @@ const InputLabel = styled('label')`
 
 const InputWrapper = styled('div')`
   display: flex;
-  flexDirection: row;
+  flexdirection: row;
 `;
 
 const inputCss = ({ input }, variant, disabled) => css`
@@ -56,17 +56,20 @@ const inputCss = ({ input }, variant, disabled) => css`
 `;
 
 export interface InputProps {
-  type: InputTypes,
-  variant: string,
-  label?: string,
-  className?: string,
-  width?: number,
-  value?: string | number,
-  placeholder?: string,
-  disabled?: boolean,
-  autoFocus?: boolean,
+  type: InputTypes;
+  variant: string;
+  label?: string;
+  className?: string;
+  width?: number;
+  value?: string | number;
+  placeholder?: string;
+  disabled?: boolean;
+  autoFocus?: boolean;
   theme?: any;
-  onChange: (value: string, e: React.SyntheticEvent<HTMLAbstractInputElement>) => any,
+  onChange: (
+    value: string,
+    e: React.SyntheticEvent<HTMLAbstractInputElement>,
+  ) => any;
 }
 
 // @ts-ignore
@@ -80,6 +83,7 @@ export class Input extends React.PureComponent<InputProps> {
 
   public isAutoFocus(): boolean {
     const { autoFocus, disabled } = this.props;
+
     return Boolean(autoFocus) && !disabled;
   }
 
@@ -89,16 +93,16 @@ export class Input extends React.PureComponent<InputProps> {
         this.input.focus();
       }
     }
-  }
+  };
 
   public handleChange = (event: any): void => {
     const { onChange } = this.props;
     onChange(event.target.value, event);
-  }
+  };
 
   public setInput = (element: any): void => {
     this.input = element;
-  }
+  };
 
   public renderLabel() {
     const { label } = this.props;
@@ -107,9 +111,7 @@ export class Input extends React.PureComponent<InputProps> {
       return null;
     }
 
-    return (
-      <InputLabel>{label}</InputLabel>
-    );
+    return <InputLabel>{label}</InputLabel>;
   }
 
   public render() {
@@ -122,33 +124,31 @@ export class Input extends React.PureComponent<InputProps> {
       theme,
       variant,
     } = this.props;
+
     return (
       <React.Fragment>
         {this.renderLabel()}
         <InputWrapper>
-          { type === 'textarea'
-            ? (
-              <textarea
-                className={cx(className, inputCss(theme, variant, disabled))}
-                placeholder={placeholder}
-                value={value}
-                ref={this.setInput}
-                disabled={disabled}
-                onChange={this.handleChange}
-              />
-            )
-            : (
-              <input
-                className={cx(className, inputCss(theme, variant, disabled))}
-                type={type}
-                placeholder={placeholder}
-                value={value}
-                ref={this.setInput}
-                disabled={disabled}
-                onChange={this.handleChange}
-              />
-            )
-          }
+          {type === 'textarea' ? (
+            <textarea
+              className={cx(className, inputCss(theme, variant, disabled))}
+              placeholder={placeholder}
+              value={value}
+              ref={this.setInput}
+              disabled={disabled}
+              onChange={this.handleChange}
+            />
+          ) : (
+            <input
+              className={cx(className, inputCss(theme, variant, disabled))}
+              type={type}
+              placeholder={placeholder}
+              value={value}
+              ref={this.setInput}
+              disabled={disabled}
+              onChange={this.handleChange}
+            />
+          )}
         </InputWrapper>
       </React.Fragment>
     );

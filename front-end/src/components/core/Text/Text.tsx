@@ -10,9 +10,7 @@ export enum TextWeight {
   Bold = 700,
 }
 
-const textCss = (
-  params
-) => css`
+const textCss = params => css`
   color: ${params.color};
   display: inline-block;
   margin: 0;
@@ -36,18 +34,9 @@ export interface ITextProps {
 @withTheme
 export class Text extends React.PureComponent<ITextProps> {
   public render() {
-    const {
-      children,
-      theme,
-      component,
-      ...rest
-    } = this.props;
-    const Element = Boolean(component) ? component as any : 'p';
+    const { children, theme, component, ...rest } = this.props;
+    const Element = Boolean(component) ? (component as any) : 'p';
 
-    return (
-      <Element className={textCss(rest)}>
-        {children}
-      </Element>
-    );
+    return <Element className={textCss(rest)}>{children}</Element>;
   }
 }
