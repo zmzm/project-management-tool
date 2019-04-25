@@ -4,7 +4,7 @@ import * as knex from 'knex';
 export function up(db: knex) {
   return db.schema
     .createTable('user', (table) => {
-      table.increments('id').primary();
+      table.increments('id').primary().unsigned();
       table.string('email', 64).unique();
       table.string('password', 256).notNullable();
       table.integer('role_id')

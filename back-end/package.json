@@ -40,12 +40,14 @@
     "knex": "^0.16.5",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
+    "koa-cors": "^0.0.16",
     "koa-graphql": "^0.8.0",
     "koa-router": "^7.4.0",
     "lodash": "^4.17.11",
     "pg": "^7.10.0"
   },
   "devDependencies": {
+    "@koa/cors": "2",
     "@types/jest": "^24.0.11",
     "@types/node": "^11.13.5",
     "@types/supertest": "^2.0.7",

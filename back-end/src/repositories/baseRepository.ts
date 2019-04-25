@@ -68,7 +68,7 @@ export default class BaseRepository<T, S> {
       const result = await conn.table(this.table).returning(fieldsToReturn).insert(entity);
       return result;
     } catch (err) {
-      if (err.code === 'ER_DUP_ENTRY') {
+      if (err.code === 23505) {
         throw new Error('Already exists');
       }
       throw err;

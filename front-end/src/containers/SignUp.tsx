@@ -7,8 +7,14 @@ import { Padding } from '../components/core/Padding/Padding';
 import { Text, TextWeight } from '../components/core/Text/Text';
 import { signupValidationSchema } from '../components/core/Forms/SignUp/Validation';
 import { Margin } from '../components/core/Margin/Margin';
+import { graphql } from 'react-apollo';
+import { RegisterUser } from '../graphql/mutations/userMutations';
 
-export default class SignUp extends React.PureComponent {
+export interface ISignUpProps {
+  mutate?: any;
+}
+
+class SignUp extends React.PureComponent<ISignUpProps> {
   private initialValues: ISignUpFormValues = {
     email: '',
     name: '',
@@ -46,7 +52,24 @@ export default class SignUp extends React.PureComponent {
   }
 
   public handleSubmit = (values:any) => {
-    // tslint:disable-next-line:no-console
-    console.log(values);
+    this.props.mutate(
+      { variables:
+        {
+          email: values.email,
+          firstName: values.name,
+          password: values.password,
+        },
+      })
+      .then(res =>
+        // tslint:disable-next-line:no-console
+        console.log(res)
+      )
+      .catch(err => 
+        // tslint:disable-next-line:no-console
+        console.log(err.graphQLErrors.map(error => error.message))
+      );
+
   }
 }
+
+export default graphql(RegisterUser)(SignUp);
