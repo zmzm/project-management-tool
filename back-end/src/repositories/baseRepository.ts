@@ -1,5 +1,6 @@
 import Postgres from '../database';
 import IBaseModel from '../models/baseModel';
+import { AppError } from './../errors';
 
 /**
  * Base repository class for all repositories
@@ -68,10 +69,7 @@ export default class BaseRepository<T, S> {
       const result = await conn.table(this.table).returning(fieldsToReturn).insert(entity);
       return result;
     } catch (err) {
-      if (err.code === 23505) {
-        throw new Error('Already exists');
-      }
-      throw err;
+      throw new AppError(err.code, err.detail, err);
     }
   }
 

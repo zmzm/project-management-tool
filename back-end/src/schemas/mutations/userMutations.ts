@@ -8,7 +8,7 @@ import Context from '../../context';
 import { User } from '../../models/userModel';
 import SignUpResponseType from '../types/signUpResponseType';
 import UserType from '../types/userType';
-import { ValidationError } from './../../errors';
+import { AppError, ErrorCodes, ValidationError } from './../../errors';
 
 const createUser = {
   args: {
@@ -34,11 +34,11 @@ const createUser = {
 
       return Object.assign(new User(returnedFields), { token: jwt });
     } catch (err) {
-      if (err.code === '23505') {
+      if (err.code === ErrorCodes.DUPLICATE_ERROR) {
         throw new ValidationError('User with such email already exists', err);
       }
 
-      throw new Error();
+      throw new AppError(err.code, err.detail, err);
     }
   },
 };
