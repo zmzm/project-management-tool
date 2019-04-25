@@ -59,8 +59,25 @@ const updateUser = {
   },
 };
 
+const login = {
+  args: {
+    email: { type: GraphQLString },
+    password: { type: GraphQLString },
+  },
+  type: UserType,
+  async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
+    try {
+      const user = await ctx.Services.UserService.login(args.email, args.password);
+      return user;
+    } catch (err) {
+      throw err;
+    }
+  },
+};
+
 export default {
   createUser,
   deleteUser,
+  login,
   updateUser,
 };

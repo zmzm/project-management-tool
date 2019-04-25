@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { keyframes } from 'emotion';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 
 /**
  * Extracts needed values for setting background-color property from theme

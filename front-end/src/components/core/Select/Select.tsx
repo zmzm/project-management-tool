@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { css, cx } from 'emotion';
-import styled from '@emotion/styled'
+import styled from '@emotion/styled';
 import { withTheme } from 'emotion-theming';
 
 export const SelectVariants = {

@@ -29,7 +29,8 @@ const buttonCss = (
   size,
   outline,
   block,
-  transparent
+  transparent,
+  color
   ) => css`
   min-width: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
   min-height: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
@@ -39,12 +40,20 @@ const buttonCss = (
   padding: ${buttonPaddings[size] || 0};
   border-radius: 0.3rem;
   border: none;
-  background-color: ${button.background.default};
+  background-color: ${color ? color: button.background.default};
   ${outline && `background-color: ${button.background.outline};`}
   ${transparent && `background-color: ${button.background.transparent};`}
   display: inline-block;
   margin-left: auto;
 
+  &[disabled] {
+    background-color: ${button.background.disabled};
+    cursor: not-allowed;
+    &:hover {
+      background-color: ${button.background.disabled};
+    }
+  }
+  
   &:hover {
     background-color: ${button.hover.default};
     ${outline && ` background-color:  ${button.hover.outline};`}
@@ -61,6 +70,7 @@ export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
   size: ButtonSize;
   className?: string;
   icon?: any;
+  color?: string;
 }
 
 // @ts-ignore
@@ -74,6 +84,7 @@ export class Button extends React.PureComponent<IButtonProps> {
       className,
       icon,
       size,
+      color,
       outline,
       block,
       transparent,
@@ -83,7 +94,7 @@ export class Button extends React.PureComponent<IButtonProps> {
 
     return (
       <Element 
-        className={cx(buttonCss(theme, size, outline, block, transparent), className)}
+        className={cx(buttonCss(theme, size, outline, block, transparent, color), className)}
         {...rest}
       >
         {
