@@ -14,14 +14,9 @@ const contentWrapper = css`
 `;
 
 export class BoardContent extends React.PureComponent<{}> {
-
   public render() {
     const { children } = this.props;
 
-    return (
-      <div className={contentWrapper}>
-        {children}
-    </div>
-    );
+    return <div className={contentWrapper}>{children}</div>;
   }
 }

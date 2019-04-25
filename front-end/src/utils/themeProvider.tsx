@@ -7,7 +7,7 @@ import { globalCss } from '../themes/global';
 globalCss();
 
 const themeProvider = ({ children }) => (
-  <ThemeProvider theme={theme}>{ children }</ThemeProvider>
+  <ThemeProvider theme={theme}>{children}</ThemeProvider>
 );
 
 export default themeProvider;
