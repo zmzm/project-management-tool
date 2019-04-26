@@ -70,3 +70,7 @@ export interface IFieldError {
   type: string;
   path: string[];
 }
+
+export enum ErrorCodes {
+  DUPLICATE_ERROR = '23505',
+}

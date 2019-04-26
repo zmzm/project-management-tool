@@ -1,16 +1,16 @@
 import * as React from 'react';
 
 import { css } from 'emotion';
-import { globalCss } from '../themes/global';
-import { Header, HeaderVariants } from './core/Header/Header';
-import { Icon, IconSize } from './core/Icon/Icon';
-import { Text, TextWeight } from './core/Text/Text';
-import { Padding } from './core/Padding/Padding';
-import { Margin } from './core/Margin/Margin';
-import { Button, ButtonSize } from './core/Button/Button';
+import { Header, HeaderVariants } from '../components/core/Header/Header';
+import { Icon, IconSize } from '../components/core/Icon/Icon';
+import { Text, TextWeight } from '../components/core/Text/Text';
+import { Padding } from '../components/core/Padding/Padding';
+import { Margin } from '../components/core/Margin/Margin';
+import { Button, ButtonSize } from '../components/core/Button/Button';
 
-import { CardList } from './core/CardList/CardList';
-import { BoardContent } from './core/BoardContent/BoardContent';
+import { globalCss } from '../themes/global';
+import { CardList } from '../components/core/CardList/CardList';
+import { BoardContent } from '../components/core/BoardContent/BoardContent';
 
 globalCss();
 
@@ -36,7 +36,7 @@ const buttonDivider = css`
   margin: 8px 4px 0 0;
 `;
 
-export default class App extends React.Component<{}> {
+export default class Board extends React.Component<{}> {
   public state = {
     cards: [
       {

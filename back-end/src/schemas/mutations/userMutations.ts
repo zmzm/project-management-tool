@@ -8,6 +8,7 @@ import Context from '../../context';
 import { User } from '../../models/userModel';
 import SignUpResponseType from '../types/signUpResponseType';
 import UserType from '../types/userType';
+import { AppError, ErrorCodes, ValidationError } from './../../errors';
 
 const createUser = {
   args: {
@@ -20,15 +21,25 @@ const createUser = {
   async resolve(root: any, args: any, ctx: Context<any>) {
     const hashedPassword = await ctx.Services.UserService.hashPassword(args.password);
     const userAttributes = Object.assign({}, args, { password: hashedPassword });
+    let result;
 
     const userModel = new User(userAttributes, false);
+    userModel.setRoleId(2);
 
     const fieldsToReturn = Object.keys(userModel.toDatabaseObject());
-    const result = await ctx.Services.UserService.create(userModel, fieldsToReturn);
-    const returnedFields = result[0];
-    const jwt = await ctx.Services.UserService.generateJwt(returnedFields.email);
+    try {
+      result = await ctx.Services.UserService.create(userModel, fieldsToReturn);
+      const returnedFields = result[0];
+      const jwt = await ctx.Services.UserService.generateJwt(returnedFields.email);
 
-    return Object.assign(new User(returnedFields), { token: jwt });
+      return Object.assign(new User(returnedFields), { token: jwt });
+    } catch (err) {
+      if (err.code === ErrorCodes.DUPLICATE_ERROR) {
+        throw new ValidationError('User with such email already exists', err);
+      }
+
+      throw new AppError(err.code, err.detail, err);
+    }
   },
 };
 

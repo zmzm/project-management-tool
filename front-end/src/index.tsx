@@ -5,10 +5,10 @@ import { ThemeProvider } from 'emotion-theming';
 
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
+import App from './containers/App';
 import registerServiceWorker from './utils/register-service-worker';
 import './utils/add-icons-to-lib';
 import theme from './themes/default';
-import SignIn from './containers/SignIn';
 import { globalCss } from './themes/global';
 
 globalCss();
@@ -20,7 +20,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
-      <SignIn />
+      <App />
     </ThemeProvider>
   </ApolloProvider>,
   document.getElementById('root'),

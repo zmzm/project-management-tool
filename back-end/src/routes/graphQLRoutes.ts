@@ -34,7 +34,6 @@ import TokenHandler from '../utils/tokenHandler';
 export default class GraphQLRoutes {
   public static map(router: Router, app: Koa): void {
     GraphQLRoutes.buildContext();
-
     app.use(cors());
     router.all(
       '/graphql',
