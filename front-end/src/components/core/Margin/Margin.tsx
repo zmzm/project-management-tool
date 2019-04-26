@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { css } from 'emotion';
 
-const marginCss = (margin) => css`
+const marginCss = margin => css`
   ${margin ? `margin: ${margin};` : null}
 `;
 
@@ -12,15 +12,8 @@ export interface IMarginProps {
 
 export class Margin extends React.PureComponent<IMarginProps> {
   public render() {
-    const {
-      children,
-      margin,
-    } = this.props;
+    const { children, margin } = this.props;
 
-    return (
-      <div className={marginCss(margin)}>
-        {children}
-      </div>
-    );
+    return <div className={marginCss(margin)}>{children}</div>;
   }
 }

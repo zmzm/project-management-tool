@@ -36,7 +36,7 @@ const defaultTheme = {
   header: {
     background: {
       default: blueDark,
-      transparent: 'transparent', 
+      transparent: 'transparent',
     },
   },
   input: {

@@ -10,7 +10,7 @@ describe('<BoardContent />', () => {
   });
 
   it('renders text content, which was passed through children prop', () => {
-    const renderResult = render(<BoardContent>{textStub}</BoardContent> );
+    const renderResult = render(<BoardContent>{textStub}</BoardContent>);
     expect(renderResult.text()).toBe(textStub);
   });
 });

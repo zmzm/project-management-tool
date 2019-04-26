@@ -1,5 +1,8 @@
-import { mountWithTheme, shallowWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme';
 import * as React from 'react';
+import {
+  mountWithTheme,
+  shallowWithTheme,
+} from '../../../utils/enzymeHelpersWithPassedTheme';
 import { Select, SelectVariants } from './Select';
 
 const state = {
@@ -25,7 +28,7 @@ const optionalProps = {
   value: 'stub value',
 };
 
-afterEach(() => state.value = null);
+afterEach(() => (state.value = null));
 
 describe('<Select />', () => {
   it('shallow renders without crashing', () => {
@@ -35,36 +38,67 @@ describe('<Select />', () => {
   it(`passes event.target.value to onChange prop as a parameter, when select changed`, () => {
     const mockValue = 'mockValue';
     const mountWrapper = mountWithTheme(<Select {...requiredProps} />);
-    mountWrapper.find('select').first().simulate('change', { target: { value: mockValue} });
+    mountWrapper
+      .find('select')
+      .first()
+      .simulate('change', { target: { value: mockValue } });
 
     expect(state.value).toEqual(mockValue);
   });
 
   it('sets select\'s placeholder based on "placeholder" prop value', () => {
-    const mountWrapper = mountWithTheme(<Select {...requiredProps} placeholder={optionalProps.placeholder} />);
+    const mountWrapper = mountWithTheme(
+      <Select {...requiredProps} placeholder={optionalProps.placeholder} />,
+    );
 
-    expect(mountWrapper.find('select').first().props().placeholder).toEqual(optionalProps.placeholder);
+    expect(
+      mountWrapper
+        .find('select')
+        .first()
+        .props().placeholder,
+    ).toEqual(optionalProps.placeholder);
   });
 
   it('disable select when "disabled" prop set to true', () => {
-    const mountWrapper = mountWithTheme(<Select {...requiredProps} disabled={optionalProps.disabled} />);
+    const mountWrapper = mountWithTheme(
+      <Select {...requiredProps} disabled={optionalProps.disabled} />,
+    );
 
-    expect(mountWrapper.find('select').first().props().disabled);
+    expect(
+      mountWrapper
+        .find('select')
+        .first()
+        .props().disabled,
+    );
   });
 
   it('sets default select value based on "value" prop', () => {
-    const mountWrapper = mountWithTheme(<Select {...requiredProps} value={optionalProps.value} />);
+    const mountWrapper = mountWithTheme(
+      <Select {...requiredProps} value={optionalProps.value} />,
+    );
 
-    expect(mountWrapper.find('select').first().props().value).toEqual(optionalProps.value);
+    expect(
+      mountWrapper
+        .find('select')
+        .first()
+        .props().value,
+    ).toEqual(optionalProps.value);
   });
 
   it('renders label if it was set', () => {
-    const mountWrapper = mountWithTheme(<Select {...requiredProps} label={optionalProps.label} />);
+    const mountWrapper = mountWithTheme(
+      <Select {...requiredProps} label={optionalProps.label} />,
+    );
 
-    expect(mountWrapper.find('label').first().text()).toEqual(optionalProps.label);
+    expect(
+      mountWrapper
+        .find('label')
+        .first()
+        .text(),
+    ).toEqual(optionalProps.label);
   });
 
-  it('doesn\'t render label, if it was not set', () => {
+  it("doesn't render label, if it was not set", () => {
     const mountWrapper = mountWithTheme(<Select {...requiredProps} />);
 
     expect(mountWrapper.find('label').length).toEqual(0);
@@ -72,13 +106,18 @@ describe('<Select />', () => {
 
   it('renders all options with appropriate values', () => {
     const mountWrapper = mountWithTheme(<Select {...requiredProps} />);
-    const options = mountWrapper.find('select').first().find('option');
+    const options = mountWrapper
+      .find('select')
+      .first()
+      .find('option');
 
     expect(options.length).toEqual(requiredProps.options.length);
 
     options.forEach((element, index) => {
       expect(element.props().value).toEqual(requiredProps.options[index].value);
-      expect(element.props().children).toEqual(requiredProps.options[index].label);
+      expect(element.props().children).toEqual(
+        requiredProps.options[index].label,
+      );
     });
   });
 });

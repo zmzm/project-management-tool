@@ -20,10 +20,10 @@ export enum InputTypes {
 }
 
 const disableStyle = css`
-  color: #fff;    
+  color: #fff;
   cursor: not-allowed;
   background-color: #cbcbcbcb;
-  outline:none;
+  outline: none;
 `;
 
 const InputLabel = styled('label')`
@@ -54,17 +54,18 @@ const inputCss = ({ input }, variant: string, disabled: any) => css`
   }
 `;
 
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  type: InputTypes,
-  name: string,
-  variant: string,
-  label?: any,
-  className?: string,
-  width?: number,
-  value?: any,
-  placeholder?: string,
-  disabled?: boolean,
-  autoFocus?: boolean,
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  type: InputTypes;
+  name: string;
+  variant: string;
+  label?: any;
+  className?: string;
+  width?: number;
+  value?: any;
+  placeholder?: string;
+  disabled?: boolean;
+  autoFocus?: boolean;
   theme?: any;
 }
 
@@ -79,6 +80,7 @@ export class Input extends React.PureComponent<InputProps> {
 
   public isAutoFocus(): boolean {
     const { autoFocus, disabled } = this.props;
+
     return Boolean(autoFocus) && !disabled;
   }
 
@@ -88,11 +90,11 @@ export class Input extends React.PureComponent<InputProps> {
         this.input.focus();
       }
     }
-  }
+  };
 
   public setInput = (element: any): void => {
     this.input = element;
-  }
+  };
 
   public renderLabel() {
     const { label } = this.props;
@@ -101,9 +103,7 @@ export class Input extends React.PureComponent<InputProps> {
       return null;
     }
 
-    return (
-      <InputLabel>{label}</InputLabel>
-    );
+    return <InputLabel>{label}</InputLabel>;
   }
 
   public render() {
@@ -118,32 +118,30 @@ export class Input extends React.PureComponent<InputProps> {
       name,
       ...rest
     } = this.props;
+
     return (
       <InputWrapper>
         {this.renderLabel()}
-        { type === 'textarea'
-          ? (
-            <textarea
-              id={name}
-              className={cx(className, inputCss(theme, variant, disabled))}
-              placeholder={placeholder}
-              value={value}
-              ref={this.setInput}
-              disabled={disabled}
-            />
-          )
-          : (
-            <input
-              id={name}
-              className={cx(className, inputCss(theme, variant, disabled))}
-              type={type}
-              placeholder={placeholder}
-              ref={this.setInput}
-              disabled={disabled}
-              {...rest}
-            />
-          )
-        }
+        {type === 'textarea' ? (
+          <textarea
+            id={name}
+            className={cx(className, inputCss(theme, variant, disabled))}
+            placeholder={placeholder}
+            value={value}
+            ref={this.setInput}
+            disabled={disabled}
+          />
+        ) : (
+          <input
+            id={name}
+            className={cx(className, inputCss(theme, variant, disabled))}
+            type={type}
+            placeholder={placeholder}
+            ref={this.setInput}
+            disabled={disabled}
+            {...rest}
+          />
+        )}
       </InputWrapper>
     );
   }

@@ -1,13 +1,16 @@
 import * as React from 'react';
 
 import { Formik } from 'formik';
-import { ISignUpFormValues, SignUpForm } from '../components/core/Forms/SignUp/SignUpForm';
+import { graphql } from 'react-apollo';
+import {
+  ISignUpFormValues,
+  SignUpForm,
+} from '../components/core/Forms/SignUp/SignUpForm';
 import { PageSection } from '../components/core/PageSection/PageSection';
 import { Padding } from '../components/core/Padding/Padding';
 import { Text, TextWeight } from '../components/core/Text/Text';
 import { signupValidationSchema } from '../components/core/Forms/SignUp/Validation';
 import { Margin } from '../components/core/Margin/Margin';
-import { graphql } from 'react-apollo';
 import { RegisterUser } from '../graphql/mutations/userMutations';
 
 export interface ISignUpProps {
@@ -20,13 +23,18 @@ class SignUp extends React.PureComponent<ISignUpProps> {
     name: '',
     password: '',
   };
-  
+
   public render() {
     return (
       <PageSection>
-        <Padding padding='10rem 1rem'>
-          <PageSection margin='0 auto' maxWidth={400}>
-            <Text component='h1' fontSize='4.5' color='#fff' weight={TextWeight.Bold}>
+        <Padding padding="10rem 1rem">
+          <PageSection margin="0 auto" maxWidth={400}>
+            <Text
+              component="h1"
+              fontSize="4.5"
+              color="#fff"
+              weight={TextWeight.Bold}
+            >
               Create Account
             </Text>
             <Formik
@@ -36,25 +44,20 @@ class SignUp extends React.PureComponent<ISignUpProps> {
               validationSchema={signupValidationSchema}
             />
             <Margin margin="3rem 0 0 0">
-              <Text
-                component='div'
-                fontSize='3'
-                weight={TextWeight.Medium}
-              >
-                Already have an account?{' '}
-                Log in
-            </Text>
-          </Margin>
+              <Text component="div" fontSize="3" weight={TextWeight.Medium}>
+                Already have an account? Log in
+              </Text>
+            </Margin>
           </PageSection>
         </Padding>
       </PageSection>
     );
   }
 
-  public handleSubmit = (values:any) => {
-    this.props.mutate(
-      { variables:
-        {
+  public handleSubmit = (values: any) => {
+    this.props
+      .mutate({
+        variables: {
           email: values.email,
           firstName: values.name,
           password: values.password,
@@ -62,14 +65,13 @@ class SignUp extends React.PureComponent<ISignUpProps> {
       })
       .then(res =>
         // tslint:disable-next-line:no-console
-        console.log(res)
+        console.log(res),
       )
-      .catch(err => 
+      .catch(err =>
         // tslint:disable-next-line:no-console
-        console.log(err.graphQLErrors.map(error => error.message))
+        console.log(err.graphQLErrors.map(error => error.message)),
       );
-
-  }
+  };
 }
 
 export default graphql(RegisterUser)(SignUp);

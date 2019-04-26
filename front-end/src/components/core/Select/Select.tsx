@@ -10,15 +10,15 @@ export const SelectVariants = {
 };
 
 export interface ISelectOption {
-    value: string,
-    label: string
+  value: string;
+  label: string;
 }
 
 const disableStyle = css`
-  color: #fff;    
+  color: #fff;
   cursor: not-allowed;
   background-color: #cbcbcbcb;
-  outline:none;
+  outline: none;
 `;
 
 const SelectLabel = styled('label')`
@@ -47,16 +47,16 @@ const selectCss = ({ input }, variant, disabled) => css`
 `;
 
 interface ISelectProps {
-    variant: string,
-    label?: string,
-    className?: string,
-    value?: string,
-    placeholder?: string,
-    disabled?: boolean,
-    autoFocus?: boolean,
-    options: ISelectOption[],
-    theme?: any,
-    onChange: (value: ISelectOption) => any,
+  variant: string;
+  label?: string;
+  className?: string;
+  value?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  autoFocus?: boolean;
+  options: ISelectOption[];
+  theme?: any;
+  onChange: (value: ISelectOption) => any;
 }
 
 // @ts-ignore
@@ -70,6 +70,7 @@ export class Select extends React.PureComponent<ISelectProps, {}> {
 
   public isAutoFocus(): boolean {
     const { autoFocus, disabled } = this.props;
+
     return Boolean(autoFocus) && !disabled;
   }
 
@@ -79,24 +80,26 @@ export class Select extends React.PureComponent<ISelectProps, {}> {
         this.select.focus();
       }
     }
-  }
+  };
 
   public handleChange = (event: any): void => {
     const { onChange } = this.props;
     onChange(event.target.value);
-  }
+  };
 
   public getOptions() {
     const { options, placeholder } = this.props;
     const result = options.map((option: ISelectOption) => (
-      <option key={option.value} value={option.value}>{option.label}</option>
+      <option key={option.value} value={option.value}>
+        {option.label}
+      </option>
     ));
 
     if (placeholder) {
       result.unshift(
         <option key="__placeholder__" value="" disabled>
           {placeholder}
-        </option>
+        </option>,
       );
     }
 
@@ -105,7 +108,7 @@ export class Select extends React.PureComponent<ISelectProps, {}> {
 
   public setSelect = (element: any): void => {
     this.select = element;
-  }
+  };
 
   public renderLabel() {
     const { label } = this.props;
@@ -114,9 +117,7 @@ export class Select extends React.PureComponent<ISelectProps, {}> {
       return null;
     }
 
-    return (
-      <SelectLabel>{label}</SelectLabel>
-    );
+    return <SelectLabel>{label}</SelectLabel>;
   }
 
   public render() {
@@ -128,6 +129,7 @@ export class Select extends React.PureComponent<ISelectProps, {}> {
       variant,
       theme,
     } = this.props;
+
     return (
       <div>
         {this.renderLabel()}
