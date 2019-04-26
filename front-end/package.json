@@ -22,7 +22,10 @@
     "react-dom": "^16.8.6",
     "react-router": "^5.0.0",
     "react-scripts": "^2.1.8",
-    "react-styleguidist": "^9.0.8"
+    "react-styleguidist": "^9.0.8",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,6 +49,7 @@
     "@types/react": "^16.8.13",
     "@types/react-dom": "^16.8.4",
     "@types/react-fontawesome": "^1.6.4",
+    "@types/yup": "^0.26.12",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
     "babel-preset-env": "^1.7.0",

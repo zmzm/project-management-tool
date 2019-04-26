@@ -1,4 +1,5 @@
 import * as Koa from 'koa';
+import * as cors from 'koa-cors';
 import * as GraphQLHTTP from 'koa-graphql';
 import * as Router from 'koa-router';
 import { AppError } from './../errors';
@@ -33,7 +34,7 @@ import TokenHandler from '../utils/tokenHandler';
 export default class GraphQLRoutes {
   public static map(router: Router, app: Koa): void {
     GraphQLRoutes.buildContext();
-
+    app.use(cors());
     router.all(
       '/graphql',
       GraphQLHTTP({
@@ -42,7 +43,8 @@ export default class GraphQLRoutes {
         schema: Schema.get(),
       }),
     );
-    app.use(router.routes()).use(router.allowedMethods());
+    app.use(router.routes());
+    app.use(router.allowedMethods());
   }
 
   private static buildContext(): void {
