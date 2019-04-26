@@ -45,7 +45,6 @@ const buttonCss = ({ button }, size, outline, block, transparent, color) => css`
   &[disabled] {
     background-color: ${button.background.disabled};
     cursor: not-allowed;
-
     &:hover {
       background-color: ${button.background.disabled};
     }

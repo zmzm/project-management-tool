@@ -39,6 +39,7 @@ export default class Schema {
     fields: {
       createUser: UserMutation.createUser,
       deleteUser: UserMutation.deleteUser,
+      loginUser: UserMutation.login,
       updateUser: UserMutation.updateUser,
 
       createTeam: TeamMutation.createTeam,

@@ -47,7 +47,6 @@ const inputCss = ({ input }, variant: string, disabled: any) => css`
   border-radius: 0.3rem;
   padding: 1rem;
   ${disabled && disableStyle}
-
   :: placeholder {
     color: #fff;
     opacity: 0.7;

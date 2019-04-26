@@ -66,6 +66,6 @@ export default class UserService extends BaseService<User, RawUser> {
       return user;
     }
 
-    throw new ValidationError('Wrong credentials');
+    throw new ValidationError('Wrong password');
   }
 }
