@@ -27,7 +27,7 @@ const disableStyle = css`
 `;
 
 const InputLabel = styled('label')`
-  color: #fff;
+  color: #000;
   line-height: 1.4;
   display: inline-block;
   cursor: pointer;
@@ -36,40 +36,36 @@ const InputLabel = styled('label')`
 
 const InputWrapper = styled('div')`
   display: flex;
-  flexdirection: row;
+  flex-direction: column;
 `;
 
-const inputCss = ({ input }, variant, disabled) => css`
+const inputCss = ({ input }, variant: string, disabled: any) => css`
   color: ${input[variant].textColor};
   font-size: 1.4rem;
   background-color: ${input[variant].bg};
   border: none;
   border-radius: 0.3rem;
-  width: 100%;
   padding: 1rem;
   ${disabled && disableStyle}
-
   :: placeholder {
     color: #fff;
     opacity: 0.7;
   }
 `;
 
-export interface InputProps {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   type: InputTypes;
+  name: string;
   variant: string;
-  label?: string;
+  label?: any;
   className?: string;
   width?: number;
-  value?: string | number;
+  value?: any;
   placeholder?: string;
   disabled?: boolean;
   autoFocus?: boolean;
   theme?: any;
-  onChange: (
-    value: string,
-    e: React.SyntheticEvent<HTMLAbstractInputElement>,
-  ) => any;
 }
 
 // @ts-ignore
@@ -95,11 +91,6 @@ export class Input extends React.PureComponent<InputProps> {
     }
   };
 
-  public handleChange = (event: any): void => {
-    const { onChange } = this.props;
-    onChange(event.target.value, event);
-  };
-
   public setInput = (element: any): void => {
     this.input = element;
   };
@@ -123,34 +114,34 @@ export class Input extends React.PureComponent<InputProps> {
       type,
       theme,
       variant,
+      name,
+      ...rest
     } = this.props;
 
     return (
-      <React.Fragment>
+      <InputWrapper>
         {this.renderLabel()}
-        <InputWrapper>
-          {type === 'textarea' ? (
-            <textarea
-              className={cx(className, inputCss(theme, variant, disabled))}
-              placeholder={placeholder}
-              value={value}
-              ref={this.setInput}
-              disabled={disabled}
-              onChange={this.handleChange}
-            />
-          ) : (
-            <input
-              className={cx(className, inputCss(theme, variant, disabled))}
-              type={type}
-              placeholder={placeholder}
-              value={value}
-              ref={this.setInput}
-              disabled={disabled}
-              onChange={this.handleChange}
-            />
-          )}
-        </InputWrapper>
-      </React.Fragment>
+        {type === 'textarea' ? (
+          <textarea
+            id={name}
+            className={cx(className, inputCss(theme, variant, disabled))}
+            placeholder={placeholder}
+            value={value}
+            ref={this.setInput}
+            disabled={disabled}
+          />
+        ) : (
+          <input
+            id={name}
+            className={cx(className, inputCss(theme, variant, disabled))}
+            type={type}
+            placeholder={placeholder}
+            ref={this.setInput}
+            disabled={disabled}
+            {...rest}
+          />
+        )}
+      </InputWrapper>
     );
   }
 }

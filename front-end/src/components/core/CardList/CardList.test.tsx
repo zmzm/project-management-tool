@@ -3,8 +3,8 @@ import { shallowWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme';
 import { CardList } from './CardList';
 
 const props = {
-  listName: 'Test list',
   cards: [],
+  listName: 'Test list',
 };
 
 describe('<CardList />', () => {
