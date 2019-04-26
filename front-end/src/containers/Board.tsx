@@ -3,7 +3,7 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { Header, HeaderVariants } from '../components/core/Header/Header';
 import { Icon, IconSize } from '../components/core/Icon/Icon';
-import { Text, TextWeight } from '../components/core/Text/Text';
+import { Text, TextSize, TextWeight } from '../components/core/Text/Text';
 import { Padding } from '../components/core/Padding/Padding';
 import { Margin } from '../components/core/Margin/Margin';
 import { Button, ButtonSize } from '../components/core/Button/Button';
@@ -41,7 +41,7 @@ export default class Board extends React.Component<{}> {
     cards: [
       {
         cardName: 'card 1',
-        commentCount: 10,
+        commentsCount: 10,
         colorMark: ['#f2d600', 'red', 'green', 'pink', 'coral', 'aqua'],
       },
       { cardName: 'card 2' },
@@ -62,7 +62,7 @@ export default class Board extends React.Component<{}> {
             <Button size={ButtonSize.Big}>
               <Text
                 component="span"
-                fontSize="1.6"
+                fontSize={TextSize.Medium}
                 color="white"
                 weight={TextWeight.Bold}
               >
@@ -74,7 +74,7 @@ export default class Board extends React.Component<{}> {
           <Button size={ButtonSize.Big}>
             <Text
               component="span"
-              fontSize="1.6"
+              fontSize={TextSize.Medium}
               color="white"
               weight={TextWeight.Bold}
             >
@@ -88,7 +88,7 @@ export default class Board extends React.Component<{}> {
               <Button size={ButtonSize.Default} outline>
                 <Text
                   component="span"
-                  fontSize="1.8"
+                  fontSize={TextSize.Big}
                   color="white"
                   weight={TextWeight.Bold}
                 >
@@ -107,11 +107,11 @@ export default class Board extends React.Component<{}> {
             <Margin margin="0 0.4rem 0 0">
               <Button
                 size={ButtonSize.Default}
-                icon={<Icon name="android" left="13" color="white" />}
+                icon={<Icon name="android" color="white" />}
                 outline
               >
-                <Padding padding="0 0 0 2.3rem">
-                  <Text fontSize="1.5" color="white">
+                <Padding padding="0 0 0 1rem">
+                  <Text fontSize={TextSize.Normal} color="white">
                     dream-team
                   </Text>
                 </Padding>
@@ -120,7 +120,7 @@ export default class Board extends React.Component<{}> {
           </Header>
         </Margin>
         <BoardContent>
-          <CardList listName="List name" cards={this.state.cards} />
+          <CardList listName="In progress" cards={this.state.cards} />
         </BoardContent>
       </React.Fragment>
     );

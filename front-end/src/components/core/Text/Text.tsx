@@ -10,6 +10,13 @@ export enum TextWeight {
   Bold = 700,
 }
 
+export enum TextSize {
+  Small = '1.4',
+  Normal = '1.5',
+  Medium = '1.6',
+  Big = '1.8',
+}
+
 const textCss = params => css`
   color: ${params.color};
   display: inline-block;

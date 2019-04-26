@@ -24,22 +24,30 @@ const buttonSize = {
   small: 1,
 };
 
-const buttonCss = ({ button }, size, outline, block, transparent, color) => css`
+const buttonCss = (
+  { button },
+  size,
+  outline,
+  block,
+  icon,
+  transparent,
+  color,
+) => css`
   min-width: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
   min-height: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
   ${block && 'width: 100%;'}
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   position: relative;
-  padding: ${buttonPaddings[size] || 0};
+  padding: ${(!icon && buttonPaddings[size]) || 0};
   border-radius: 0.3rem;
   border: none;
   background-color: ${color ? color : button.background.default};
   ${outline && `background-color: ${button.background.outline};`}
   ${transparent &&
-    `background-color: ${
-      button.background.transparent
-    };`}
-  display: inline-block;
+    `background-color: ${button.background.transparent};`}
   margin-left: auto;
 
   &[disabled] {
@@ -92,7 +100,7 @@ export class Button extends React.PureComponent<IButtonProps> {
     return (
       <Element
         className={cx(
-          buttonCss(theme, size, outline, block, transparent, color),
+          buttonCss(theme, size, outline, block, icon, transparent, color),
           className,
         )}
         {...rest}

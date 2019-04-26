@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import { css } from 'emotion';
 
-const marginCss = margin => css`
+const marginCss = (margin?: string) => css`
+  font-size: 0;
   ${margin ? `margin: ${margin};` : null}
 `;
 
