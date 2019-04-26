@@ -3,11 +3,7 @@ import * as React from 'react';
 import { css, cx } from 'emotion';
 import { withTheme } from 'emotion-theming';
 
-const pageSectionCss = (
-  { page },
-  margin = '0',
-  maxWidth
-) => css`
+const pageSectionCss = ({ page }, margin = '0', maxWidth) => css`
   margin: ${margin};
   background-color: transparent;
   position: relative;
@@ -26,27 +22,10 @@ export interface IPageSectionProps {
 @withTheme
 export class PageSection extends React.PureComponent<IPageSectionProps> {
   public render() {
-    const {
-      className,
-      margin,
-      maxWidth,
-      children,
-      theme,
-    } = this.props;
+    const { className, margin, maxWidth, children, theme } = this.props;
 
     return (
-      <div
-        className={
-          cx(
-            className,
-            pageSectionCss(
-              theme,
-              margin,
-              maxWidth
-            )
-          )
-        }
-      >
+      <div className={cx(className, pageSectionCss(theme, margin, maxWidth))}>
         {children}
       </div>
     );

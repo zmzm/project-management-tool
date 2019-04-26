@@ -36,17 +36,15 @@ const iconCss = (left, color, size) => css`
 // @ts-ignore
 @withTheme
 export class Icon extends React.PureComponent<IconProps> {
-
   public render() {
-    const {
-      name,
-      className,
-      color,
-      left,
-      size,
-    } = this.props;
+    const { name, className, color, left, size } = this.props;
+
     return (
-      <i className={cx('material-icons', className, iconCss(left, color, size))}>{name}</i>
+      <i
+        className={cx('material-icons', className, iconCss(left, color, size))}
+      >
+        {name}
+      </i>
     );
   }
 }

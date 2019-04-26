@@ -19,6 +19,7 @@ const generateStylesBasedOnTheme = ({ theme }: { theme: any }): string => {
       background-color: ${roller};
     }
   `;
+
   return styles;
 };
 
@@ -92,7 +93,7 @@ const StyledSpinner = styled(Spinner)`
     height: 40px;
     z-index: 0;
     animation: ${rotate360} 1s linear infinite;
-    
+
     & div {
       width: 100%;
     }

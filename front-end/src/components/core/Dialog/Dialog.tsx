@@ -16,7 +16,8 @@ const dialogContainerCss = css`
   z-index: 3;
   background-color: #fff;
   border-radius: 0.4rem;
-  box-shadow: 0 8px 16px -4px rgba(9,45,66,.25), 0 0 0 1px rgba(9,45,66,.08);
+  box-shadow: 0 8px 16px -4px rgba(9, 45, 66, 0.25),
+    0 0 0 1px rgba(9, 45, 66, 0.08);
   width: 30rem;
   height: 35rem;
 `;
@@ -31,12 +32,8 @@ export class Dialog extends React.PureComponent<IDialogProps> {
 
     if (visible) {
       return ReactDOM.createPortal(
-        <div
-          className={dialogContainerCss}
-        >
-          {children}
-        </div>,
-        document.querySelector('body') as Element
+        <div className={dialogContainerCss}>{children}</div>,
+        document.querySelector('body') as Element,
       );
     }
 

@@ -19,7 +19,7 @@ const defaultTheme = {
     background: {
       default: grayLight,
       outline: 'transparent',
-      transparent: 'transparent', 
+      transparent: 'transparent',
     },
     hover: {
       default: gray,
@@ -34,7 +34,7 @@ const defaultTheme = {
   header: {
     background: {
       default: blueDark,
-      transparent: 'transparent', 
+      transparent: 'transparent',
     },
   },
   input: {

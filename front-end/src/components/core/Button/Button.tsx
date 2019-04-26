@@ -24,14 +24,7 @@ const buttonSize = {
   small: 1,
 };
 
-const buttonCss = (
-  { button },
-  size,
-  outline,
-  block,
-  transparent,
-  color
-  ) => css`
+const buttonCss = ({ button }, size, outline, block, transparent, color) => css`
   min-width: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
   min-height: ${buttonSize[size] || buttonSize[ButtonSize.Default]}rem;
   ${block && 'width: 100%;'}
@@ -40,9 +33,12 @@ const buttonCss = (
   padding: ${buttonPaddings[size] || 0};
   border-radius: 0.3rem;
   border: none;
-  background-color: ${color ? color: button.background.default};
+  background-color: ${color ? color : button.background.default};
   ${outline && `background-color: ${button.background.outline};`}
-  ${transparent && `background-color: ${button.background.transparent};`}
+  ${transparent &&
+    `background-color: ${
+      button.background.transparent
+    };`}
   display: inline-block;
   margin-left: auto;
 
@@ -53,7 +49,7 @@ const buttonCss = (
       background-color: ${button.background.disabled};
     }
   }
-  
+
   &:hover {
     background-color: ${button.hover.default};
     ${outline && ` background-color:  ${button.hover.outline};`}
@@ -61,7 +57,8 @@ const buttonCss = (
   }
 `;
 
-export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   theme?: any;
   component?: string;
   outline?: boolean;
@@ -90,18 +87,19 @@ export class Button extends React.PureComponent<IButtonProps> {
       transparent,
       ...rest
     } = this.props;
-    const Element = Boolean(component) ? component as any : 'button';
+    const Element = Boolean(component) ? (component as any) : 'button';
 
     return (
-      <Element 
-        className={cx(buttonCss(theme, size, outline, block, transparent, color), className)}
+      <Element
+        className={cx(
+          buttonCss(theme, size, outline, block, transparent, color),
+          className,
+        )}
         {...rest}
       >
-        {
-          icon && (icon)
-        }
+        {icon && icon}
         {children}
-    </Element>
+      </Element>
     );
   }
 }

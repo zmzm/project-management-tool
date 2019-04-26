@@ -3,19 +3,18 @@ import * as ReactDOM from 'react-dom';
 
 import { ThemeProvider } from 'emotion-theming';
 
+import { ApolloProvider } from 'react-apollo';
+import ApolloClient from 'apollo-boost';
 import registerServiceWorker from './utils/register-service-worker';
 import './utils/add-icons-to-lib';
 import theme from './themes/default';
 import SignIn from './containers/SignIn';
-
-import { ApolloProvider } from "react-apollo";
-import ApolloClient from "apollo-boost";
 import { globalCss } from './themes/global';
 
 globalCss();
 
 const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql",
+  uri: 'http://localhost:8000/graphql',
 });
 
 ReactDOM.render(
@@ -24,6 +23,6 @@ ReactDOM.render(
       <SignIn />
     </ThemeProvider>
   </ApolloProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 registerServiceWorker();

@@ -10,7 +10,9 @@ export enum HeaderVariants {
 }
 
 const headerCss = ({ header }, variant) => css`
-  background-color: ${variant ? header.background[variant] : header.background.default};
+  background-color: ${variant
+    ? header.background[variant]
+    : header.background.default};
   position: relative;
   min-height: 3.5rem;
   padding: 0.4rem;
@@ -19,23 +21,18 @@ const headerCss = ({ header }, variant) => css`
 `;
 
 export interface IHeaderProps {
-  variant?: HeaderVariants,
-  className?: string,
-  theme?: any,
-  children: any,
+  variant?: HeaderVariants;
+  className?: string;
+  theme?: any;
+  children: any;
 }
 
 // @ts-ignore
 @withTheme
 export class Header extends React.PureComponent<IHeaderProps> {
-
   public render() {
-    const {
-      theme,
-      variant,
-      className,
-      children,
-    } = this.props;
+    const { theme, variant, className, children } = this.props;
+
     return (
       <div className={cx(headerCss(theme, variant), className)}>{children}</div>
     );
