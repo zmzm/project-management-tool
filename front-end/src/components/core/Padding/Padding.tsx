@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { css } from 'emotion';
 
-const paddingCss = padding => css`
+const paddingCss = (padding?: string) => css`
   ${padding ? `padding: ${padding};` : null}
 `;
 

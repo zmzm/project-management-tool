@@ -9,7 +9,7 @@ export enum HeaderVariants {
   Transparent = 'transparent',
 }
 
-const headerCss = ({ header }, variant) => css`
+const headerCss = ({ header }, variant?: string) => css`
   background-color: ${variant
     ? header.background[variant]
     : header.background.default};

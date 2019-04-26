@@ -20,16 +20,12 @@ export interface IconProps {
   color?: string;
   name: string;
   className?: string;
-  left?: string;
   size?: number;
+  onClick?: any;
 }
 
-const iconCss = (left, color, size) => css`
+const iconCss = (color?: string, size?: number) => css`
   color: ${color || 'white'};
-  position: absolute;
-  transform: translate(-50%, -50%);
-  left: ${left || 50}%;
-  top: 50%;
   font-size: ${size || IconSize.Default}rem;
 `;
 
@@ -37,11 +33,12 @@ const iconCss = (left, color, size) => css`
 @withTheme
 export class Icon extends React.PureComponent<IconProps> {
   public render() {
-    const { name, className, color, left, size } = this.props;
+    const { name, className, color, size, onClick } = this.props;
 
     return (
       <i
-        className={cx('material-icons', className, iconCss(left, color, size))}
+        className={cx('material-icons', className, iconCss(color, size))}
+        onClick={onClick}
       >
         {name}
       </i>

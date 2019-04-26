@@ -29,7 +29,7 @@ const SelectLabel = styled('label')`
   font-size: 1.6rem;
 `;
 
-const selectCss = ({ input }, variant, disabled) => css`
+const selectCss = ({ input }, variant: string, disabled?: boolean) => css`
   color: ${input[variant].textColor};
   font-size: 1.4rem;
   background-color: ${input[variant].bg};
