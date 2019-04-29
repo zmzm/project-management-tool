@@ -10,6 +10,8 @@ import { Button, ButtonSize } from '../Button/Button';
 export interface ICardProps {
   cardName: string;
   colorMark?: any[];
+  detail?: string;
+  partisipants?: any[];
   commentsCount?: number;
   onClick?(): any;
 }
@@ -50,9 +52,20 @@ const bagesWrapper = css`
   margin-bottom: 0.4rem;
 `;
 
+const partisipantsWrapper = css`
+  display: flex;
+  margin-left: auto;
+`;
+
 export class Card extends React.PureComponent<ICardProps> {
   public render() {
-    const { cardName, colorMark, commentsCount, onClick } = this.props;
+    const {
+      cardName,
+      colorMark,
+      commentsCount,
+      onClick,
+      partisipants,
+    } = this.props;
 
     return (
       <div className={cardWrapper} onClick={onClick}>
@@ -89,16 +102,21 @@ export class Card extends React.PureComponent<ICardProps> {
               </Text>
             </React.Fragment>
           )}
-          <Button size={ButtonSize.Medium}>
-            <Text
-              component="span"
-              fontSize={TextSize.Small}
-              color="#17394d"
-              weight={TextWeight.Bold}
-            >
-              UK
-            </Text>
-          </Button>
+          <div className={partisipantsWrapper}>
+            {partisipants &&
+              partisipants.map((user, index) => (
+                <Button key={index} size={ButtonSize.Medium} transparent>
+                  <Text
+                    component="span"
+                    fontSize={TextSize.Small}
+                    color="#17394d"
+                    weight={TextWeight.Bold}
+                  >
+                    {user}
+                  </Text>
+                </Button>
+              ))}
+          </div>
         </div>
       </div>
     );

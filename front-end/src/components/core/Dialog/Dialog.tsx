@@ -26,7 +26,7 @@ const dialogContainerCss = (fullScreen?: boolean) => css`
   min-width: 40rem;
   min-height: 35rem;
 
-  ${fullScreen && `width: 40%; height: 90%;`}
+  ${fullScreen && `width: 700px; height: 90%;`}
 `;
 
 const dialogHeaderCss = css`
@@ -42,7 +42,9 @@ const dialogHeaderCss = css`
   }
 `;
 
-const dialogContentCss = css``;
+const dialogContentCss = css`
+  margin: 5px 20px;
+`;
 
 const dialogFooterCss = css``;
 

@@ -8,7 +8,7 @@ import { Icon, IconSize } from '../Icon/Icon';
 import { Padding } from '../Padding/Padding';
 import { Card, ICardProps } from '../Card/Card';
 import { Dialog } from '../Dialog/Dialog';
-import { Margin } from '../Margin/Margin';
+import { CardDetail } from '../CardDetail/CardDetail';
 
 export interface ICardListProps {
   theme?: any;
@@ -25,6 +25,7 @@ const headerCss = css`
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0.7rem 0.7rem 0.4rem 1rem;
 `;
 
@@ -55,6 +56,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
           commentsCount={card.commentsCount}
           colorMark={card.colorMark}
           onClick={this.toggleDilog(!this.state.showDialog, card)}
+          partisipants={card.partisipants}
         />
       ));
     }
@@ -98,7 +100,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
               visible={this.state.showDialog}
               title={
                 <Text
-                  fontSize={TextSize.Big}
+                  fontSize={TextSize.MmmmmegaBig}
                   weight={TextWeight.Bold}
                   color="#17394d"
                 >
@@ -107,9 +109,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
               }
               fullScreen
             >
-              <Margin margin="2rem">
-                <Text fontSize={TextSize.Medium}>ASDASDADADADSAHSHJASL</Text>
-              </Margin>
+              <CardDetail card={this.state.card} />
             </Dialog>
           </div>
           <div style={{ padding: '0 0.7rem 0', color: '#17394d' }}>

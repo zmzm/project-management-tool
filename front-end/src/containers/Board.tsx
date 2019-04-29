@@ -40,9 +40,18 @@ export default class Board extends React.Component<{}> {
   public state = {
     cards: [
       {
-        cardName: 'card 1',
+        cardName: 'Test card 1',
         commentsCount: 10,
-        colorMark: ['#f2d600', 'red', 'green', 'pink', 'coral', 'aqua'],
+        colorMark: [
+          '#61bd4f',
+          '#f2d600',
+          '#ff9f1a',
+          '#eb5a46',
+          '#c377e0',
+          '#0079bf',
+        ],
+        partisipants: ['SU', 'KA', 'BL', 'AT'],
+        detail: 'No description :(',
       },
       { cardName: 'card 2' },
     ],

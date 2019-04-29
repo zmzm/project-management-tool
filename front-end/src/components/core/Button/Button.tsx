@@ -46,9 +46,7 @@ const buttonCss = (
   border: none;
   background-color: ${color ? color : button.background.default};
   ${outline && `background-color: ${button.background.outline};`}
-  ${transparent &&
-    `background-color: ${button.background.transparent};`}
-  margin-left: auto;
+  ${transparent && `background-color: ${button.background.transparent};`}
 
   &[disabled] {
     background-color: ${button.background.disabled};
@@ -62,6 +60,7 @@ const buttonCss = (
     background-color: ${button.hover.default};
     ${outline && ` background-color:  ${button.hover.outline};`}
     ${transparent && `background-color: ${button.hover.transparent};`}
+    ${color && `background-color: ${color}; opacity: 0.8;`}
   }
 `;
 

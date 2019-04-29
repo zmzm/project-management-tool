@@ -15,6 +15,7 @@ export enum TextSize {
   Normal = '1.5',
   Medium = '1.6',
   Big = '1.8',
+  MmmmmegaBig = '2.3',
 }
 
 const textCss = params => css`
