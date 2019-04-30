@@ -30,14 +30,6 @@ const partisipantsContent = css`
   justify-content: space-between;
 `;
 
-const markWrapper = css`
-  margin-left: 4rem;
-`;
-
-const descriptionWrapper = css`
-  margin-top: 1.5rem;
-`;
-
 export class CardDetail extends React.PureComponent<ICardDetailProps> {
   public render() {
     const { card } = this.props;
@@ -57,12 +49,8 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
               <Margin margin="2rem 0">
                 <div className={partisipantsContent}>
                   {card.partisipants.map((user, index) => (
-                    <Margin margin="0 0.5rem 0 0">
-                      <Button
-                        key={index}
-                        size={ButtonSize.Default}
-                        color="#dfe3e6"
-                      >
+                    <Margin key={index} margin="0 0.5rem 0 0">
+                      <Button size={ButtonSize.Default} color="#dfe3e6">
                         <Text
                           component="span"
                           fontSize={TextSize.Medium}
@@ -79,7 +67,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
             </div>
           )}
           {card.colorMark && (
-            <div className={markWrapper}>
+            <Margin margin="0 0 0 4rem">
               <Text
                 fontSize={TextSize.Medium}
                 weight={TextWeight.Medium}
@@ -91,20 +79,16 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
                 <div className={partisipantsContent}>
                   {card.colorMark &&
                     card.colorMark.map((mark, index) => (
-                      <Margin margin="0 0.5rem 0 0">
-                        <Button
-                          key={index}
-                          size={ButtonSize.Default}
-                          color={mark}
-                        />
+                      <Margin key={index} margin="0 0.5rem 0 0">
+                        <Button size={ButtonSize.Default} color={mark} />
                       </Margin>
                     ))}
                 </div>
               </Margin>
-            </div>
+            </Margin>
           )}
         </div>
-        <div className={descriptionWrapper}>
+        <Margin margin="1.5rem 0 0 0">
           <Text
             fontSize={TextSize.MmmmmegaBig}
             weight={TextWeight.Bold}
@@ -125,8 +109,54 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
                   0 0 0 1px rgba(9, 45, 66, 0.08);
               `}
             />
+            <Margin margin="1rem 0 0 0">
+              <Button type="submit" size={ButtonSize.Medium} color="#61BD4F">
+                <Text
+                  component="span"
+                  fontSize={TextSize.Big}
+                  color="#fff"
+                  weight={TextWeight.Bold}
+                >
+                  Save
+                </Text>
+              </Button>
+            </Margin>
           </Margin>
-        </div>
+        </Margin>
+        <Margin margin="1.5rem 0 0 0">
+          <Text
+            fontSize={TextSize.MmmmmegaBig}
+            weight={TextWeight.Bold}
+            color="#17394d"
+          >
+            Add comment
+          </Text>
+          <Margin margin="1rem 0">
+            <Input
+              name="detail-info"
+              type={InputTypes.TextArea}
+              placeholder="Type something"
+              variant={InputVariants.Default}
+              onChange={value => console.log(value)}
+              className={css`
+                box-shadow: 0 1px 2px -1px rgba(9, 45, 66, 0.25),
+                  0 0 0 1px rgba(9, 45, 66, 0.08);
+              `}
+            />
+            <Margin margin="1rem 0 0 0">
+              <Button type="submit" size={ButtonSize.Medium} color="#61BD4F">
+                <Text
+                  component="span"
+                  fontSize={TextSize.Big}
+                  color="#fff"
+                  weight={TextWeight.Bold}
+                >
+                  Add comment
+                </Text>
+              </Button>
+            </Margin>
+          </Margin>
+        </Margin>
       </div>
     );
   }

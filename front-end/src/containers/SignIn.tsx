@@ -55,14 +55,8 @@ class SignIn extends React.PureComponent<ISignUpProps> {
           password: values.password,
         },
       })
-      .then(res =>
-        // tslint:disable-next-line:no-console
-        console.log(res),
-      )
-      .catch(err =>
-        // tslint:disable-next-line:no-console
-        console.log(err.graphQLErrors.map(error => error.message)),
-      );
+      .then(res => console.log(res))
+      .catch(err => console.log(err.graphQLErrors.map(error => error.message)));
   };
 }
 

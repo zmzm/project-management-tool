@@ -54,7 +54,7 @@ const inputCss = ({ input }, variant: string, disabled: any) => css`
 `;
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends React.HTMLAttributes<HTMLAbstractInputElement> {
   type: InputTypes;
   name: string;
   variant: string;
@@ -129,6 +129,7 @@ export class Input extends React.PureComponent<InputProps> {
             value={value}
             ref={this.setInput}
             disabled={disabled}
+            {...rest}
           />
         ) : (
           <input
