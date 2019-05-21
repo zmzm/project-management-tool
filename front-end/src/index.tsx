@@ -5,6 +5,7 @@ import { ThemeProvider } from 'emotion-theming';
 
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 import App from './containers/App';
 import registerServiceWorker from './utils/register-service-worker';
 import './utils/add-icons-to-lib';
@@ -20,7 +21,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
-      <App />
+      <Router>
+        <Route path="/" component={App} />
+      </Router>
     </ThemeProvider>
   </ApolloProvider>,
   document.getElementById('root'),
