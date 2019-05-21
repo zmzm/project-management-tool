@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 import { withTheme } from 'emotion-theming';
 
 export enum TextWeight {
@@ -35,15 +35,18 @@ export interface ITextProps {
   weight?: TextWeight;
   align?: 'left' | 'center' | 'right';
   style?: 'normal' | 'italic';
+  className?: string;
 }
 
 // @ts-ignore
 @withTheme
 export class Text extends React.PureComponent<ITextProps> {
   public render() {
-    const { children, theme, component, ...rest } = this.props;
+    const { children, theme, component, className, ...rest } = this.props;
     const Element = Boolean(component) ? (component as any) : 'p';
 
-    return <Element className={textCss(rest)}>{children}</Element>;
+    return (
+      <Element className={cx(textCss(rest), className)}>{children}</Element>
+    );
   }
 }
