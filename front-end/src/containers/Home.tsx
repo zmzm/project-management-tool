@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { css, keyframes } from 'emotion';
 import { withTheme } from 'emotion-theming';
+import { Link } from 'react-router-dom';
 import { Button, ButtonSize } from '../components/core/Button/Button';
 import { Text, TextSize, TextWeight } from '../components/core/Text/Text';
 import { Margin } from '../components/core/Margin/Margin';
@@ -119,36 +120,40 @@ export default class Home extends React.Component {
           </Text>
           <div className={buttonWrapper}>
             <Margin margin="0 1.5rem 0 0">
-              <Button
-                size={ButtonSize.Big}
-                color="#61BD4F"
-                className={buttonAnimation}
-              >
-                <Text
-                  component="span"
-                  fontSize={TextSize.Big}
-                  color="#fff"
-                  weight={TextWeight.Medium}
+              <Link to="/sign-in">
+                <Button
+                  size={ButtonSize.Big}
+                  color="#61BD4F"
+                  className={buttonAnimation}
                 >
-                  Sign in
-                </Text>
-              </Button>
+                  <Text
+                    component="span"
+                    fontSize={TextSize.Big}
+                    color="#fff"
+                    weight={TextWeight.Medium}
+                  >
+                    Sign in
+                  </Text>
+                </Button>
+              </Link>
             </Margin>
             <Margin margin="0 1.5rem 0 0">
-              <Button
-                size={ButtonSize.Big}
-                color="#61BD4F"
-                className={buttonAnimation}
-              >
-                <Text
-                  component="span"
-                  fontSize={TextSize.Big}
-                  color="#fff"
-                  weight={TextWeight.Medium}
+              <Link to="/sign-up">
+                <Button
+                  size={ButtonSize.Big}
+                  color="#61BD4F"
+                  className={buttonAnimation}
                 >
-                  Sign up
-                </Text>
-              </Button>
+                  <Text
+                    component="span"
+                    fontSize={TextSize.Big}
+                    color="#fff"
+                    weight={TextWeight.Medium}
+                  >
+                    Sign up
+                  </Text>
+                </Button>
+              </Link>
             </Margin>
           </div>
         </div>
