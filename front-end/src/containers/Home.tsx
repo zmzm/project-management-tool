@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { Button, ButtonSize } from '../components/core/Button/Button';
 import { Text, TextSize, TextWeight } from '../components/core/Text/Text';
 import { Margin } from '../components/core/Margin/Margin';
+import { URLS } from '../consts/urls';
 
 const moveInLeft = keyframes`
   0% {
@@ -120,7 +121,7 @@ export default class Home extends React.Component {
           </Text>
           <div className={buttonWrapper}>
             <Margin margin="0 1.5rem 0 0">
-              <Link to="/sign-in">
+              <Link to={URLS.SIGN_IN}>
                 <Button
                   size={ButtonSize.Big}
                   color="#61BD4F"
@@ -138,7 +139,7 @@ export default class Home extends React.Component {
               </Link>
             </Margin>
             <Margin margin="0 1.5rem 0 0">
-              <Link to="/sign-up">
+              <Link to={URLS.SIGN_UP}>
                 <Button
                   size={ButtonSize.Big}
                   color="#61BD4F"
