@@ -48,7 +48,6 @@ const buttonCss = (
   ${outline && `background-color: ${button.background.outline};`}
   ${transparent &&
     `background-color: ${button.background.transparent};`}
-  margin-left: auto;
 
   &[disabled] {
     background-color: ${button.background.disabled};

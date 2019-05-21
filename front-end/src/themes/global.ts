@@ -51,4 +51,8 @@ export const globalCss = () => injectGlobal`
     display: flex;
     flex-direction: column;
   }
+
+  a {
+    text-decoration: none;
+  }
 `;
