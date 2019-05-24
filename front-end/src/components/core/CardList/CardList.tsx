@@ -51,9 +51,14 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
       return cards.map((card: any, index: number) => (
         <Card
           key={card.cardName + index}
-          cardName={card.cardName}
+          cardName={
+            <Text fontSize={TextSize.Small} weight={TextWeight.Medium}>
+              {card.cardName}
+            </Text>
+          }
           commentsCount={card.commentsCount}
           colorMark={card.colorMark}
+          assignedUsers={['UK', 'SK']}
           onClick={this.toggleDilog(!this.state.showDialog, card)}
         />
       ));
