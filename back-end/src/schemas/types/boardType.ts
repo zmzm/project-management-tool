@@ -10,7 +10,7 @@ import {
 const BoardType = new GraphQLObjectType({
   description: 'A single board.',
   fields: {
-    bardName: { type: GraphQLString },
+    boardName: { type: GraphQLString },
     created: { type: GraphQLString },
     id: { type: GraphQLID },
     isClosed: { type: GraphQLBoolean },

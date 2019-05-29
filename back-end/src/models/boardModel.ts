@@ -127,7 +127,7 @@ export class Board implements IBaseModel {
   public mapDatabaseObject(attributes: any): Board {
     if (attributes !== undefined) {
       this.setId(attributes.id);
-      this.setName(attributes.team_name);
+      this.setName(attributes.board_name);
       this.setIsClosed(attributes.is_closed);
       this.setTeamId(attributes.team_id);
       this.setCreatedAt(attributes.created_at);

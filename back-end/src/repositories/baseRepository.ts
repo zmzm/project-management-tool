@@ -42,7 +42,7 @@ export default class BaseRepository<T, S> {
    * @returns {Promise<T>}
    * @memberof BaseRepository
    */
-  public async findById(id: number): Promise<IBaseModel> {
+  public async findById(id: number): Promise<T> {
     const conn = await this.db.getConnection();
     const result = await conn
       .select()
@@ -77,10 +77,10 @@ export default class BaseRepository<T, S> {
    * Update entity of @type S in database
    *
    * @param {S} entity
-   * @returns {Promise<IBaseModel>}
+   * @returns {Promise<T>}
    * @memberof BaseRepository
    */
-  public async update(entity: S, id: number): Promise<IBaseModel> {
+  public async update(entity: S, id: number): Promise<T> {
     const conn = await this.db.getConnection();
 
     // TODO: find way to get updated entity as a response, to avoid making extra call
