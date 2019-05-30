@@ -5,7 +5,6 @@ import {
 } from 'graphql';
 import UserType from './userType';
 
-// tslint:disable-next-line
 const AuthResponseType = new GraphQLObjectType({
   description: 'Response to successfull sign-up/sign-in request, that contains user entity and JWT token',
   fields: {

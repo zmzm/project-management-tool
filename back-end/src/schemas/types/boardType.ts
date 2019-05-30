@@ -6,7 +6,6 @@ import {
   GraphQLString,
 } from 'graphql';
 
-// tslint:disable-next-line
 const BoardType = new GraphQLObjectType({
   description: 'A single board.',
   fields: {

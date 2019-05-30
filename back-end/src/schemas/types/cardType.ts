@@ -5,7 +5,6 @@ import {
   GraphQLString,
 } from 'graphql';
 
-// tslint:disable-next-line
 const CardType = new GraphQLObjectType({
   description: 'A single card.',
   fields: {

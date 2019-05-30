@@ -5,7 +5,6 @@ import {
   GraphQLString,
 } from 'graphql';
 
-// tslint:disable-next-line
 const CommentType = new GraphQLObjectType({
   description: 'A single comment.',
   fields: {

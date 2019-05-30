@@ -14,6 +14,7 @@ import { LogInUser } from '../graphql/mutations/userMutations';
 
 export interface ISignUpProps {
   mutate?: any;
+  history?: any;
 }
 
 class SignIn extends React.PureComponent<ISignUpProps> {
@@ -55,14 +56,16 @@ class SignIn extends React.PureComponent<ISignUpProps> {
           password: values.password,
         },
       })
-      .then(res =>
-        // tslint:disable-next-line:no-console
-        console.log(res),
-      )
-      .catch(err =>
-        // tslint:disable-next-line:no-console
-        console.log(err.graphQLErrors.map(error => error.message)),
-      );
+      .then(res => {
+        localStorage.setItem('user', JSON.stringify(res.data.loginUser.user));
+        this.props.history.push({
+          pathname: '/home',
+          state: { user: res.data.loginUser.user },
+        });
+      })
+      .catch(err => {
+        console.log(err.graphQLErrors);
+      });
   };
 }
 

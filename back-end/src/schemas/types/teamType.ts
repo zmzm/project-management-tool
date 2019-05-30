@@ -17,10 +17,13 @@ const TeamType = new GraphQLObjectType({
     boards: {
       type: new GraphQLList(BoardType),
       async resolve(source: Team, args: any, ctx: Context<any>) {
-        const boards = await ctx.Services.BoardService.findByTeamId(
-          source.getId(),
-        );
-        return boards;
+        if(Object.keys(source).length !== 0) {
+          const boards = await ctx.Services.BoardService.findByTeamId(
+            source.getId(),
+          );
+          return boards;
+        }
+        return null;
       },
     },
   },
