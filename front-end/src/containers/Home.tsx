@@ -51,11 +51,18 @@ const cardCss = css`
 
 export default class Home extends React.Component {
   public render() {
+    const userFromStorage = Number.parseInt(
+      JSON.parse(localStorage.getItem('user') || '{id: null}').id,
+    );
+    const userId = this.props['location'].state
+      ? Number.parseInt(this.props['location'].state.user.id)
+      : userFromStorage;
+
     return (
       <Query
         query={GetUserInfo}
         variables={{
-          id: Number.parseInt(this.props['location'].state.user.id),
+          id: userId,
         }}
       >
         {({ data, loading, error }) => {

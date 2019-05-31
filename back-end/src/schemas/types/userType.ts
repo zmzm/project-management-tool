@@ -24,8 +24,11 @@ const UserType = new GraphQLObjectType({
     team: {
       type: TeamType,
       async resolve(source: User, args: any, ctx: Context<any>) {
-        const dbTeam = await ctx.Services.TeamService.findById(source.TeamId);
-        return new Team(dbTeam);
+        if (Object.keys(source).length !== 0) {
+          const dbTeam = await ctx.Services.TeamService.findById(source.TeamId);
+          return new Team(dbTeam);
+        }
+        return null;
       },
     },
   },
