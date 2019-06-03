@@ -14,4 +14,16 @@ export default class CardService extends BaseService<Card, RawCard> {
   public getRepository(): BaseRepository<Card, RawCard> {
     return this.repo;
   }
+
+  /**
+   * Find cards by list id
+   *
+   * @param {listId} number
+   * @returns {Promise<Card>}
+   * @memberof CardService
+   */
+  public async findByListId(listId: number): Promise<Card[]> {
+    const boards = await this.repo.findByListId(listId);
+    return boards.map((board) => new Card(board));
+  }
 }

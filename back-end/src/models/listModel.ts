@@ -96,7 +96,7 @@ export class List implements IBaseModel {
   public mapDatabaseObject(attributes: any): List {
     if (attributes !== undefined) {
       this.setId(attributes.id);
-      this.setName(attributes.name);
+      this.setName(attributes.list_name);
     }
     return this;
   }
