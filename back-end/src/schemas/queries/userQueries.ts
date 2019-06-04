@@ -1,3 +1,4 @@
+import { AppError } from './../../errors';
 import { GraphQLInt, GraphQLList, GraphQLString } from 'graphql';
 import Context from '../../context';
 import { User } from '../../models/userModel';
@@ -7,7 +8,7 @@ const findAll = {
   type: new GraphQLList(UserType),
   async resolve(root: any, args: any, ctx: Context<any>): Promise<User[]> {
     const users = await ctx.Services.UserService.findAll();
-    return users.map((user) => new User(user));
+    return users.map(user => new User(user));
   },
 };
 
@@ -17,8 +18,12 @@ const findById = {
   },
   type: UserType,
   async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
-    const user = await ctx.Services.UserService.findById(args.id);
-    return new User(user);
+    try {
+        const dbUser = await ctx.Services.UserService.findById(args.id);
+        return new User(dbUser);
+    } catch (err) {
+      throw new AppError(err.code, err.detail, err);
+    }
   },
 };
 

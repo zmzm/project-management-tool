@@ -14,4 +14,16 @@ export default class ListService extends BaseService<List, RawList> {
   public getRepository(): BaseRepository<List, RawList> {
     return this.repo;
   }
+
+  /**
+   * Find lists by board id
+   *
+   * @param {number} boardId
+   * @returns Promise<List[]>
+   * @memberof ListService
+   */
+  public async findByBoardId(boardId: number): Promise<List[]> {
+    const lists = await this.repo.findByQuery({ board_id: boardId });
+    return lists.map((list) => new List(list));
+  }
 }

@@ -11,9 +11,11 @@ import { Padding } from '../components/core/Padding/Padding';
 import { Text, TextWeight } from '../components/core/Text/Text';
 import { signinValidationSchema } from '../components/core/Forms/SignIn/Validation';
 import { LogInUser } from '../graphql/mutations/userMutations';
+import { StorageHelper } from '../utils/localStorage';
 
 export interface ISignUpProps {
   mutate?: any;
+  history?: any;
 }
 
 class SignIn extends React.PureComponent<ISignUpProps> {
@@ -55,14 +57,16 @@ class SignIn extends React.PureComponent<ISignUpProps> {
           password: values.password,
         },
       })
-      .then(res =>
-        // tslint:disable-next-line:no-console
-        console.log(res),
-      )
-      .catch(err =>
-        // tslint:disable-next-line:no-console
-        console.log(err.graphQLErrors.map(error => error.message)),
-      );
+      .then(res => {
+        StorageHelper.add('user', res.data.loginUser.user);
+        this.props.history.push({
+          pathname: '/home',
+          state: { user: res.data.loginUser.user },
+        });
+      })
+      .catch(err => {
+        console.log(err.graphQLErrors);
+      });
   };
 }
 

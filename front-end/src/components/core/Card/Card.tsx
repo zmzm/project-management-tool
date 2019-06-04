@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { Text, TextSize, TextWeight } from '../Text/Text';
 import { Margin } from '../Margin/Margin';
@@ -8,9 +8,11 @@ import { Icon, IconSize } from '../Icon/Icon';
 import { Button, ButtonSize } from '../Button/Button';
 
 export interface ICardProps {
-  cardName: string;
+  cardName: any;
   colorMark?: any[];
   commentsCount?: number;
+  className?: string;
+  assignedUsers?: any[];
   onClick?(): any;
 }
 
@@ -52,10 +54,17 @@ const bagesWrapper = css`
 
 export class Card extends React.PureComponent<ICardProps> {
   public render() {
-    const { cardName, colorMark, commentsCount, onClick } = this.props;
+    const {
+      cardName,
+      colorMark,
+      commentsCount,
+      onClick,
+      className,
+      assignedUsers,
+    } = this.props;
 
     return (
-      <div className={cardWrapper} onClick={onClick}>
+      <div className={cx(cardWrapper, className)} onClick={onClick}>
         <Margin margin="0 0 0.4rem">
           {colorMark && colorMark.length && (
             <div className={labelWrapper}>
@@ -67,15 +76,11 @@ export class Card extends React.PureComponent<ICardProps> {
             </div>
           )}
         </Margin>
-        <Margin margin="0 0 0.4rem">
-          <Text fontSize={TextSize.Small} weight={TextWeight.Medium}>
-            {cardName}
-          </Text>
-        </Margin>
+        <Margin margin="0 0 0.4rem">{cardName}</Margin>
         <div className={bagesWrapper}>
-          <Margin margin="0 0.5rem 0 0">
+          {/* <Margin margin="0 0.5rem 0 0">
             <Icon name="visibility" color="gray" size={IconSize.Small} />
-          </Margin>
+              </Margin> */}
           {'  '}
           {commentsCount && (
             <React.Fragment>
@@ -89,16 +94,20 @@ export class Card extends React.PureComponent<ICardProps> {
               </Text>
             </React.Fragment>
           )}
-          <Button size={ButtonSize.Medium}>
-            <Text
-              component="span"
-              fontSize={TextSize.Small}
-              color="#17394d"
-              weight={TextWeight.Bold}
-            >
-              UK
-            </Text>
-          </Button>
+          {assignedUsers &&
+            assignedUsers.length &&
+            assignedUsers.map(user => (
+              <Button size={ButtonSize.Medium}>
+                <Text
+                  component="span"
+                  fontSize={TextSize.Small}
+                  color="#17394d"
+                  weight={TextWeight.Bold}
+                >
+                  {user}
+                </Text>
+              </Button>
+            ))}
         </div>
       </div>
     );

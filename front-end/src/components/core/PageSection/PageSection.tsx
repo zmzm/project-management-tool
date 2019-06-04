@@ -5,7 +5,6 @@ import { withTheme } from 'emotion-theming';
 
 const pageSectionCss = ({ page }, margin = '0', maxWidth) => css`
   margin: ${margin};
-  background-color: transparent;
   position: relative;
   ${maxWidth && `max-width: ${maxWidth}px`};
   z-index: 1;

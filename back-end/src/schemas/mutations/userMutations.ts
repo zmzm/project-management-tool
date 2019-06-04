@@ -1,12 +1,7 @@
-import {
-  GraphQLID,
-  GraphQLInt,
-  GraphQLNonNull,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLID, GraphQLInt, GraphQLNonNull, GraphQLString } from 'graphql';
 import Context from '../../context';
 import { User } from '../../models/userModel';
-import SignUpResponseType from '../types/signUpResponseType';
+import AuthResponseType from '../types/AuthResponseType';
 import UserType from '../types/userType';
 import { AppError, ErrorCodes, ValidationError } from './../../errors';
 
@@ -17,10 +12,14 @@ const createUser = {
     lastName: { type: GraphQLString },
     password: { type: GraphQLString },
   },
-  type: SignUpResponseType,
+  type: AuthResponseType,
   async resolve(root: any, args: any, ctx: Context<any>) {
-    const hashedPassword = await ctx.Services.UserService.hashPassword(args.password);
-    const userAttributes = Object.assign({}, args, { password: hashedPassword });
+    const hashedPassword = await ctx.Services.UserService.hashPassword(
+      args.password,
+    );
+    const userAttributes = Object.assign({}, args, {
+      password: hashedPassword,
+    });
     let result;
 
     const userModel = new User(userAttributes, false);
@@ -30,7 +29,9 @@ const createUser = {
     try {
       result = await ctx.Services.UserService.create(userModel, fieldsToReturn);
       const returnedFields = result[0];
-      const jwt = await ctx.Services.UserService.generateJwt(returnedFields.email);
+      const jwt = await ctx.Services.UserService.generateJwt(
+        returnedFields.email,
+      );
 
       return Object.assign(new User(returnedFields), { token: jwt });
     } catch (err) {
@@ -75,11 +76,16 @@ const login = {
     email: { type: GraphQLString },
     password: { type: GraphQLString },
   },
-  type: UserType,
+  type: AuthResponseType,
   async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
     try {
-      const user = await ctx.Services.UserService.login(args.email, args.password);
-      return user;
+      const user = await ctx.Services.UserService.login(
+        args.email,
+        args.password,
+      );
+      const jwt = await ctx.Services.UserService.generateJwt(user.Email);
+
+      return Object.assign(user, { token: jwt });
     } catch (err) {
       throw err;
     }

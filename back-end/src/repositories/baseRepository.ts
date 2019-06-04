@@ -28,9 +28,7 @@ export default class BaseRepository<T, S> {
    */
   public async findAll(): Promise<T[]> {
     const conn = await this.db.getConnection();
-    const result = await conn
-      .select()
-      .from(this.table);
+    const result = await conn.select().from(this.table);
 
     return result;
   }
@@ -42,15 +40,19 @@ export default class BaseRepository<T, S> {
    * @returns {Promise<T>}
    * @memberof BaseRepository
    */
-  public async findById(id: number): Promise<IBaseModel> {
+  public async findById(id: number): Promise<T> {
     const conn = await this.db.getConnection();
-    const result = await conn
-      .select()
-      .from(this.table)
-      .where({ id })
-      .first();
+    try {
+      const result = await conn
+        .select()
+        .from(this.table)
+        .where({ id })
+        .first();
 
-    return result;
+      return result;
+    } catch (err) {
+      throw new AppError(err.code, err.detail, err);
+    }
   }
 
   /**
@@ -61,12 +63,18 @@ export default class BaseRepository<T, S> {
    * @returns {Promise<IBaseModelS>}
    * @memberof BaseRepository
    */
-  public async create(entity: S, fieldsToReturn: string[]): Promise<IBaseModel> {
+  public async create(
+    entity: S,
+    fieldsToReturn: string[],
+  ): Promise<IBaseModel> {
     const conn = await this.db.getConnection();
     try {
       // TODO: looks like so presice selection of returning fields is not needed here,
       // switch to '*' - to return all fields instead
-      const result = await conn.table(this.table).returning(fieldsToReturn).insert(entity);
+      const result = await conn
+        .table(this.table)
+        .returning(fieldsToReturn)
+        .insert(entity);
       return result;
     } catch (err) {
       throw new AppError(err.code, err.detail, err);
@@ -77,14 +85,17 @@ export default class BaseRepository<T, S> {
    * Update entity of @type S in database
    *
    * @param {S} entity
-   * @returns {Promise<IBaseModel>}
+   * @returns {Promise<T>}
    * @memberof BaseRepository
    */
-  public async update(entity: S, id: number): Promise<IBaseModel> {
+  public async update(entity: S, id: number): Promise<T> {
     const conn = await this.db.getConnection();
 
     // TODO: find way to get updated entity as a response, to avoid making extra call
-    await conn.update(entity).into(this.table).where('id', id);
+    await conn
+      .update(entity)
+      .into(this.table)
+      .where('id', id);
     return await this.findById(id);
   }
 
@@ -102,5 +113,26 @@ export default class BaseRepository<T, S> {
       .from(this.table)
       .delete()
       .where({ id });
+  }
+
+  /**
+   * Find entity of @type T in database by query
+   *
+   * @param {any} query
+   * @returns {Promise<T>}
+   * @memberof BaseRepository
+   */
+  public async findByQuery(query: object): Promise<T[]> {
+    const conn = await this.db.getConnection();
+    try {
+      const result = await conn
+        .select()
+        .from(this.table)
+        .where(query);
+
+      return result;
+    } catch (err) {
+      throw new AppError(err.code, err.detail, err);
+    }
   }
 }

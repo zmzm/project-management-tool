@@ -31,7 +31,7 @@ export default abstract class BaseService<T, S> {
    * @returns {Promise<T>}
    * @memberof BaseService
    */
-  public async findById(id: number): Promise<IBaseModel> {
+  public async findById(id: number): Promise<T> {
     const entity = await this.getRepository().findById(id);
     return entity;
   }
@@ -55,10 +55,10 @@ export default abstract class BaseService<T, S> {
    * Update entity of @type IBaseModel
    *
    * @param {IBaseModel} entity
-   * @returns {Promise<IBaseModel>}
+   * @returns {Promise<T>}
    * @memberof BaseService
    */
-  public async update(entity: IBaseModel): Promise<IBaseModel> {
+  public async update(entity: IBaseModel): Promise<T> {
     const newEntity = await this.findById(entity.getId());
     const result = await this.getRepository()
       .update(lodash.merge({}, newEntity, entity.toDatabaseObject()), entity.getId());

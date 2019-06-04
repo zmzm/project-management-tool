@@ -2,6 +2,7 @@ import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
 import TeamQuery from './queries/teamQueries';
 import UserQuery from './queries/userQueries';
+import BoardQuery from './queries/boardQueries';
 
 import TeamMutation from './mutations/teamMutations';
 import UserMutation from './mutations/userMutations';
@@ -31,6 +32,8 @@ export default class Schema {
       findAllTeams: TeamQuery.findAll,
       findTeamById: TeamQuery.findById,
       findTeamByTeamName: TeamQuery.findByTeamName,
+
+      findBoardById: BoardQuery.findById,
     },
     name: 'Query',
   });
