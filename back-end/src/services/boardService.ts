@@ -23,7 +23,7 @@ export default class BoardService extends BaseService<Board, RawBoard> {
    * @memberof TeamService
    */
   public async findByTeamId(teamId: number): Promise<Board[]> {
-    const boards = await this.repo.findByTeamId(teamId);
+    const boards = await this.repo.findByQuery({ team_id: teamId });
     return boards.map((board) => new Board(board));
   }
 }

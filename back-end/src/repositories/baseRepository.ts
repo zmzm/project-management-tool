@@ -114,4 +114,25 @@ export default class BaseRepository<T, S> {
       .delete()
       .where({ id });
   }
+
+  /**
+   * Find entity of @type T in database by query
+   *
+   * @param {any} query
+   * @returns {Promise<T>}
+   * @memberof BaseRepository
+   */
+  public async findByQuery(query: object): Promise<T[]> {
+    const conn = await this.db.getConnection();
+    try {
+      const result = await conn
+        .select()
+        .from(this.table)
+        .where(query);
+
+      return result;
+    } catch (err) {
+      throw new AppError(err.code, err.detail, err);
+    }
+  }
 }

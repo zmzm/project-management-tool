@@ -23,7 +23,7 @@ export default class CardService extends BaseService<Card, RawCard> {
    * @memberof CardService
    */
   public async findByListId(listId: number): Promise<Card[]> {
-    const boards = await this.repo.findByListId(listId);
+    const boards = await this.repo.findByQuery({ list_id: listId });
     return boards.map((board) => new Card(board));
   }
 }

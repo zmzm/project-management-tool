@@ -23,7 +23,7 @@ export default class ListService extends BaseService<List, RawList> {
    * @memberof ListService
    */
   public async findByBoardId(boardId: number): Promise<List[]> {
-    const lists = await this.repo.findByBoardId(boardId);
+    const lists = await this.repo.findByQuery({ board_id: boardId });
     return lists.map((list) => new List(list));
   }
 }
