@@ -11,6 +11,7 @@ import { Padding } from '../components/core/Padding/Padding';
 import { Text, TextWeight } from '../components/core/Text/Text';
 import { signinValidationSchema } from '../components/core/Forms/SignIn/Validation';
 import { LogInUser } from '../graphql/mutations/userMutations';
+import { StorageHelper } from '../utils/localStorage';
 
 export interface ISignUpProps {
   mutate?: any;
@@ -57,7 +58,7 @@ class SignIn extends React.PureComponent<ISignUpProps> {
         },
       })
       .then(res => {
-        localStorage.setItem('user', JSON.stringify(res.data.loginUser.user));
+        StorageHelper.add('user', res.data.loginUser.user);
         this.props.history.push({
           pathname: '/home',
           state: { user: res.data.loginUser.user },

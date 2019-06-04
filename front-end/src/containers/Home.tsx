@@ -10,6 +10,7 @@ import { PageSection } from '../components/core/PageSection/PageSection';
 import { Padding } from '../components/core/Padding/Padding';
 import { Card } from '../components/core/Card/Card';
 import { GetUserInfo } from '../graphql/queries/userQueries';
+import { StorageHelper } from '../utils/localStorage';
 
 const logoCss = css`
   color: white;
@@ -51,12 +52,10 @@ const cardCss = css`
 
 export default class Home extends React.Component {
   public render() {
-    const userFromStorage = Number.parseInt(
-      JSON.parse(localStorage.getItem('user') || '{id: null}').id,
-    );
+    const userFromStorage = StorageHelper.get('user');
     const userId = this.props['location'].state
       ? Number.parseInt(this.props['location'].state.user.id)
-      : userFromStorage;
+      : userFromStorage && Number.parseInt(userFromStorage.id);
 
     return (
       <Query
