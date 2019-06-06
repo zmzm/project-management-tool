@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { ThemeProvider } from 'emotion-theming';
-import theme from '../themes/default';
-import { globalCss } from '../themes/global';
+import theme from '../styles/default';
+import { globalCss } from '../styles/global';
 
 globalCss();
 

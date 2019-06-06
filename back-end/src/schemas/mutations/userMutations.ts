@@ -1,7 +1,7 @@
 import { GraphQLID, GraphQLInt, GraphQLNonNull, GraphQLString } from 'graphql';
 import Context from '../../context';
 import { User } from '../../models/userModel';
-import AuthResponseType from '../types/AuthResponseType';
+import AuthResponseType from '../types/authResponseType';
 import UserType from '../types/userType';
 import { AppError, ErrorCodes, ValidationError } from './../../errors';
 

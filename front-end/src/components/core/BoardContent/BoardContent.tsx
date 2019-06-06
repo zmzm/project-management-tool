@@ -11,6 +11,7 @@ const contentWrapper = css`
   overflow-x: auto;
   overflow-y: hidden;
   margin-left: 0.5rem;
+  display: flex;
 `;
 
 export class BoardContent extends React.PureComponent<{}> {

@@ -47,6 +47,7 @@ const labelWrapper = css`
 const bagesWrapper = css`
   min-height: 3rem;
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
   align-items: center;
   margin-bottom: 0.4rem;
@@ -78,12 +79,8 @@ export class Card extends React.PureComponent<ICardProps> {
         </Margin>
         <Margin margin="0 0 0.4rem">{cardName}</Margin>
         <div className={bagesWrapper}>
-          {/* <Margin margin="0 0.5rem 0 0">
-            <Icon name="visibility" color="gray" size={IconSize.Small} />
-              </Margin> */}
-          {'  '}
-          {commentsCount && (
-            <React.Fragment>
+          {commentsCount && commentsCount > 0 ? (
+            <div style={{ display: 'flex' }}>
               <Icon
                 name="chat_bubble_outline"
                 color="gray"
@@ -92,22 +89,24 @@ export class Card extends React.PureComponent<ICardProps> {
               <Text fontSize={TextSize.Small} weight={TextWeight.Medium}>
                 {commentsCount}
               </Text>
-            </React.Fragment>
-          )}
-          {assignedUsers &&
-            assignedUsers.length &&
-            assignedUsers.map(user => (
-              <Button size={ButtonSize.Medium}>
-                <Text
-                  component="span"
-                  fontSize={TextSize.Small}
-                  color="#17394d"
-                  weight={TextWeight.Bold}
-                >
-                  {user}
-                </Text>
-              </Button>
-            ))}
+            </div>
+          ) : null}
+          <div style={{ display: 'flex' }}>
+            {assignedUsers &&
+              assignedUsers.length > 0 &&
+              assignedUsers.map((user, index) => (
+                <Button key={index} size={ButtonSize.Medium}>
+                  <Text
+                    component="span"
+                    fontSize={TextSize.Small}
+                    color="#17394d"
+                    weight={TextWeight.Bold}
+                  >
+                    {user}
+                  </Text>
+                </Button>
+              ))}
+          </div>
         </div>
       </div>
     );

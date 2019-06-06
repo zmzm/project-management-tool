@@ -44,7 +44,7 @@ const wrapperCss = css`
 // @ts-ignore
 @withTheme
 export class CardList extends React.Component<ICardListProps, ICardListState> {
-  public state = { showDialog: false, card: { cardName: '' } };
+  public state = { showDialog: false, card: { cardName: '', about: '' } };
 
   public renderCards = (cards: any) => {
     if (cards.length > 0) {
@@ -56,7 +56,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
               {card.cardName}
             </Text>
           }
-          commentsCount={card.commentsCount}
+          commentsCount={card.comments.length}
           colorMark={card.colorMark}
           assignedUsers={['UK', 'SK']}
           onClick={this.toggleDilog(!this.state.showDialog, card)}
@@ -113,7 +113,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
               fullScreen
             >
               <Margin margin="2rem">
-                <Text fontSize={TextSize.Medium}>ASDASDADADADSAHSHJASL</Text>
+                <Text fontSize={TextSize.Medium}>{this.state.card.about}</Text>
               </Margin>
             </Dialog>
           </div>
