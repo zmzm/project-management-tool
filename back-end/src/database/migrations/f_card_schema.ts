@@ -17,6 +17,7 @@ export function up(db: knex) {
         .inTable('list')
         .onDelete('CASCADE')
         .onUpdate('CASCADE');
+      table.specificType('marks', 'text[]');
       table.timestamp('created_at').defaultTo(db.fn.now());
     })
     .then(() => db('card').insert([
@@ -26,6 +27,7 @@ export function up(db: knex) {
         id: 1,
         list_id: 1,
         user_id: 1,
+        marks: ["#61bd4f", "#f2d600", "#ff9f1a", "#eb5a46", "#c377e0", "#0079bf"],
       },
       {
         about: 'Test2 test2 test2 test2 test2',
@@ -33,6 +35,7 @@ export function up(db: knex) {
         id: 2,
         list_id: 1,
         user_id: 1,
+        marks: ["#f2d600", "#ff9f1a", "#eb5a46", "#0079bf"],
       },
     ]));
 }

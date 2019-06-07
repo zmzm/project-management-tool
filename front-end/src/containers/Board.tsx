@@ -140,13 +140,18 @@ export default class Board extends React.Component<{}> {
               <BoardContent>
                 {lists &&
                   lists.length &&
-                  lists.map((list, index) => (
-                    <CardList
-                      key={index + '_list_' + boardName}
-                      listName={list.listName}
-                      cards={list.cards}
-                    />
-                  ))}
+                  lists.map(
+                    (
+                      list: { listName: string; cards: any[] },
+                      index: string,
+                    ) => (
+                      <CardList
+                        key={index + '_list_' + boardName}
+                        listName={list.listName}
+                        cards={list.cards}
+                      />
+                    ),
+                  )}
               </BoardContent>
             </React.Fragment>
           );

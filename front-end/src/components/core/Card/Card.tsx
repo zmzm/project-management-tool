@@ -95,7 +95,7 @@ export class Card extends React.PureComponent<ICardProps> {
             {assignedUsers &&
               assignedUsers.length > 0 &&
               assignedUsers.map((user, index) => (
-                <Button key={index} size={ButtonSize.Medium}>
+                <Button key={index} size={ButtonSize.Medium} transparent>
                   <Text
                     component="span"
                     fontSize={TextSize.Small}

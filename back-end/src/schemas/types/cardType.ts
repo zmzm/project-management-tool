@@ -30,6 +30,7 @@ const CardType = new GraphQLObjectType({
     id: { type: GraphQLID },
     listId: { type: GraphQLInt },
     userId: { type: GraphQLInt },
+    marks: {type: new GraphQLList(GraphQLString)}
   },
   name: 'Card',
 });

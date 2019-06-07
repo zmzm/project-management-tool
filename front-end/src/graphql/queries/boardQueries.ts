@@ -10,6 +10,7 @@ export const GetBoardInfo = gql`
         cards {
           id
           cardName
+          marks
           about
           comments {
             id
