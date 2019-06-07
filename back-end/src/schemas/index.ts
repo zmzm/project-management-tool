@@ -7,6 +7,7 @@ import CardQuery from './queries/cardQueries';
 
 import TeamMutation from './mutations/teamMutations';
 import UserMutation from './mutations/userMutations';
+import CardMutation from './mutations/cardMutations';
 
 /**
  * Creating GraphQL schema
@@ -51,6 +52,8 @@ export default class Schema {
       createTeam: TeamMutation.createTeam,
       deleteTeam: TeamMutation.deleteTeam,
       updateTeam: TeamMutation.updateTeam,
+      
+      createCard: CardMutation.createCard,
     },
     name: 'Mutation',
   });

@@ -59,23 +59,14 @@ export default class BaseRepository<T, S> {
    * Create entity of @type S in database
    *
    * @param {S} entity
-   * @param {string[]} fieldsToReturn
    * @returns {Promise<IBaseModelS>}
    * @memberof BaseRepository
    */
-  public async create(
-    entity: S,
-    fieldsToReturn: string[],
-  ): Promise<IBaseModel> {
+  public async create(entity: S): Promise<IBaseModel> {
     const conn = await this.db.getConnection();
     try {
-      // TODO: looks like so presice selection of returning fields is not needed here,
-      // switch to '*' - to return all fields instead
-      const result = await conn
-        .table(this.table)
-        .returning(fieldsToReturn)
-        .insert(entity);
-      return result;
+      const result = await conn.table(this.table).returning('*').insert(entity);
+      return result[0];
     } catch (err) {
       throw new AppError(err.code, err.detail, err);
     }
