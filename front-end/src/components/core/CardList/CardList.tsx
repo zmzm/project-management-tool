@@ -57,7 +57,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
             </Text>
           }
           commentsCount={card.comments.length}
-          colorMark={card.marks}
+          labels={card.labels}
           assignedUsers={['UK', 'SK']}
           onClick={this.toggleDilog(!this.state.showDialog, card)}
         />

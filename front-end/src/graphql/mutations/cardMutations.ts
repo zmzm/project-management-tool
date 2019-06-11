@@ -16,7 +16,7 @@ export const CreateCard = gql`
       id
       cardName
       about
-      marks
+      labels
     }
   }
 `;

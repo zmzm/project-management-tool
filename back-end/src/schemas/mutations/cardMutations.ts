@@ -9,7 +9,7 @@ const createCard = {
     about: { type: GraphQLString },
     userId: { type: GraphQLInt },
     listId: { type: GraphQLInt },
-    marks: { type: new GraphQLList(GraphQLString) },
+    labels: { type: new GraphQLList(GraphQLString) },
   },
   type: CardType,
   async resolve(root: any, args: any, ctx: Context<any>): Promise<Card> {

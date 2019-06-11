@@ -9,7 +9,7 @@ import { Button, ButtonSize } from '../Button/Button';
 
 export interface ICardProps {
   cardName: any;
-  colorMark?: any[];
+  labels?: any[];
   commentsCount?: number;
   className?: string;
   assignedUsers?: any[];
@@ -26,8 +26,8 @@ const cardWrapper = css`
   padding: 0.6rem 0.8rem 0.2rem;
 `;
 
-const cardLabelCss = (colorMark?: any) => css`
-  background-color: ${colorMark};
+const cardLabelCss = (labelColor?: any) => css`
+  background-color: ${labelColor};
   border-radius: 0.5rem;
   display: block;
   float: left;
@@ -57,7 +57,7 @@ export class Card extends React.PureComponent<ICardProps> {
   public render() {
     const {
       cardName,
-      colorMark,
+      labels,
       commentsCount,
       onClick,
       className,
@@ -67,9 +67,9 @@ export class Card extends React.PureComponent<ICardProps> {
     return (
       <div className={cx(cardWrapper, className)} onClick={onClick}>
         <Margin margin="0 0 0.4rem">
-          {colorMark && colorMark.length && (
+          {labels && labels.length && (
             <div className={labelWrapper}>
-              {colorMark.map((color, index) => (
+              {labels.map((color, index) => (
                 <span key={index} className={cardLabelCss(color)}>
                   &nbsp;
                 </span>

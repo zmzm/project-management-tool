@@ -7,7 +7,7 @@ import { Card } from './Card';
 
 const props = {
   cardName: 'test card',
-  colorMark: ['#f2d600', 'red', 'green', 'pink', 'coral', 'aqua'],
+  labels: ['#f2d600', 'red', 'green', 'pink', 'coral', 'aqua'],
   commentsCount: 7,
 };
 
@@ -31,7 +31,7 @@ describe('<Card />', () => {
     expect(textComponents.first().props().children).toEqual(props.cardName);
   });
 
-  it('mount with "cardName", "colorMark", and "commentsCount" props ', () => {
+  it('mount with "cardName", "labels", and "commentsCount" props ', () => {
     const mountedCard = mountWithTheme(<Card {...props} />);
     const colorMarkSpans = mountedCard
       .find(Margin)
@@ -41,7 +41,7 @@ describe('<Card />', () => {
       .find('span');
     const commentsCountTextComponent = mountedCard.find(Text).at(1);
 
-    expect(colorMarkSpans.length).toBe(props.colorMark.length);
+    expect(colorMarkSpans.length).toBe(props.labels.length);
     expect(commentsCountTextComponent.props().children).toEqual(
       props.commentsCount,
     );

@@ -39,17 +39,6 @@ const buttonDivider = css`
 `;
 
 export default class Board extends React.Component<{}> {
-  public state = {
-    cards: [
-      {
-        cardName: 'card 1',
-        commentsCount: 10,
-        colorMark: ['#f2d600', 'red', 'green', 'pink', 'coral', 'aqua'],
-      },
-      { cardName: 'card 2' },
-    ],
-  };
-
   public render() {
     return (
       <Query
