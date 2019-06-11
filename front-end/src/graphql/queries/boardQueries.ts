@@ -6,6 +6,7 @@ export const GetBoardInfo = gql`
       id
       boardName
       lists {
+        id
         listName
         cards {
           id

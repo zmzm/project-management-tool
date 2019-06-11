@@ -22,7 +22,7 @@ const cardWrapper = css`
   box-shadow: 0 1px 0 rgba(9, 45, 66, 0.25);
   margin: 0 0 0.8rem 0;
   max-width: 30rem;
-  min-height: 2rem;
+  min-height: 3.5rem;
   padding: 0.6rem 0.8rem 0.2rem;
 `;
 
