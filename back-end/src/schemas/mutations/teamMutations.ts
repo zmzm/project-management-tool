@@ -16,8 +16,7 @@ const createTeam = {
   async resolve(root: any, args: any, ctx: Context<any>) {
     const teamModel = new Team(args, false);
 
-    const fieldsToReturn = Object.keys(teamModel.toDatabaseObject());
-    const result = await ctx.Services.TeamService.create(teamModel, fieldsToReturn);
+    const result = await ctx.Services.TeamService.create(teamModel);
     const returnedFields = result[0];
 
     return Object.assign(new Team(returnedFields));

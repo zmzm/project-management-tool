@@ -1,7 +1,7 @@
 import { GraphQLID, GraphQLInt, GraphQLNonNull, GraphQLString } from 'graphql';
 import Context from '../../context';
 import { User } from '../../models/userModel';
-import AuthResponseType from '../types/AuthResponseType';
+import AuthResponseType from '../types/authResponseType';
 import UserType from '../types/userType';
 import { AppError, ErrorCodes, ValidationError } from './../../errors';
 
@@ -25,15 +25,13 @@ const createUser = {
     const userModel = new User(userAttributes, false);
     userModel.setRoleId(2);
 
-    const fieldsToReturn = Object.keys(userModel.toDatabaseObject());
     try {
-      result = await ctx.Services.UserService.create(userModel, fieldsToReturn);
-      const returnedFields = result[0];
+      result = await ctx.Services.UserService.create(userModel);
       const jwt = await ctx.Services.UserService.generateJwt(
-        returnedFields.email,
+        result.email,
       );
 
-      return Object.assign(new User(returnedFields), { token: jwt });
+      return Object.assign(new User(result), { token: jwt });
     } catch (err) {
       if (err.code === ErrorCodes.DUPLICATE_ERROR) {
         throw new ValidationError('User with such email already exists', err);

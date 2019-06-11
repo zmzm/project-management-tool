@@ -40,13 +40,11 @@ export default abstract class BaseService<T, S> {
    * Create entity of @type IBaseModel
    *
    * @param {IBaseModel} entity
-   * @param {string[]} fieldsToReturn
    * @returns {Promise<IBaseModel>}
    * @memberof BaseService
    */
-  public async create(entity: IBaseModel, fieldsToReturn: string[]): Promise<IBaseModel> {
-    const result = await this.getRepository()
-      .create(entity.toDatabaseObject(), fieldsToReturn);
+  public async create(entity: IBaseModel): Promise<IBaseModel> {
+    const result = await this.getRepository().create(entity.toDatabaseObject());
 
     return result;
   }
@@ -60,8 +58,10 @@ export default abstract class BaseService<T, S> {
    */
   public async update(entity: IBaseModel): Promise<T> {
     const newEntity = await this.findById(entity.getId());
-    const result = await this.getRepository()
-      .update(lodash.merge({}, newEntity, entity.toDatabaseObject()), entity.getId());
+    const result = await this.getRepository().update(
+      lodash.merge({}, newEntity, entity.toDatabaseObject()),
+      entity.getId(),
+    );
     return result;
   }
 

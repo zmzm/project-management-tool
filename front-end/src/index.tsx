@@ -9,8 +9,8 @@ import { Route, BrowserRouter as Router } from 'react-router-dom';
 import App from './containers/App';
 import registerServiceWorker from './utils/register-service-worker';
 import './utils/add-icons-to-lib';
-import theme from './themes/default';
-import { globalCss } from './themes/global';
+import theme from './styles/default';
+import { globalCss } from './styles/global';
 
 globalCss();
 
