@@ -10,9 +10,9 @@ import { Margin } from '../components/core/Margin/Margin';
 import { Button, ButtonSize } from '../components/core/Button/Button';
 
 import { globalCss } from '../styles/global';
-import { CardList } from '../components/core/CardList/CardList';
 import { BoardContent } from '../components/core/BoardContent/BoardContent';
 import { GetBoardInfo } from '../graphql/queries/boardQueries';
+import { CardList } from './CardList';
 
 globalCss();
 
