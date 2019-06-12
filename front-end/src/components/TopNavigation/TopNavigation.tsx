@@ -1,6 +1,5 @@
 import { css } from 'emotion';
 import * as React from 'react';
-// import { Route, Switch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Button, ButtonSize } from '../core/Button/Button';
 import { Icon, IconSize } from '../core/Icon/Icon';
@@ -25,6 +24,16 @@ const logoCss = css`
   height: 3.7rem;
 `;
 
+const homeIconCss = css`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  background-color: hsla(0, 0%, 100%, 0.2);
+  padding: 0 0.65rem;
+`;
+
 const linkCss = css`
   color: ${colors.white};
 `;
@@ -38,10 +47,11 @@ export class TopNavigation extends React.Component {
       <nav>
         <Header>
           <Margin margin="0 0.4rem 0 0">
-            <Button
-              size={ButtonSize.Big}
-              icon={<Icon name="home" color="white" size={IconSize.Medium} />}
-            />
+            <div className={homeIconCss}>
+              <Link to={URLS.HOME}>
+                <Icon name="home" color="white" size={IconSize.Medium} />
+              </Link>
+            </div>
           </Margin>
           <Margin margin="0 0.6rem 0 0">
             <Button size={ButtonSize.Big}>
