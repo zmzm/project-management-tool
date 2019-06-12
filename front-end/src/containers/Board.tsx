@@ -136,11 +136,12 @@ export default class Board extends React.Component<{}> {
                   lists.length &&
                   lists.map(
                     (
-                      list: { listName: string; cards: any[] },
+                      list: { listName: string; cards: any[]; id: number },
                       index: string,
                     ) => (
                       <CardList
                         key={index + '_list_' + boardName}
+                        id={list.id}
                         listName={list.listName}
                         cards={list.cards}
                       />
