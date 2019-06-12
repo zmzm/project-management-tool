@@ -6,6 +6,7 @@ const colors = {
   grayLight: 'hsla(0,0%,100%,.2)',
   primary: 'rgb(0,121,191)',
   redDark: '#b70a0a',
+  white: '#FFF',
   rgbWhite: '255, 255, 255',
   secondary: '#ffffff',
 };

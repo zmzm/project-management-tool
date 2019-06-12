@@ -3,7 +3,7 @@ import * as React from 'react';
 import { css } from 'emotion';
 import { Query } from 'react-apollo';
 import { Header, HeaderVariants } from '../components/core/Header/Header';
-import { Icon, IconSize } from '../components/core/Icon/Icon';
+import { Icon } from '../components/core/Icon/Icon';
 import { Text, TextSize, TextWeight } from '../components/core/Text/Text';
 import { Padding } from '../components/core/Padding/Padding';
 import { Margin } from '../components/core/Margin/Margin';
@@ -15,21 +15,6 @@ import { BoardContent } from '../components/core/BoardContent/BoardContent';
 import { GetBoardInfo } from '../graphql/queries/boardQueries';
 
 globalCss();
-
-const logoCss = css`
-  color: white;
-  position absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  font-size: 2.5rem;
-  cursor: pointer;
-  background-image: url("images/LOGO.png");
-  background-size: 15rem 3.7rem;
-  width: 15rem;
-  height: 3.7rem;
-`;
 
 const buttonDivider = css`
   float: left;
@@ -56,39 +41,6 @@ export default class Board extends React.Component<{}> {
 
           return (
             <React.Fragment>
-              <Header>
-                <Margin margin="0 0.4rem 0 0">
-                  <Button
-                    size={ButtonSize.Big}
-                    icon={
-                      <Icon name="home" color="white" size={IconSize.Medium} />
-                    }
-                  />
-                </Margin>
-                <Margin margin="0 0.4rem 0 0">
-                  <Button size={ButtonSize.Big}>
-                    <Text
-                      component="span"
-                      fontSize={TextSize.Medium}
-                      color="white"
-                      weight={TextWeight.Bold}
-                    >
-                      Boards
-                    </Text>
-                  </Button>
-                </Margin>
-                <div className={logoCss} />
-                <Button size={ButtonSize.Big}>
-                  <Text
-                    component="span"
-                    fontSize={TextSize.Medium}
-                    color="white"
-                    weight={TextWeight.Bold}
-                  >
-                    Profile
-                  </Text>
-                </Button>
-              </Header>
               <Margin margin="0.4rem">
                 <Header variant={HeaderVariants.Transparent}>
                   <Margin margin="0 0.4rem 0 0">
