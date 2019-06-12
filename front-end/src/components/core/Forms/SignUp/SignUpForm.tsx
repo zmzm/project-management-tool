@@ -4,6 +4,7 @@ import { Margin } from '../../Margin/Margin';
 import { Input, InputTypes } from '../../Input/Input';
 import { Text, TextWeight } from '../../Text/Text';
 import { Button, ButtonSize } from '../../Button/Button';
+import colors from '../../../../styles/default/colors';
 
 export interface ISignUpFormValues {
   email: string;
@@ -28,7 +29,7 @@ export const SignUpForm = ({
           <Text
             component="span"
             fontSize="3"
-            color="#fff"
+            color={colors.white}
             weight={TextWeight.Bold}
           >
             Name
@@ -45,7 +46,7 @@ export const SignUpForm = ({
         <Text
           component="span"
           fontSize="1.5"
-          color="#ffde03"
+          color={colors.vividYellow}
           weight={TextWeight.Bold}
         >
           {errors.name}
@@ -59,7 +60,7 @@ export const SignUpForm = ({
           <Text
             component="span"
             fontSize="3"
-            color="#fff"
+            color={colors.white}
             weight={TextWeight.Bold}
           >
             Email
@@ -76,7 +77,7 @@ export const SignUpForm = ({
         <Text
           component="span"
           fontSize="1.5"
-          color="#ffde03"
+          color={colors.vividYellow}
           weight={TextWeight.Bold}
         >
           {errors.email}
@@ -90,7 +91,7 @@ export const SignUpForm = ({
           <Text
             component="span"
             fontSize="3"
-            color="#fff"
+            color={colors.white}
             weight={TextWeight.Bold}
           >
             Password
@@ -107,7 +108,7 @@ export const SignUpForm = ({
         <Text
           component="span"
           fontSize="1.5"
-          color="#ffde03"
+          color={colors.vividYellow}
           weight={TextWeight.Bold}
         >
           {errors.password}
@@ -119,13 +120,13 @@ export const SignUpForm = ({
         disabled={!isValid}
         type="submit"
         size={ButtonSize.Big}
-        color="#61BD4F"
+        color={colors.lightGreen}
         block
       >
         <Text
           component="span"
           fontSize="2.5"
-          color="#fff"
+          color={colors.white}
           weight={TextWeight.Bold}
         >
           Create New Account

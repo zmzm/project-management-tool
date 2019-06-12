@@ -9,6 +9,7 @@ import { List } from '../components/core/List/List';
 import { Button, ButtonSize } from '../components/core/Button/Button';
 import { Icon, IconSize } from '../components/core/Icon/Icon';
 import { Padding } from '../components/core/Padding/Padding';
+import colors from '../styles/default/colors';
 
 export interface ICardListProps {
   theme?: any;
@@ -42,7 +43,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
             <Text
               fontSize={TextSize.Big}
               weight={TextWeight.Bold}
-              color="#17394d"
+              color={colors.veryDarkBlue}
             >
               {this.state.card.cardName}
             </Text>
@@ -67,13 +68,19 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
             size={ButtonSize.Default}
             transparent
             block
-            icon={<Icon name="add" color="#6b808c" size={IconSize.Default} />}
+            icon={
+              <Icon
+                name="add"
+                color={colors.darkGrayishBlue}
+                size={IconSize.Default}
+              />
+            }
             onClick={this.showNewCardForm(true)}
           >
             <Padding padding="0 13rem 0 0">
               <Text
                 fontSize={TextSize.Medium}
-                color="#6b808c"
+                color={colors.darkGrayishBlue}
                 weight={TextWeight.Medium}
               >
                 Add a card

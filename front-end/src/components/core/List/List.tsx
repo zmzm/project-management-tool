@@ -5,6 +5,7 @@ import { withTheme } from 'emotion-theming';
 import { Text, TextSize, TextWeight } from '../Text/Text';
 import { Button, ButtonSize } from '../Button/Button';
 import { Icon, IconSize } from '../Icon/Icon';
+import colors from '../../../styles/default/colors';
 
 export interface IListProps {
   theme?: any;
@@ -45,7 +46,7 @@ export class List extends React.Component<IListProps> {
           <div className={headerCss}>
             <Text
               fontSize={TextSize.Medium}
-              color="#17394d"
+              color={colors.veryDarkBlue}
               weight={TextWeight.Bold}
             >
               {listName}
@@ -55,7 +56,7 @@ export class List extends React.Component<IListProps> {
               icon={
                 <Icon
                   name="more_horiz"
-                  color="#798d99"
+                  color={colors.darkGrayishBlue}
                   size={IconSize.Default}
                 />
               }

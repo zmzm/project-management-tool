@@ -11,6 +11,7 @@ import { Padding } from '../components/core/Padding/Padding';
 import { Card } from '../components/core/Card/Card';
 import { GetUserInfo } from '../graphql/queries/userQueries';
 import { StorageHelper } from '../utils/localStorage';
+import colors from '../styles/default/colors';
 
 const logoCss = css`
   color: white;
@@ -78,7 +79,11 @@ export default class Home extends React.Component {
                   <Button
                     size={ButtonSize.Big}
                     icon={
-                      <Icon name="home" color="white" size={IconSize.Medium} />
+                      <Icon
+                        name="home"
+                        color={colors.white}
+                        size={IconSize.Medium}
+                      />
                     }
                   />
                 </Margin>
@@ -87,7 +92,7 @@ export default class Home extends React.Component {
                     <Text
                       component="span"
                       fontSize={TextSize.Medium}
-                      color="white"
+                      color={colors.white}
                       weight={TextWeight.Bold}
                     >
                       Boards
@@ -99,7 +104,7 @@ export default class Home extends React.Component {
                   <Text
                     component="span"
                     fontSize={TextSize.Medium}
-                    color="white"
+                    color={colors.white}
                     weight={TextWeight.Bold}
                   >
                     Profile
@@ -111,7 +116,7 @@ export default class Home extends React.Component {
                   <Text
                     component="h1"
                     fontSize="2"
-                    color="#172b4d"
+                    color={colors.veryDarkBlue}
                     weight={TextWeight.Bold}
                   >
                     Personal boards
@@ -133,7 +138,7 @@ export default class Home extends React.Component {
                       <Text
                         component="h1"
                         fontSize="2"
-                        color="#172b4d"
+                        color={colors.veryDarkBlue}
                         weight={TextWeight.Bold}
                       >
                         <em>{team.teamName}</em> boards

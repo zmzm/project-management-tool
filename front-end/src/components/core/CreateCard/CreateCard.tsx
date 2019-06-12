@@ -1,17 +1,24 @@
 import * as React from 'react';
 
 import { Formik } from 'formik';
+import { css } from 'emotion';
 import { Card } from '../Card/Card';
 import { Input, InputTypes, InputVariants } from '../Input/Input';
 import { Margin } from '../Margin/Margin';
 import { Button, ButtonSize } from '../Button/Button';
 import { Text, TextSize, TextWeight } from '../Text/Text';
 import { Icon, IconSize } from '../Icon/Icon';
+import colors from '../../../styles/default/colors';
 
 export interface ICreateCardProps {
   handleSubmit(value: any): void;
   showForm(value: boolean): void;
 }
+
+const formContentWrapperCss = css`
+  display: flex;
+  align-items: center;
+`;
 
 export class CreateCard extends React.Component<ICreateCardProps> {
   public state = { inputValue: '' };
@@ -40,13 +47,17 @@ export class CreateCard extends React.Component<ICreateCardProps> {
                 />
               }
             />
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className={formContentWrapperCss}>
               <Margin margin="0 1.3rem 0 0">
-                <Button type="submit" size={ButtonSize.Big} color="#5aac44">
+                <Button
+                  type="submit"
+                  size={ButtonSize.Big}
+                  color={colors.green}
+                >
                   <Text
                     component="span"
                     fontSize={TextSize.Normal}
-                    color="#fff"
+                    color={colors.white}
                     weight={TextWeight.Bold}
                   >
                     Create card
@@ -57,7 +68,7 @@ export class CreateCard extends React.Component<ICreateCardProps> {
                 onClick={showForm(false)}
                 size={IconSize.Big}
                 name="close"
-                color="gray"
+                color={colors.grayDark}
               />
             </div>
           </form>
