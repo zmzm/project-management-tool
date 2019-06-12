@@ -26,8 +26,6 @@ export default class Authorized extends React.Component {
         {({ data, loading, error }) => {
           if (loading) return <p>LOADING.....</p>;
           if (error) return <p>ERROR</p>;
-          console.log('data', data);
-          console.log('Authorized');
 
           return (
             <div>
