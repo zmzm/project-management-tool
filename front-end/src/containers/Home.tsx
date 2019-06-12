@@ -7,6 +7,7 @@ import { Padding } from '../components/core/Padding/Padding';
 import { Card } from '../components/core/Card/Card';
 import { GetUserInfo } from '../graphql/queries/userQueries';
 import { StorageHelper } from '../utils/localStorage';
+import colors from '../styles/default/colors';
 
 const pageSectionCss = css`
   background: #fafbfc;
@@ -59,7 +60,7 @@ export default class Home extends React.Component {
                   <Text
                     component="h1"
                     fontSize="2"
-                    color="#172b4d"
+                    color={colors.veryDarkBlue}
                     weight={TextWeight.Bold}
                   >
                     Personal boards
@@ -81,7 +82,7 @@ export default class Home extends React.Component {
                       <Text
                         component="h1"
                         fontSize="2"
-                        color="#172b4d"
+                        color={colors.veryDarkBlue}
                         weight={TextWeight.Bold}
                       >
                         <em>{team.teamName}</em> boards

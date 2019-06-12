@@ -49,7 +49,7 @@ export class TopNavigation extends React.Component {
           <Margin margin="0 0.4rem 0 0">
             <div className={homeIconCss}>
               <Link to={URLS.HOME}>
-                <Icon name="home" color="white" size={IconSize.Medium} />
+                <Icon name="home" color={colors.white} size={IconSize.Medium} />
               </Link>
             </div>
           </Margin>
@@ -58,7 +58,7 @@ export class TopNavigation extends React.Component {
               <Text
                 component="span"
                 fontSize={TextSize.Medium}
-                color="white"
+                color={colors.white}
                 weight={TextWeight.Bold}
               >
                 <Link to={URLS.BOARDS} className={linkCss}>
@@ -72,7 +72,7 @@ export class TopNavigation extends React.Component {
             <Text
               component="span"
               fontSize={TextSize.Medium}
-              color="white"
+              color={colors.white}
               weight={TextWeight.Bold}
             >
               <Link to={URLS.PROFILE} className={linkCss}>
