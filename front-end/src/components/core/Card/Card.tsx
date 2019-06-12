@@ -6,6 +6,7 @@ import { Text, TextSize, TextWeight } from '../Text/Text';
 import { Margin } from '../Margin/Margin';
 import { Icon, IconSize } from '../Icon/Icon';
 import { Button, ButtonSize } from '../Button/Button';
+import colors from '../../../styles/default/colors';
 
 export interface ICardProps {
   cardName: any;
@@ -83,7 +84,7 @@ export class Card extends React.PureComponent<ICardProps> {
             <div style={{ display: 'flex' }}>
               <Icon
                 name="chat_bubble_outline"
-                color="gray"
+                color={colors.grayDark}
                 size={IconSize.Small}
               />
               <Text fontSize={TextSize.Small} weight={TextWeight.Medium}>
@@ -99,7 +100,7 @@ export class Card extends React.PureComponent<ICardProps> {
                   <Text
                     component="span"
                     fontSize={TextSize.Small}
-                    color="#17394d"
+                    color={colors.veryDarkBlue}
                     weight={TextWeight.Bold}
                   >
                     {user}
