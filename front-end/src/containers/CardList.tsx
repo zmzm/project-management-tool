@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import { withTheme } from 'emotion-theming';
 import { Card, ICardProps } from '../components/core/Card/Card';
 import { Text, TextSize, TextWeight } from '../components/core/Text/Text';
 import { Dialog } from '../components/core/Dialog/Dialog';
