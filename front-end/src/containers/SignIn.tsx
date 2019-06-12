@@ -12,6 +12,7 @@ import { Text, TextWeight } from '../components/core/Text/Text';
 import { signinValidationSchema } from '../components/core/Forms/SignIn/Validation';
 import { LogInUser } from '../graphql/mutations/userMutations';
 import { StorageHelper } from '../utils/localStorage';
+import colors from '../styles/default/colors';
 
 export interface ISignUpProps {
   mutate?: any;
@@ -32,7 +33,7 @@ class SignIn extends React.PureComponent<ISignUpProps> {
             <Text
               component="h1"
               fontSize="4.5"
-              color="#fff"
+              color={colors.white}
               weight={TextWeight.Bold}
             >
               Log in to Huello

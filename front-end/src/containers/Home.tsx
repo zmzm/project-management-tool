@@ -7,6 +7,7 @@ import { Padding } from '../components/core/Padding/Padding';
 import { Card } from '../components/core/Card/Card';
 import { GetUserInfo } from '../graphql/queries/userQueries';
 import { StorageHelper } from '../utils/localStorage';
+import colors from '../styles/default/colors';
 
 const pageSectionCss = css`
   background: #fafbfc;
@@ -54,12 +55,52 @@ export default class Home extends React.Component {
 
           return (
             <React.Fragment>
+<<<<<<< HEAD
+=======
+              <Header>
+                <Margin margin="0 0.4rem 0 0">
+                  <Button
+                    size={ButtonSize.Big}
+                    icon={
+                      <Icon
+                        name="home"
+                        color={colors.white}
+                        size={IconSize.Medium}
+                      />
+                    }
+                  />
+                </Margin>
+                <Margin margin="0 0.6rem 0 0">
+                  <Button size={ButtonSize.Big}>
+                    <Text
+                      component="span"
+                      fontSize={TextSize.Medium}
+                      color={colors.white}
+                      weight={TextWeight.Bold}
+                    >
+                      Boards
+                    </Text>
+                  </Button>
+                </Margin>
+                <div className={logoCss} />
+                <Button size={ButtonSize.Big}>
+                  <Text
+                    component="span"
+                    fontSize={TextSize.Medium}
+                    color={colors.white}
+                    weight={TextWeight.Bold}
+                  >
+                    Profile
+                  </Text>
+                </Button>
+              </Header>
+>>>>>>> aa10d04ea8c28019de511d1b73547bd0d697a138
               <PageSection className={pageSectionCss}>
                 <Padding padding="3rem 0 1rem 3rem">
                   <Text
                     component="h1"
                     fontSize="2"
-                    color="#172b4d"
+                    color={colors.veryDarkBlue}
                     weight={TextWeight.Bold}
                   >
                     Personal boards
@@ -81,7 +122,7 @@ export default class Home extends React.Component {
                       <Text
                         component="h1"
                         fontSize="2"
-                        color="#172b4d"
+                        color={colors.veryDarkBlue}
                         weight={TextWeight.Bold}
                       >
                         <em>{team.teamName}</em> boards

@@ -7,6 +7,7 @@ import { Button, ButtonSize } from '../components/core/Button/Button';
 import { Text, TextSize, TextWeight } from '../components/core/Text/Text';
 import { Margin } from '../components/core/Margin/Margin';
 import { URLS } from '../consts/urls';
+import colors from '../styles/default/colors';
 
 const moveInLeft = keyframes`
   0% {
@@ -124,13 +125,13 @@ export default class Home extends React.Component {
               <Link to={URLS.SIGN_IN}>
                 <Button
                   size={ButtonSize.Big}
-                  color="#61BD4F"
+                  color={colors.lightGreen}
                   className={buttonAnimation}
                 >
                   <Text
                     component="span"
                     fontSize={TextSize.Big}
-                    color="#fff"
+                    color={colors.white}
                     weight={TextWeight.Medium}
                   >
                     Sign in
@@ -142,13 +143,13 @@ export default class Home extends React.Component {
               <Link to={URLS.SIGN_UP}>
                 <Button
                   size={ButtonSize.Big}
-                  color="#61BD4F"
+                  color={colors.lightGreen}
                   className={buttonAnimation}
                 >
                   <Text
                     component="span"
                     fontSize={TextSize.Big}
-                    color="#fff"
+                    color={colors.white}
                     weight={TextWeight.Medium}
                   >
                     Sign up
