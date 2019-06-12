@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { shallowWithTheme } from '../../../utils/enzymeHelpersWithPassedTheme';
-import { CardList } from './CardList';
+import { List } from './List';
 
 const props = {
   cards: [],
   listName: 'Test list',
 };
 
-describe('<CardList />', () => {
+describe('<List />', () => {
   it('shallow renders without crashing', () => {
-    shallowWithTheme(<CardList {...props} />);
+    shallowWithTheme(<List {...props} />);
   });
 });

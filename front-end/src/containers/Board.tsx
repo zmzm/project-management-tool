@@ -10,9 +10,10 @@ import { Margin } from '../components/core/Margin/Margin';
 import { Button, ButtonSize } from '../components/core/Button/Button';
 
 import { globalCss } from '../styles/global';
-import { CardList } from '../components/core/CardList/CardList';
 import { BoardContent } from '../components/core/BoardContent/BoardContent';
 import { GetBoardInfo } from '../graphql/queries/boardQueries';
+import colors from '../styles/default/colors';
+import { CardList } from './CardList';
 
 globalCss();
 
@@ -61,7 +62,11 @@ export default class Board extends React.Component<{}> {
                   <Button
                     size={ButtonSize.Big}
                     icon={
-                      <Icon name="home" color="white" size={IconSize.Medium} />
+                      <Icon
+                        name="home"
+                        color={colors.white}
+                        size={IconSize.Medium}
+                      />
                     }
                   />
                 </Margin>
@@ -70,7 +75,7 @@ export default class Board extends React.Component<{}> {
                     <Text
                       component="span"
                       fontSize={TextSize.Medium}
-                      color="white"
+                      color={colors.white}
                       weight={TextWeight.Bold}
                     >
                       Boards
@@ -82,7 +87,7 @@ export default class Board extends React.Component<{}> {
                   <Text
                     component="span"
                     fontSize={TextSize.Medium}
-                    color="white"
+                    color={colors.white}
                     weight={TextWeight.Bold}
                   >
                     Profile
@@ -96,7 +101,7 @@ export default class Board extends React.Component<{}> {
                       <Text
                         component="span"
                         fontSize={TextSize.Big}
-                        color="white"
+                        color={colors.white}
                         weight={TextWeight.Bold}
                       >
                         {boardName}
@@ -106,7 +111,7 @@ export default class Board extends React.Component<{}> {
                   <Margin margin="0 0.4rem 0 0">
                     <Button
                       size={ButtonSize.Default}
-                      icon={<Icon name="star_border" color="white" />}
+                      icon={<Icon name="star_border" color={colors.white} />}
                       outline
                     />
                   </Margin>
@@ -114,11 +119,11 @@ export default class Board extends React.Component<{}> {
                   <Margin margin="0 0.4rem 0 0">
                     <Button
                       size={ButtonSize.Default}
-                      icon={<Icon name="android" color="white" />}
+                      icon={<Icon name="android" color={colors.white} />}
                       outline
                     >
                       <Padding padding="0 0 0 1rem">
-                        <Text fontSize={TextSize.Normal} color="white">
+                        <Text fontSize={TextSize.Normal} color={colors.white}>
                           dream-team
                         </Text>
                       </Padding>
