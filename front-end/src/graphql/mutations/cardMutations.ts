@@ -7,6 +7,11 @@ export const CreateCardMutation = gql`
       cardName
       about
       labels
+      comments {
+        id
+        commentText
+        created
+      }
     }
   }
 `;

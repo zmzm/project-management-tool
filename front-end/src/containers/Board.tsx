@@ -135,15 +135,11 @@ export default class Board extends React.Component<{}> {
                 {lists &&
                   lists.length &&
                   lists.map(
-                    (
-                      list: { listName: string; cards: any[]; id: number },
-                      index: string,
-                    ) => (
+                    (list: { listName: string; id: number }, index: string) => (
                       <CardList
                         key={index + '_list_' + boardName}
                         id={list.id}
                         listName={list.listName}
-                        cards={list.cards}
                       />
                     ),
                   )}

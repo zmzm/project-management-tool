@@ -38,6 +38,7 @@ export default class Schema {
       findBoardById: BoardQuery.findById,
 
       findCardById: CardQuery.findById,
+      finCardsByListId: CardQuery.findByListId
     },
     name: 'Query',
   });
