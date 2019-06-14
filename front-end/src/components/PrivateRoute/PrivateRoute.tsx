@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Redirect, Route } from 'react-router';
-import { URLS } from '../../../consts/urls';
+import { URLS } from '../../consts/urls';
 
 export const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -9,7 +9,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
       localStorage.getItem('authToken') ? (
         <Component {...props} />
       ) : (
-        <Redirect to={URLS.INDEX} />
+        <Redirect to={URLS.SIGN_IN} />
       )
     }
   />

@@ -59,6 +59,7 @@ class SignIn extends React.PureComponent<ISignUpProps> {
         },
       })
       .then(res => {
+        StorageHelper.add('authToken', res.data.loginUser.token);
         StorageHelper.add('user', res.data.loginUser.user);
         this.props.history.push({
           pathname: '/home',
