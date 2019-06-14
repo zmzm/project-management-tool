@@ -13,6 +13,7 @@ import { Padding } from '../components/core/Padding/Padding';
 import colors from '../styles/default/colors';
 import { CreateCard } from '../components/core/CreateCard/CreateCard';
 import { GetCardsByList } from '../graphql/queries/cardQueries';
+import { ICONS } from '../consts/icons';
 
 export interface ICardListProps {
   theme?: any;
@@ -77,7 +78,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
               mutation={CreateCardMutation}
               update={this.updateApolloCache(id)}
             >
-              {this.renderSomething(responseCards)}
+              {this.renderContent(responseCards)}
             </Mutation>
           );
         }}
@@ -85,7 +86,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
     );
   }
 
-  public renderSomething = (responseCards: any) => (createCard: any) => {
+  public renderContent = (responseCards: any) => (createCard: any) => {
     const { listName, id } = this.props;
     const { showCardInput } = this.state;
 
@@ -110,11 +111,14 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
           </Margin>
         </Dialog>
         <List listName={listName}>
-          <div style={{ padding: '0 0.7rem 0.7rem', color: '#17394d' }}>
+          <Padding
+            padding="0 0.7rem 0.7rem"
+            style={{ color: colors.veryDarkBlue }}
+          >
             {this.renderCards(responseCards)}
             {showCardInput && (
               <CreateCard
-                handleSubmit={value => {
+                handleSubmit={(value: string) => {
                   createCard({
                     variables: {
                       cardName: value,
@@ -126,14 +130,14 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
                 showForm={this.showNewCardForm}
               />
             )}
-          </div>
+          </Padding>
           <Button
             size={ButtonSize.Default}
             transparent
             block
             icon={
               <Icon
-                name="add"
+                name={ICONS.ADD}
                 color={colors.darkGrayishBlue}
                 size={IconSize.Default}
               />

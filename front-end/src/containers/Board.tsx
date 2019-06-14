@@ -13,6 +13,7 @@ import { globalCss } from '../styles/global';
 import { BoardContent } from '../components/core/BoardContent/BoardContent';
 import { GetBoardInfo } from '../graphql/queries/boardQueries';
 import colors from '../styles/default/colors';
+import { ICONS } from '../consts/icons';
 import { CardList } from './CardList';
 
 globalCss();
@@ -63,7 +64,7 @@ export default class Board extends React.Component<{}> {
                     size={ButtonSize.Big}
                     icon={
                       <Icon
-                        name="home"
+                        name={ICONS.HOME}
                         color={colors.white}
                         size={IconSize.Medium}
                       />
@@ -111,7 +112,9 @@ export default class Board extends React.Component<{}> {
                   <Margin margin="0 0.4rem 0 0">
                     <Button
                       size={ButtonSize.Default}
-                      icon={<Icon name="star_border" color={colors.white} />}
+                      icon={
+                        <Icon name={ICONS.STAR_BORDER} color={colors.white} />
+                      }
                       outline
                     />
                   </Margin>
@@ -119,7 +122,7 @@ export default class Board extends React.Component<{}> {
                   <Margin margin="0 0.4rem 0 0">
                     <Button
                       size={ButtonSize.Default}
-                      icon={<Icon name="android" color={colors.white} />}
+                      icon={<Icon name={ICONS.ANDROID} color={colors.white} />}
                       outline
                     >
                       <Padding padding="0 0 0 1rem">

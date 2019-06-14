@@ -12,6 +12,7 @@ import { Card } from '../components/core/Card/Card';
 import { GetUserInfo } from '../graphql/queries/userQueries';
 import { StorageHelper } from '../utils/localStorage';
 import colors from '../styles/default/colors';
+import { ICONS } from '../consts/icons';
 
 const logoCss = css`
   color: white;
@@ -80,7 +81,7 @@ export default class Home extends React.Component {
                     size={ButtonSize.Big}
                     icon={
                       <Icon
-                        name="home"
+                        name={ICONS.HOME}
                         color={colors.white}
                         size={IconSize.Medium}
                       />

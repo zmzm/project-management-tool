@@ -6,6 +6,7 @@ import { Text, TextSize, TextWeight } from '../Text/Text';
 import { Button, ButtonSize } from '../Button/Button';
 import { Icon, IconSize } from '../Icon/Icon';
 import colors from '../../../styles/default/colors';
+import { ICONS } from '../../../consts/icons';
 
 export interface IListProps {
   theme?: any;
@@ -55,7 +56,7 @@ export class List extends React.Component<IListProps> {
               size={ButtonSize.Default}
               icon={
                 <Icon
-                  name="more_horiz"
+                  name={ICONS.MORE_HORIZ}
                   color={colors.darkGrayishBlue}
                   size={IconSize.Default}
                 />

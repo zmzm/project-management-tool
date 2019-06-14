@@ -7,6 +7,7 @@ import { Margin } from '../Margin/Margin';
 import { Icon, IconSize } from '../Icon/Icon';
 import { Button, ButtonSize } from '../Button/Button';
 import colors from '../../../styles/default/colors';
+import { ICONS } from '../../../consts/icons';
 
 export interface ICardProps {
   cardName: any;
@@ -18,7 +19,7 @@ export interface ICardProps {
 }
 
 const cardWrapper = css`
-  background-color: #fff;
+  background-color: ${colors.white};
   border-radius: 0.3rem;
   box-shadow: 0 1px 0 rgba(9, 45, 66, 0.25);
   margin: 0 0 0.8rem 0;
@@ -83,7 +84,7 @@ export class Card extends React.PureComponent<ICardProps> {
           {commentsCount && commentsCount > 0 ? (
             <div style={{ display: 'flex' }}>
               <Icon
-                name="chat_bubble_outline"
+                name={ICONS.CHAT_BUBBLE}
                 color={colors.grayDark}
                 size={IconSize.Small}
               />

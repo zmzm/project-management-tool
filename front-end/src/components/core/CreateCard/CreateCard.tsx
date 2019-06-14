@@ -9,6 +9,7 @@ import { Button, ButtonSize } from '../Button/Button';
 import { Text, TextSize, TextWeight } from '../Text/Text';
 import { Icon, IconSize } from '../Icon/Icon';
 import colors from '../../../styles/default/colors';
+import { ICONS } from '../../../consts/icons';
 
 export interface ICreateCardProps {
   handleSubmit(value: any): void;
@@ -67,7 +68,7 @@ export class CreateCard extends React.Component<ICreateCardProps> {
               <Icon
                 onClick={showForm(false)}
                 size={IconSize.Big}
-                name="close"
+                name={ICONS.CLOSE}
                 color={colors.grayDark}
               />
             </div>
