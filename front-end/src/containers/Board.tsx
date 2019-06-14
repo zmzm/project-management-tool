@@ -13,6 +13,8 @@ import { globalCss } from '../styles/global';
 import { BoardContent } from '../components/core/BoardContent/BoardContent';
 import { GetBoardInfo } from '../graphql/queries/boardQueries';
 import colors from '../styles/default/colors';
+import { ICONS } from '../consts/icons';
+import ICardList from '../interfaces/CardListInterface';
 import { CardList } from './CardList';
 
 globalCss();
@@ -38,7 +40,7 @@ export default class Board extends React.Component<{}> {
           if (error) return <p>ERROR</p>;
 
           const boardName = data.findBoardById.boardName;
-          const lists = data.findBoardById.lists;
+          const lists = data.findBoardById.lists || [];
 
           return (
             <React.Fragment>
@@ -59,7 +61,9 @@ export default class Board extends React.Component<{}> {
                   <Margin margin="0 0.4rem 0 0">
                     <Button
                       size={ButtonSize.Default}
-                      icon={<Icon name="star_border" color={colors.white} />}
+                      icon={
+                        <Icon name={ICONS.STAR_BORDER} color={colors.white} />
+                      }
                       outline
                     />
                   </Margin>
@@ -67,7 +71,7 @@ export default class Board extends React.Component<{}> {
                   <Margin margin="0 0.4rem 0 0">
                     <Button
                       size={ButtonSize.Default}
-                      icon={<Icon name="android" color={colors.white} />}
+                      icon={<Icon name={ICONS.ANDROID} color={colors.white} />}
                       outline
                     >
                       <Padding padding="0 0 0 1rem">
@@ -82,18 +86,13 @@ export default class Board extends React.Component<{}> {
               <BoardContent>
                 {lists &&
                   lists.length &&
-                  lists.map(
-                    (
-                      list: { listName: string; cards: any[] },
-                      index: string,
-                    ) => (
-                      <CardList
-                        key={index + '_list_' + boardName}
-                        listName={list.listName}
-                        cards={list.cards}
-                      />
-                    ),
-                  )}
+                  lists.map((list: ICardList, index: string) => (
+                    <CardList
+                      key={`${index}_list_${boardName}`}
+                      id={Number.parseInt(list.id)}
+                      listName={list.listName}
+                    />
+                  ))}
               </BoardContent>
             </React.Fragment>
           );

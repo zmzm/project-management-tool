@@ -1,20 +1,24 @@
 import * as React from 'react';
 
+import { Mutation, Query } from 'react-apollo';
 import { Card, ICardProps } from '../components/core/Card/Card';
 import { Text, TextSize, TextWeight } from '../components/core/Text/Text';
 import { Dialog } from '../components/core/Dialog/Dialog';
 import { Margin } from '../components/core/Margin/Margin';
-import { CreateCard } from '../components/core/CreateCard/CreateCard';
+import { CreateCardMutation } from '../graphql/mutations/cardMutations';
 import { List } from '../components/core/List/List';
 import { Button, ButtonSize } from '../components/core/Button/Button';
 import { Icon, IconSize } from '../components/core/Icon/Icon';
 import { Padding } from '../components/core/Padding/Padding';
 import colors from '../styles/default/colors';
+import { CreateCard } from '../components/core/CreateCard/CreateCard';
+import { GetCardsByList } from '../graphql/queries/cardQueries';
+import { ICONS } from '../consts/icons';
 
 export interface ICardListProps {
   theme?: any;
-  cards?: any[];
-  listName?: string;
+  listName: string;
+  id: number;
 }
 
 export interface ICardListState {
@@ -30,8 +34,60 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
     showCardInput: false,
   };
 
+  public updateApolloCache = (id: number) => (cache: any, fetchResult: any) => {
+    const {
+      data: { createCard },
+    } = fetchResult;
+
+    const {
+      finCardsByListId: { cards },
+    } = cache.readQuery({
+      query: GetCardsByList,
+      variables: { id },
+    });
+    cache.writeQuery({
+      query: GetCardsByList,
+      variables: { id },
+      data: {
+        finCardsByListId: {
+          cards: cards.concat([createCard]),
+          __typename: 'CardList',
+        },
+      },
+    });
+  };
+
   public render() {
-    const { listName, cards } = this.props;
+    const { id } = this.props;
+
+    return (
+      <Query
+        query={GetCardsByList}
+        variables={{
+          id: +id,
+        }}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <p>LOADING.....</p>;
+          if (error) return <p>ERROR</p>;
+
+          const responseCards = data.finCardsByListId.cards;
+
+          return (
+            <Mutation
+              mutation={CreateCardMutation}
+              update={this.updateApolloCache(id)}
+            >
+              {this.renderContent(responseCards)}
+            </Mutation>
+          );
+        }}
+      </Query>
+    );
+  }
+
+  public renderContent = (responseCards: any) => (createCard: any) => {
+    const { listName, id } = this.props;
     const { showCardInput } = this.state;
 
     return (
@@ -40,11 +96,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
           onClose={this.handleCloseModal}
           visible={this.state.showDialog}
           title={
-            <Text
-              fontSize={TextSize.Big}
-              weight={TextWeight.Bold}
-              color={colors.veryDarkBlue}
-            >
+            <Text fontSize={TextSize.Big} weight={TextWeight.Bold}>
               {this.state.card.cardName}
             </Text>
           }
@@ -55,22 +107,33 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
           </Margin>
         </Dialog>
         <List listName={listName}>
-          <div style={{ padding: '0 0.7rem 0.7rem', color: '#17394d' }}>
-            {this.renderCards(cards)}
+          <Padding
+            padding="0 0.7rem 0.7rem"
+            style={{ color: colors.veryDarkBlue }}
+          >
+            {this.renderCards(responseCards)}
             {showCardInput && (
               <CreateCard
-                handleSubmit={this.handleSubmit}
+                handleSubmit={(value: string) => {
+                  createCard({
+                    variables: {
+                      cardName: value,
+                      about: '',
+                      listId: id,
+                    },
+                  });
+                }}
                 showForm={this.showNewCardForm}
               />
             )}
-          </div>
+          </Padding>
           <Button
             size={ButtonSize.Default}
             transparent
             block
             icon={
               <Icon
-                name="add"
+                name={ICONS.ADD}
                 color={colors.darkGrayishBlue}
                 size={IconSize.Default}
               />
@@ -90,13 +153,13 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
         </List>
       </React.Fragment>
     );
-  }
+  };
 
-  private renderCards = (cards: any) => {
+  public renderCards = (cards: any) => {
     if (cards.length > 0) {
       return cards.map((card: any, index: number) => (
         <Card
-          key={card.cardName + index}
+          key={`${card.cardName}_${index}`}
           cardName={
             <Text fontSize={TextSize.Small} weight={TextWeight.Medium}>
               {card.cardName}
@@ -113,21 +176,17 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
     return null;
   };
 
-  private handleCloseModal = () => {
+  public handleCloseModal = () => {
     this.setState({
       showDialog: false,
     });
   };
 
-  private handleSubmit = value => {
-    console.log(value);
-  };
-
-  private toggleDilog = (value: boolean, card: ICardProps) => () => {
+  public toggleDilog = (value: boolean, card: ICardProps) => () => {
     this.setState({ showDialog: value, card: card });
   };
 
-  private showNewCardForm = (value: boolean) => () => {
+  public showNewCardForm = (value: boolean) => () => {
     this.setState({ showCardInput: value });
   };
 }

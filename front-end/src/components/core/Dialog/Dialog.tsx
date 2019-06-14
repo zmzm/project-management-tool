@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom';
 import { css } from 'emotion';
 import { Icon, IconSize } from '../Icon/Icon';
 import colors from '../../../styles/default/colors';
+import { ICONS } from '../../../consts/icons';
 
 const dialogOverlayCss = css`
   z-index: 3;
@@ -69,7 +70,7 @@ export class Dialog extends React.PureComponent<IDialogProps> {
                 <Icon
                   onClick={onClose}
                   size={IconSize.Medium}
-                  name="close"
+                  name={ICONS.CLOSE}
                   color={colors.grayDark}
                 />
               </div>

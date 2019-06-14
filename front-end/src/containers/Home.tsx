@@ -51,65 +51,63 @@ export default class Home extends React.Component {
           if (error) return <p>ERROR</p>;
 
           const team = data.findUserById.team;
-          const teamBoards = data.findUserById.team.boards;
+          const teamBoards = data.findUserById.team.boards || [];
 
           return (
-            <React.Fragment>
-              <PageSection className={pageSectionCss}>
-                <Padding padding="3rem 0 1rem 3rem">
-                  <Text
-                    component="h1"
-                    fontSize="2"
-                    color={colors.veryDarkBlue}
-                    weight={TextWeight.Bold}
-                  >
-                    Personal boards
-                  </Text>
-                </Padding>
-                <PageSection className={boardsRowCss}>
-                  <Card
-                    className={cardCss}
-                    cardName={
-                      <Text fontSize={TextSize.Big} weight={TextWeight.Bold}>
-                        Board 1
-                      </Text>
-                    }
-                  />
-                </PageSection>
-                {team.teamName && (
-                  <React.Fragment>
-                    <Padding padding="3rem 0 1rem 3rem">
-                      <Text
-                        component="h1"
-                        fontSize="2"
-                        color={colors.veryDarkBlue}
-                        weight={TextWeight.Bold}
-                      >
-                        <em>{team.teamName}</em> boards
-                      </Text>
-                    </Padding>
-                    <PageSection className={boardsRowCss}>
-                      {teamBoards &&
-                        teamBoards.length &&
-                        teamBoards.map((board, index) => (
-                          <Card
-                            key={index + board.boardName}
-                            className={cardCss}
-                            cardName={
-                              <Text
-                                fontSize={TextSize.Big}
-                                weight={TextWeight.Bold}
-                              >
-                                {board.boardName}
-                              </Text>
-                            }
-                          />
-                        ))}
-                    </PageSection>
-                  </React.Fragment>
-                )}
+            <PageSection className={pageSectionCss}>
+              <Padding padding="3rem 0 1rem 3rem">
+                <Text
+                  component="h1"
+                  fontSize="2"
+                  color={colors.veryDarkBlue}
+                  weight={TextWeight.Bold}
+                >
+                  Personal boards
+                </Text>
+              </Padding>
+              <PageSection className={boardsRowCss}>
+                <Card
+                  className={cardCss}
+                  cardName={
+                    <Text fontSize={TextSize.Big} weight={TextWeight.Bold}>
+                      Board 1
+                    </Text>
+                  }
+                />
               </PageSection>
-            </React.Fragment>
+              {team.teamName && (
+                <React.Fragment>
+                  <Padding padding="3rem 0 1rem 3rem">
+                    <Text
+                      component="h1"
+                      fontSize="2"
+                      color={colors.veryDarkBlue}
+                      weight={TextWeight.Bold}
+                    >
+                      <em>{team.teamName}</em> boards
+                    </Text>
+                  </Padding>
+                  <PageSection className={boardsRowCss}>
+                    {teamBoards &&
+                      teamBoards.length &&
+                      teamBoards.map((board, index) => (
+                        <Card
+                          key={`${board.boardName}_${index}`}
+                          className={cardCss}
+                          cardName={
+                            <Text
+                              fontSize={TextSize.Big}
+                              weight={TextWeight.Bold}
+                            >
+                              {board.boardName}
+                            </Text>
+                          }
+                        />
+                      ))}
+                  </PageSection>
+                </React.Fragment>
+              )}
+            </PageSection>
           );
         }}
       </Query>
