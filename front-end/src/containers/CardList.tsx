@@ -33,9 +33,31 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
     showCardInput: false,
   };
 
+  public updateApolloCache = (id: number) => (cache: any, fetchResult: any) => {
+    const {
+      data: { createCard },
+    } = fetchResult;
+
+    const {
+      finCardsByListId: { cards },
+    } = cache.readQuery({
+      query: GetCardsByList,
+      variables: { id: +id },
+    });
+    cache.writeQuery({
+      query: GetCardsByList,
+      variables: { id: +id },
+      data: {
+        finCardsByListId: {
+          cards: cards.concat([createCard]),
+          __typename: 'CardList',
+        },
+      },
+    });
+  };
+
   public render() {
-    const { listName, id } = this.props;
-    const { showCardInput } = this.state;
+    const { id } = this.props;
 
     return (
       <Query
@@ -53,95 +75,9 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
           return (
             <Mutation
               mutation={CreateCardMutation}
-              update={(cache, { data: { createCard } }) => {
-                const {
-                  finCardsByListId: { cards },
-                } = cache.readQuery({
-                  query: GetCardsByList,
-                  variables: { id: +id },
-                });
-                cache.writeQuery({
-                  query: GetCardsByList,
-                  variables: { id: +id },
-                  data: {
-                    finCardsByListId: {
-                      cards: cards.concat([createCard]),
-                      __typename: 'CardList',
-                    },
-                  },
-                });
-              }}
+              update={this.updateApolloCache(id)}
             >
-              {createCard => {
-                return (
-                  <React.Fragment>
-                    <Dialog
-                      onClose={this.handleCloseModal}
-                      visible={this.state.showDialog}
-                      title={
-                        <Text
-                          fontSize={TextSize.Big}
-                          weight={TextWeight.Bold}
-                          color={colors.veryDarkBlue}
-                        >
-                          {this.state.card.cardName}
-                        </Text>
-                      }
-                      fullScreen
-                    >
-                      <Margin margin="2rem">
-                        <Text fontSize={TextSize.Medium}>
-                          {this.state.card.about}
-                        </Text>
-                      </Margin>
-                    </Dialog>
-                    <List listName={listName}>
-                      <div
-                        style={{ padding: '0 0.7rem 0.7rem', color: '#17394d' }}
-                      >
-                        {this.renderCards(responseCards)}
-                        {showCardInput && (
-                          <CreateCard
-                            handleSubmit={value => {
-                              createCard({
-                                variables: {
-                                  cardName: value,
-                                  about: '',
-                                  listId: +id,
-                                },
-                              });
-                            }}
-                            showForm={this.showNewCardForm}
-                          />
-                        )}
-                      </div>
-                      <Button
-                        size={ButtonSize.Default}
-                        transparent
-                        block
-                        icon={
-                          <Icon
-                            name="add"
-                            color={colors.darkGrayishBlue}
-                            size={IconSize.Default}
-                          />
-                        }
-                        onClick={this.showNewCardForm(true)}
-                      >
-                        <Padding padding="0 13rem 0 0">
-                          <Text
-                            fontSize={TextSize.Medium}
-                            color={colors.darkGrayishBlue}
-                            weight={TextWeight.Medium}
-                          >
-                            Add a card
-                          </Text>
-                        </Padding>
-                      </Button>
-                    </List>
-                  </React.Fragment>
-                );
-              }}
+              {this.renderSomething(responseCards)}
             </Mutation>
           );
         }}
@@ -149,7 +85,77 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
     );
   }
 
-  private renderCards = (cards: any) => {
+  public renderSomething = (responseCards: any) => (createCard: any) => {
+    const { listName, id } = this.props;
+    const { showCardInput } = this.state;
+
+    return (
+      <React.Fragment>
+        <Dialog
+          onClose={this.handleCloseModal}
+          visible={this.state.showDialog}
+          title={
+            <Text
+              fontSize={TextSize.Big}
+              weight={TextWeight.Bold}
+              color={colors.veryDarkBlue}
+            >
+              {this.state.card.cardName}
+            </Text>
+          }
+          fullScreen
+        >
+          <Margin margin="2rem">
+            <Text fontSize={TextSize.Medium}>{this.state.card.about}</Text>
+          </Margin>
+        </Dialog>
+        <List listName={listName}>
+          <div style={{ padding: '0 0.7rem 0.7rem', color: '#17394d' }}>
+            {this.renderCards(responseCards)}
+            {showCardInput && (
+              <CreateCard
+                handleSubmit={value => {
+                  createCard({
+                    variables: {
+                      cardName: value,
+                      about: '',
+                      listId: +id,
+                    },
+                  });
+                }}
+                showForm={this.showNewCardForm}
+              />
+            )}
+          </div>
+          <Button
+            size={ButtonSize.Default}
+            transparent
+            block
+            icon={
+              <Icon
+                name="add"
+                color={colors.darkGrayishBlue}
+                size={IconSize.Default}
+              />
+            }
+            onClick={this.showNewCardForm(true)}
+          >
+            <Padding padding="0 13rem 0 0">
+              <Text
+                fontSize={TextSize.Medium}
+                color={colors.darkGrayishBlue}
+                weight={TextWeight.Medium}
+              >
+                Add a card
+              </Text>
+            </Padding>
+          </Button>
+        </List>
+      </React.Fragment>
+    );
+  };
+
+  public renderCards = (cards: any) => {
     if (cards.length > 0) {
       return cards.map((card: any, index: number) => (
         <Card
@@ -170,17 +176,17 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
     return null;
   };
 
-  private handleCloseModal = () => {
+  public handleCloseModal = () => {
     this.setState({
       showDialog: false,
     });
   };
 
-  private toggleDilog = (value: boolean, card: ICardProps) => () => {
+  public toggleDilog = (value: boolean, card: ICardProps) => () => {
     this.setState({ showDialog: value, card: card });
   };
 
-  private showNewCardForm = (value: boolean) => () => {
+  public showNewCardForm = (value: boolean) => () => {
     this.setState({ showCardInput: value });
   };
 }
