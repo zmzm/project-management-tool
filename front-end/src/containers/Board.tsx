@@ -88,7 +88,7 @@ export default class Board extends React.Component<{}> {
                   lists.length &&
                   lists.map((list: ICardList, index: string) => (
                     <CardList
-                      key={index + '_list_' + boardName}
+                      key={`${index}_list_${boardName}`}
                       id={Number.parseInt(list.id)}
                       listName={list.listName}
                     />

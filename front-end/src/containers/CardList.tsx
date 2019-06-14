@@ -159,7 +159,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
     if (cards.length > 0) {
       return cards.map((card: any, index: number) => (
         <Card
-          key={card.cardName + index}
+          key={`${card.cardName}_${index}`}
           cardName={
             <Text fontSize={TextSize.Small} weight={TextWeight.Medium}>
               {card.cardName}

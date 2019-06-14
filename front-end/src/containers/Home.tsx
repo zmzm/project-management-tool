@@ -92,7 +92,7 @@ export default class Home extends React.Component {
                       teamBoards.length &&
                       teamBoards.map((board, index) => (
                         <Card
-                          key={index + board.boardName}
+                          key={`${board.boardName}_${index}`}
                           className={cardCss}
                           cardName={
                             <Text
