@@ -14,6 +14,7 @@ import { BoardContent } from '../components/core/BoardContent/BoardContent';
 import { GetBoardInfo } from '../graphql/queries/boardQueries';
 import colors from '../styles/default/colors';
 import { ICONS } from '../consts/icons';
+import ICardList from '../interfaces/CardListInterface';
 import { CardList } from './CardList';
 
 globalCss();
@@ -39,7 +40,7 @@ export default class Board extends React.Component<{}> {
           if (error) return <p>ERROR</p>;
 
           const boardName = data.findBoardById.boardName;
-          const lists = data.findBoardById.lists;
+          const lists = data.findBoardById.lists || [];
 
           return (
             <React.Fragment>
@@ -85,15 +86,13 @@ export default class Board extends React.Component<{}> {
               <BoardContent>
                 {lists &&
                   lists.length &&
-                  lists.map(
-                    (list: { listName: string; id: number }, index: string) => (
-                      <CardList
-                        key={index + '_list_' + boardName}
-                        id={list.id}
-                        listName={list.listName}
-                      />
-                    ),
-                  )}
+                  lists.map((list: ICardList, index: string) => (
+                    <CardList
+                      key={index + '_list_' + boardName}
+                      id={Number.parseInt(list.id)}
+                      listName={list.listName}
+                    />
+                  ))}
               </BoardContent>
             </React.Fragment>
           );

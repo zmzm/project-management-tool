@@ -51,7 +51,7 @@ export default class Home extends React.Component {
           if (error) return <p>ERROR</p>;
 
           const team = data.findUserById.team;
-          const teamBoards = data.findUserById.team.boards;
+          const teamBoards = data.findUserById.team.boards || [];
 
           return (
             <PageSection className={pageSectionCss}>

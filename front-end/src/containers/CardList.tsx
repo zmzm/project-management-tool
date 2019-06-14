@@ -43,11 +43,11 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
       finCardsByListId: { cards },
     } = cache.readQuery({
       query: GetCardsByList,
-      variables: { id: +id },
+      variables: { id },
     });
     cache.writeQuery({
       query: GetCardsByList,
-      variables: { id: +id },
+      variables: { id },
       data: {
         finCardsByListId: {
           cards: cards.concat([createCard]),
@@ -96,11 +96,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
           onClose={this.handleCloseModal}
           visible={this.state.showDialog}
           title={
-            <Text
-              fontSize={TextSize.Big}
-              weight={TextWeight.Bold}
-              color={colors.veryDarkBlue}
-            >
+            <Text fontSize={TextSize.Big} weight={TextWeight.Bold}>
               {this.state.card.cardName}
             </Text>
           }
@@ -123,7 +119,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
                     variables: {
                       cardName: value,
                       about: '',
-                      listId: +id,
+                      listId: id,
                     },
                   });
                 }}
