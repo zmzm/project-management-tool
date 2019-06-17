@@ -5,9 +5,11 @@ import {
   GraphQLInt,
   GraphQLObjectType,
   GraphQLString,
+  GraphQLList,
 } from 'graphql';
 import TeamType from './teamType';
 import Context from '../../context';
+import BoardType from './boardType';
 
 // tslint:disable-next-line
 const UserType = new GraphQLObjectType({
@@ -21,6 +23,13 @@ const UserType = new GraphQLObjectType({
     roleId: { type: GraphQLInt },
     teamId: { type: GraphQLInt },
     updated: { type: GraphQLString },
+    personalBoards: {
+      type: new GraphQLList(BoardType),
+      async resolve(source: User, args: any, ctx: Context<any>) {
+        const boards = await ctx.Services.BoardService.findByOwnerId(source.getId());
+        return boards;
+      }
+    },
     team: {
       type: TeamType,
       async resolve(source: User, args: any, ctx: Context<any>) {

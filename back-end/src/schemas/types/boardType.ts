@@ -18,6 +18,7 @@ const BoardType = new GraphQLObjectType({
     id: { type: GraphQLID },
     isClosed: { type: GraphQLBoolean },
     teamId: { type: GraphQLInt },
+    ownerId: { type: GraphQLInt },
     lists: {
       type: new GraphQLList(ListType),
       async resolve(source: Board, args: any, ctx: Context<any>) {
