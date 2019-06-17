@@ -1,10 +1,18 @@
 import colors from './colors';
 
-const { black, blueDark, blueLight, grayLight, gray, primary, white } = colors;
+const {
+  black,
+  blueDark,
+  blueLight,
+  grayLight,
+  gray,
+  strongBlue,
+  white,
+} = colors;
 
 const defaultTheme = {
   body: {
-    default: primary,
+    default: strongBlue,
   },
   button: {
     background: {

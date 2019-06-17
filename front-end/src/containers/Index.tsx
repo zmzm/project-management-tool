@@ -125,7 +125,7 @@ export default class Home extends React.Component {
               <Link to={URLS.SIGN_IN}>
                 <Button
                   size={ButtonSize.Big}
-                  color={colors.lightGreen}
+                  color={colors.limeGreen}
                   className={buttonAnimation}
                 >
                   <Text
@@ -143,7 +143,7 @@ export default class Home extends React.Component {
               <Link to={URLS.SIGN_UP}>
                 <Button
                   size={ButtonSize.Big}
-                  color={colors.lightGreen}
+                  color={colors.limeGreen}
                   className={buttonAnimation}
                 >
                   <Text

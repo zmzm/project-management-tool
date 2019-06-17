@@ -10,8 +10,13 @@ export const GetUserInfo = gql`
       team {
         teamName
         boards {
+          id
           boardName
         }
+      }
+      personalBoards {
+        id
+        boardName
       }
     }
   }
