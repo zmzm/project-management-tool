@@ -1,33 +1,35 @@
 import * as React from 'react';
 
-import { css } from 'emotion';
+import { css, cx } from 'emotion';
 
 import { Text, TextSize, TextWeight } from '../Text/Text';
 import { Margin } from '../Margin/Margin';
 import { Icon, IconSize } from '../Icon/Icon';
 import { Button, ButtonSize } from '../Button/Button';
+import colors from '../../../styles/default/colors';
+import { ICONS } from '../../../consts/icons';
 
 export interface ICardProps {
-  cardName: string;
-  colorMark?: any[];
-  detail?: string;
-  partisipants?: any[];
+  cardName: any;
+  labels?: any[];
   commentsCount?: number;
+  className?: string;
+  assignedUsers?: any[];
   onClick?(): any;
 }
 
 const cardWrapper = css`
-  background-color: #fff;
+  background-color: ${colors.white};
   border-radius: 0.3rem;
   box-shadow: 0 1px 0 rgba(9, 45, 66, 0.25);
   margin: 0 0 0.8rem 0;
   max-width: 30rem;
-  min-height: 2rem;
+  min-height: 3.5rem;
   padding: 0.6rem 0.8rem 0.2rem;
 `;
 
-const cardLabelCss = (colorMark?: any) => css`
-  background-color: ${colorMark};
+const cardLabelCss = (labelColor?: any) => css`
+  background-color: ${labelColor};
   border-radius: 0.5rem;
   display: block;
   float: left;
@@ -47,32 +49,29 @@ const labelWrapper = css`
 const bagesWrapper = css`
   min-height: 3rem;
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
   align-items: center;
   margin-bottom: 0.4rem;
-`;
-
-const partisipantsWrapper = css`
-  display: flex;
-  margin-left: auto;
 `;
 
 export class Card extends React.PureComponent<ICardProps> {
   public render() {
     const {
       cardName,
-      colorMark,
+      labels,
       commentsCount,
       onClick,
-      partisipants,
+      className,
+      assignedUsers,
     } = this.props;
 
     return (
-      <div className={cardWrapper} onClick={onClick}>
+      <div className={cx(cardWrapper, className)} onClick={onClick}>
         <Margin margin="0 0 0.4rem">
-          {colorMark && colorMark.length && (
+          {labels && labels.length && (
             <div className={labelWrapper}>
-              {colorMark.map((color, index) => (
+              {labels.map((color, index) => (
                 <span key={index} className={cardLabelCss(color)}>
                   &nbsp;
                 </span>
@@ -80,36 +79,29 @@ export class Card extends React.PureComponent<ICardProps> {
             </div>
           )}
         </Margin>
-        <Margin margin="0 0 0.4rem">
-          <Text fontSize={TextSize.Small} weight={TextWeight.Medium}>
-            {cardName}
-          </Text>
-        </Margin>
+        <Margin margin="0 0 0.4rem">{cardName}</Margin>
         <div className={bagesWrapper}>
-          <Margin margin="0 0.5rem 0 0">
-            <Icon name="visibility" color="gray" size={IconSize.Small} />
-          </Margin>
-          {'  '}
-          {commentsCount && (
-            <React.Fragment>
+          {commentsCount && commentsCount > 0 ? (
+            <div style={{ display: 'flex' }}>
               <Icon
-                name="chat_bubble_outline"
-                color="gray"
+                name={ICONS.CHAT_BUBBLE}
+                color={colors.grayDark}
                 size={IconSize.Small}
               />
               <Text fontSize={TextSize.Small} weight={TextWeight.Medium}>
                 {commentsCount}
               </Text>
-            </React.Fragment>
-          )}
-          <div className={partisipantsWrapper}>
-            {partisipants &&
-              partisipants.map((user, index) => (
+            </div>
+          ) : null}
+          <div style={{ display: 'flex' }}>
+            {assignedUsers &&
+              assignedUsers.length > 0 &&
+              assignedUsers.map((user, index) => (
                 <Button key={index} size={ButtonSize.Medium} transparent>
                   <Text
                     component="span"
                     fontSize={TextSize.Small}
-                    color="#17394d"
+                    color={colors.veryDarkBlue}
                     weight={TextWeight.Bold}
                   >
                     {user}

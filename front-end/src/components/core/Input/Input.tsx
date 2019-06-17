@@ -45,10 +45,10 @@ const inputCss = ({ input }, variant: string, disabled: any) => css`
   background-color: ${input[variant].bg};
   border: none;
   border-radius: 0.3rem;
-  padding: 1rem;
+  padding: 0.5rem;
   ${disabled && disableStyle}
   :: placeholder {
-    color: #fff;
+    color: #6b778c;
     opacity: 0.7;
   }
 `;

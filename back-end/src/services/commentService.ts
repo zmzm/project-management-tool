@@ -14,4 +14,16 @@ export default class CommentService extends BaseService<Comment, RawComment> {
   public getRepository(): BaseRepository<Comment, RawComment> {
     return this.repo;
   }
+
+    /**
+   * Find comments by card id
+   *
+   * @param {cardId} number
+   * @returns {Promise<Comment[]>}
+   * @memberof CommentService
+   */
+  public async findByCardId(listId: number): Promise<Comment[]> {
+    const comments = await this.repo.findByQuery({ card_id: listId });
+    return comments.map((comment) => new Comment(comment));
+  }
 }

@@ -9,8 +9,9 @@ const contentWrapper = css`
   height: 100%;
   white-space: nowrap;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: auto;
   margin-left: 0.5rem;
+  display: flex;
 `;
 
 export class BoardContent extends React.PureComponent<{}> {

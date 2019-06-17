@@ -12,6 +12,7 @@ import { Text, TextWeight } from '../components/core/Text/Text';
 import { signupValidationSchema } from '../components/core/Forms/SignUp/Validation';
 import { Margin } from '../components/core/Margin/Margin';
 import { RegisterUser } from '../graphql/mutations/userMutations';
+import colors from '../styles/default/colors';
 
 export interface ISignUpProps {
   mutate?: any;
@@ -32,7 +33,7 @@ class SignUp extends React.PureComponent<ISignUpProps> {
             <Text
               component="h1"
               fontSize="4.5"
-              color="#fff"
+              color={colors.white}
               weight={TextWeight.Bold}
             >
               Create Account

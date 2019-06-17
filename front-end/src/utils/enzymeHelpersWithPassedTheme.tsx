@@ -2,7 +2,7 @@ import * as React from 'react';
 import { mount, render, shallow } from 'enzyme';
 import { channel, createBroadcast } from 'emotion-theming';
 import * as PropTypes from 'prop-types';
-import defaultTheme from '../themes/default';
+import defaultTheme from '../styles/default';
 
 const broadcast = createBroadcast(defaultTheme);
 

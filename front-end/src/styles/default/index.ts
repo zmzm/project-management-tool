@@ -6,14 +6,13 @@ const {
   blueLight,
   grayLight,
   gray,
-  primary,
-  rgbWhite,
-  secondary,
+  strongBlue,
+  white,
 } = colors;
 
 const defaultTheme = {
   body: {
-    default: primary,
+    default: strongBlue,
   },
   button: {
     background: {
@@ -47,19 +46,19 @@ const defaultTheme = {
     inverted: {
       bg: 'palevioletred',
       border: '2px solid palevioletred',
-      textColor: secondary,
+      textColor: white,
     },
   },
   modalWindow: {
     // modal window background set through rgba property, so it's needed to use rgb color(it
     // looks like the most convinient way to set opacity)
-    color: rgbWhite,
+    color: white,
     opacity: '0.7',
   },
   spinner: {
     bg: blueLight,
     roller: blueDark,
-    stub: secondary,
+    stub: white,
   },
 };
 

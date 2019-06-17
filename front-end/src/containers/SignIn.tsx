@@ -11,9 +11,12 @@ import { Padding } from '../components/core/Padding/Padding';
 import { Text, TextWeight } from '../components/core/Text/Text';
 import { signinValidationSchema } from '../components/core/Forms/SignIn/Validation';
 import { LogInUser } from '../graphql/mutations/userMutations';
+import { StorageHelper } from '../utils/localStorage';
+import colors from '../styles/default/colors';
 
 export interface ISignUpProps {
   mutate?: any;
+  history?: any;
 }
 
 class SignIn extends React.PureComponent<ISignUpProps> {
@@ -30,7 +33,7 @@ class SignIn extends React.PureComponent<ISignUpProps> {
             <Text
               component="h1"
               fontSize="4.5"
-              color="#fff"
+              color={colors.white}
               weight={TextWeight.Bold}
             >
               Log in to Huello
@@ -55,8 +58,17 @@ class SignIn extends React.PureComponent<ISignUpProps> {
           password: values.password,
         },
       })
-      .then(res => console.log(res))
-      .catch(err => console.log(err.graphQLErrors.map(error => error.message)));
+      .then(res => {
+        StorageHelper.add('authToken', res.data.loginUser.token);
+        StorageHelper.add('user', res.data.loginUser.user);
+        this.props.history.push({
+          pathname: '/home',
+          state: { user: res.data.loginUser.user },
+        });
+      })
+      .catch(err => {
+        console.log(err.graphQLErrors);
+      });
   };
 }
 

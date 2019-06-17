@@ -4,14 +4,14 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql';
+import DateType from './dateType';
 
-// tslint:disable-next-line
 const CommentType = new GraphQLObjectType({
   description: 'A single comment.',
   fields: {
     cardId: { type: GraphQLInt },
     commentText: { type: GraphQLString },
-    created: { type: GraphQLString },
+    created: { type: DateType },
     id: { type: GraphQLID },
     userId: { type: GraphQLInt },
   },

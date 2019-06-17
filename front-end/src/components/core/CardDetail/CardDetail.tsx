@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { css } from 'emotion';
 import { Text, TextSize, TextWeight } from '../Text/Text';
-import { ICardProps } from '../Card/Card';
 import { Button, ButtonSize } from '../Button/Button';
 import { Margin } from '../Margin/Margin';
 import { Input, InputTypes, InputVariants } from '../Input/Input';
+import ICard from '../../../interfaces/ICard';
 
 export interface ICardDetailProps {
-  card: ICardProps;
+  card: ICard;
 }
 
 const detailWrapper = css`
@@ -37,36 +37,34 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
     return (
       <div className={detailWrapper}>
         <div className={bagesWrapper}>
-          {card.partisipants && (
-            <div className={partisipantsWrapper}>
-              <Text
-                fontSize={TextSize.Medium}
-                weight={TextWeight.Medium}
-                color="#6b808c"
-              >
-                PARTISIPANTS
-              </Text>
-              <Margin margin="2rem 0">
-                <div className={partisipantsContent}>
-                  {card.partisipants.map((user, index) => (
-                    <Margin key={index} margin="0 0.5rem 0 0">
-                      <Button size={ButtonSize.Default} color="#dfe3e6">
-                        <Text
-                          component="span"
-                          fontSize={TextSize.Medium}
-                          color="#17394d"
-                          weight={TextWeight.Bold}
-                        >
-                          {user}
-                        </Text>
-                      </Button>
-                    </Margin>
-                  ))}
-                </div>
-              </Margin>
-            </div>
-          )}
-          {card.colorMark && (
+          <div className={partisipantsWrapper}>
+            <Text
+              fontSize={TextSize.Medium}
+              weight={TextWeight.Medium}
+              color="#6b808c"
+            >
+              PARTISIPANTS
+            </Text>
+            <Margin margin="2rem 0">
+              <div className={partisipantsContent}>
+                {card.partisipants.map((user, index) => (
+                  <Margin key={index} margin="0 0.5rem 0 0">
+                    <Button size={ButtonSize.Default} color="#dfe3e6">
+                      <Text
+                        component="span"
+                        fontSize={TextSize.Medium}
+                        color="#17394d"
+                        weight={TextWeight.Bold}
+                      >
+                        {user}
+                      </Text>
+                    </Button>
+                  </Margin>
+                ))}
+              </div>
+            </Margin>
+          </div>
+          {card.labels && (
             <Margin margin="0 0 0 4rem">
               <Text
                 fontSize={TextSize.Medium}
@@ -77,12 +75,11 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
               </Text>
               <Margin margin="2rem 0">
                 <div className={partisipantsContent}>
-                  {card.colorMark &&
-                    card.colorMark.map((mark, index) => (
-                      <Margin key={index} margin="0 0.5rem 0 0">
-                        <Button size={ButtonSize.Default} color={mark} />
-                      </Margin>
-                    ))}
+                  {card.labels.map((mark, index) => (
+                    <Margin key={index} margin="0 0.5rem 0 0">
+                      <Button size={ButtonSize.Default} color={mark} />
+                    </Margin>
+                  ))}
                 </div>
               </Margin>
             </Margin>
@@ -100,7 +97,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
             <Input
               name="detail-info"
               type={InputTypes.TextArea}
-              value={card.detail}
+              value={card.about}
               placeholder="Type something"
               variant={InputVariants.Default}
               onChange={value => console.log(value)}

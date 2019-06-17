@@ -46,7 +46,8 @@ const buttonCss = (
   border: none;
   background-color: ${color ? color : button.background.default};
   ${outline && `background-color: ${button.background.outline};`}
-  ${transparent && `background-color: ${button.background.transparent};`}
+  ${transparent &&
+    `background-color: ${button.background.transparent};`}
 
   &[disabled] {
     background-color: ${button.background.disabled};

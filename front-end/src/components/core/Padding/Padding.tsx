@@ -6,14 +6,18 @@ const paddingCss = (padding?: string) => css`
   ${padding ? `padding: ${padding};` : null}
 `;
 
-export interface IPaddingProps {
+export interface IPaddingProps extends React.HTMLAttributes<HTMLDivElement> {
   padding?: string;
 }
 
 export class Padding extends React.PureComponent<IPaddingProps> {
   public render() {
-    const { children, padding } = this.props;
+    const { children, padding, ...rest } = this.props;
 
-    return <div className={paddingCss(padding)}>{children}</div>;
+    return (
+      <div className={paddingCss(padding)} {...rest}>
+        {children}
+      </div>
+    );
   }
 }

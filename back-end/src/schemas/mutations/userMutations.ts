@@ -1,12 +1,7 @@
-import {
-  GraphQLID,
-  GraphQLInt,
-  GraphQLNonNull,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLID, GraphQLInt, GraphQLNonNull, GraphQLString } from 'graphql';
 import Context from '../../context';
 import { User } from '../../models/userModel';
-import SignUpResponseType from '../types/signUpResponseType';
+import AuthResponseType from '../types/authResponseType';
 import UserType from '../types/userType';
 import { AppError, ErrorCodes, ValidationError } from './../../errors';
 
@@ -17,22 +12,26 @@ const createUser = {
     lastName: { type: GraphQLString },
     password: { type: GraphQLString },
   },
-  type: SignUpResponseType,
+  type: AuthResponseType,
   async resolve(root: any, args: any, ctx: Context<any>) {
-    const hashedPassword = await ctx.Services.UserService.hashPassword(args.password);
-    const userAttributes = Object.assign({}, args, { password: hashedPassword });
+    const hashedPassword = await ctx.Services.UserService.hashPassword(
+      args.password,
+    );
+    const userAttributes = Object.assign({}, args, {
+      password: hashedPassword,
+    });
     let result;
 
     const userModel = new User(userAttributes, false);
     userModel.setRoleId(2);
 
-    const fieldsToReturn = Object.keys(userModel.toDatabaseObject());
     try {
-      result = await ctx.Services.UserService.create(userModel, fieldsToReturn);
-      const returnedFields = result[0];
-      const jwt = await ctx.Services.UserService.generateJwt(returnedFields.email);
+      result = await ctx.Services.UserService.create(userModel);
+      const jwt = await ctx.Services.UserService.generateJwt(
+        result.email,
+      );
 
-      return Object.assign(new User(returnedFields), { token: jwt });
+      return Object.assign(new User(result), { token: jwt });
     } catch (err) {
       if (err.code === ErrorCodes.DUPLICATE_ERROR) {
         throw new ValidationError('User with such email already exists', err);
@@ -75,11 +74,16 @@ const login = {
     email: { type: GraphQLString },
     password: { type: GraphQLString },
   },
-  type: UserType,
+  type: AuthResponseType,
   async resolve(root: any, args: any, ctx: Context<any>): Promise<User> {
     try {
-      const user = await ctx.Services.UserService.login(args.email, args.password);
-      return user;
+      const user = await ctx.Services.UserService.login(
+        args.email,
+        args.password,
+      );
+      const jwt = await ctx.Services.UserService.generateJwt(user.Email);
+
+      return Object.assign(user, { token: jwt });
     } catch (err) {
       throw err;
     }

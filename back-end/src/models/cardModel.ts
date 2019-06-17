@@ -18,6 +18,8 @@ export class RawCard {
 
   public list_id?: number;
 
+  public labels?: string[];
+
   public created_at?: Date;
 
   constructor(builder: Card) {
@@ -26,6 +28,7 @@ export class RawCard {
     this.about = builder.About;
     this.user_id = builder.UserId;
     this.list_id = builder.ListId;
+    this.labels =  builder.Labels;
     this.created_at = builder.CreatedAt;
   }
 }
@@ -46,6 +49,8 @@ export class Card implements IBaseModel {
   private userId?: number;
 
   private listId?: number;
+
+  private labels?: string[];
 
   private created?: Date;
 
@@ -79,6 +84,10 @@ export class Card implements IBaseModel {
     return this.listId as number;
   }
 
+  public get Labels(): string[] {
+    return this.labels as string[];
+  }
+
   public get CreatedAt(): Date {
     return this.created as Date;
   }
@@ -108,6 +117,11 @@ export class Card implements IBaseModel {
     return this;
   }
 
+  public setLabels(labels: string[]): Card {
+    this.labels = labels;
+    return this;
+  }
+
   public setCreatedAt(createdAt: Date): Card {
     this.created = createdAt;
     return this;
@@ -127,6 +141,7 @@ export class Card implements IBaseModel {
       this.setAbout(attributes.about);
       this.setUserId(attributes.userId);
       this.setListId(attributes.listId);
+      this.setLabels(attributes.labels);
       this.setCreatedAt(attributes.created);
     }
     return this;
@@ -146,6 +161,7 @@ export class Card implements IBaseModel {
       this.setAbout(attributes.about);
       this.setUserId(attributes.user_id);
       this.setListId(attributes.list_id);
+      this.setLabels(attributes.labels);
       this.setCreatedAt(attributes.created_at);
     }
     return this;

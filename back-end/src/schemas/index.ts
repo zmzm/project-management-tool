@@ -2,9 +2,12 @@ import { GraphQLObjectType, GraphQLSchema } from 'graphql';
 
 import TeamQuery from './queries/teamQueries';
 import UserQuery from './queries/userQueries';
+import BoardQuery from './queries/boardQueries';
+import CardQuery from './queries/cardQueries';
 
 import TeamMutation from './mutations/teamMutations';
 import UserMutation from './mutations/userMutations';
+import CardMutation from './mutations/cardMutations';
 
 /**
  * Creating GraphQL schema
@@ -31,6 +34,11 @@ export default class Schema {
       findAllTeams: TeamQuery.findAll,
       findTeamById: TeamQuery.findById,
       findTeamByTeamName: TeamQuery.findByTeamName,
+
+      findBoardById: BoardQuery.findById,
+
+      findCardById: CardQuery.findById,
+      finCardsByListId: CardQuery.findByListId
     },
     name: 'Query',
   });
@@ -45,6 +53,8 @@ export default class Schema {
       createTeam: TeamMutation.createTeam,
       deleteTeam: TeamMutation.deleteTeam,
       updateTeam: TeamMutation.updateTeam,
+      
+      createCard: CardMutation.createCard,
     },
     name: 'Mutation',
   });
