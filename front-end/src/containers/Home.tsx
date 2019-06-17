@@ -8,7 +8,7 @@ import { Card } from '../components/core/Card/Card';
 import { GetUserInfo } from '../graphql/queries/userQueries';
 import { StorageHelper } from '../utils/localStorage';
 import colors from '../styles/default/colors';
-import IBoard from '../interfaces/BoardInterface';
+import IBoard from '../interfaces/Board';
 
 const pageSectionCss = css`
   background: ${colors.veryLightGray};
