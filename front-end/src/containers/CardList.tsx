@@ -1,10 +1,9 @@
 import * as React from 'react';
 
 import { Mutation, Query } from 'react-apollo';
-import { Card, ICardProps } from '../components/core/Card/Card';
+import { Card } from '../components/core/Card/Card';
 import { Text, TextSize, TextWeight } from '../components/core/Text/Text';
 import { Dialog } from '../components/core/Dialog/Dialog';
-import { Margin } from '../components/core/Margin/Margin';
 import { CreateCardMutation } from '../graphql/mutations/cardMutations';
 import { List } from '../components/core/List/List';
 import { Button, ButtonSize } from '../components/core/Button/Button';
@@ -14,6 +13,8 @@ import colors from '../styles/default/colors';
 import { CreateCard } from '../components/core/CreateCard/CreateCard';
 import { GetCardsByList } from '../graphql/queries/cardQueries';
 import { ICONS } from '../consts/icons';
+import { CardDetail } from '../components/core/CardDetail/CardDetail';
+import ICard from '../interfaces/ICard';
 
 export interface ICardListProps {
   theme?: any;
@@ -22,7 +23,7 @@ export interface ICardListProps {
 }
 
 export interface ICardListState {
-  card: ICardProps;
+  card: ICard;
   showDialog: boolean;
   showCardInput: boolean;
 }
@@ -30,7 +31,14 @@ export interface ICardListState {
 export class CardList extends React.Component<ICardListProps, ICardListState> {
   public state = {
     showDialog: false,
-    card: { cardName: '', about: '' },
+    card: {
+      about: '',
+      cardName: '',
+      id: '',
+      labels: [],
+      partisipants: [],
+      comments: [],
+    },
     showCardInput: false,
   };
 
@@ -96,15 +104,13 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
           onClose={this.handleCloseModal}
           visible={this.state.showDialog}
           title={
-            <Text fontSize={TextSize.Big} weight={TextWeight.Bold}>
+            <Text fontSize="2.3" weight={TextWeight.Bold}>
               {this.state.card.cardName}
             </Text>
           }
           fullScreen
         >
-          <Margin margin="2rem">
-            <Text fontSize={TextSize.Medium}>{this.state.card.about}</Text>
-          </Margin>
+          <CardDetail card={this.state.card} />
         </Dialog>
         <List listName={listName}>
           <Padding
@@ -155,9 +161,9 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
     );
   };
 
-  public renderCards = (cards: any) => {
+  public renderCards = (cards: ICard[]) => {
     if (cards.length > 0) {
-      return cards.map((card: any, index: number) => (
+      return cards.map((card: ICard, index: number) => (
         <Card
           key={`${card.cardName}_${index}`}
           cardName={
@@ -182,7 +188,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
     });
   };
 
-  public toggleDilog = (value: boolean, card: ICardProps) => () => {
+  public toggleDilog = (value: boolean, card: ICard) => () => {
     this.setState({ showDialog: value, card: card });
   };
 

@@ -3,5 +3,6 @@ export default interface ICard {
   cardName: string;
   labels: string[];
   about: string;
+  comments: any[];
   partisipants: any[];
 }
