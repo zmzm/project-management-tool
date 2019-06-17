@@ -88,7 +88,7 @@ export const SignInForm = ({
         disabled={!isValid}
         type="submit"
         size={ButtonSize.Big}
-        color={colors.lightGreen}
+        color={colors.limeGreen}
         block
       >
         <Text

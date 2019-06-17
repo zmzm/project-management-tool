@@ -53,7 +53,7 @@ export class CreateCard extends React.Component<ICreateCardProps> {
                 <Button
                   type="submit"
                   size={ButtonSize.Big}
-                  color={colors.green}
+                  color={colors.limeGreen}
                 >
                   <Text
                     component="span"

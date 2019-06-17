@@ -8,9 +8,10 @@ import { Card } from '../components/core/Card/Card';
 import { GetUserInfo } from '../graphql/queries/userQueries';
 import { StorageHelper } from '../utils/localStorage';
 import colors from '../styles/default/colors';
+import IBoard from '../interfaces/BoardInterface';
 
 const pageSectionCss = css`
-  background: #fafbfc;
+  background: ${colors.veryLightGray};
   min-height: calc(100vh - 43px);
 `;
 
@@ -22,17 +23,31 @@ const boardsRowCss = css`
 
 const cardCss = css`
   cursor: pointer;
-  color: #fff;
-  background-color: #0079bf;
+  color: ${colors.white};
+  background-color: ${colors.strongBlue};
   width: 17rem;
   margin: 0 2% 0 0;
 
   &:hover {
-    background-color: #006198;
+    background-color: ${colors.blueDark};
   }
 `;
 
 export default class Home extends React.Component {
+  public renderBoards(boards: IBoard[]) {
+    return boards.map((board: IBoard, index: number) => (
+      <Card
+        key={`${board.boardName}_${index}`}
+        className={cardCss}
+        cardName={
+          <Text fontSize={TextSize.Big} weight={TextWeight.Bold}>
+            {board.boardName}
+          </Text>
+        }
+      />
+    ));
+  }
+
   public render() {
     const userFromStorage = StorageHelper.get('user');
     const userId = this.props['location'].state
@@ -52,6 +67,7 @@ export default class Home extends React.Component {
 
           const team = data.findUserById.team;
           const teamBoards = data.findUserById.team.boards || [];
+          const personalBoards = data.findUserById.personalBoards || [];
 
           return (
             <PageSection className={pageSectionCss}>
@@ -66,14 +82,7 @@ export default class Home extends React.Component {
                 </Text>
               </Padding>
               <PageSection className={boardsRowCss}>
-                <Card
-                  className={cardCss}
-                  cardName={
-                    <Text fontSize={TextSize.Big} weight={TextWeight.Bold}>
-                      Board 1
-                    </Text>
-                  }
-                />
+                {this.renderBoards(personalBoards)}
               </PageSection>
               {team.teamName && (
                 <React.Fragment>
@@ -88,22 +97,7 @@ export default class Home extends React.Component {
                     </Text>
                   </Padding>
                   <PageSection className={boardsRowCss}>
-                    {teamBoards &&
-                      teamBoards.length &&
-                      teamBoards.map((board, index) => (
-                        <Card
-                          key={`${board.boardName}_${index}`}
-                          className={cardCss}
-                          cardName={
-                            <Text
-                              fontSize={TextSize.Big}
-                              weight={TextWeight.Bold}
-                            >
-                              {board.boardName}
-                            </Text>
-                          }
-                        />
-                      ))}
+                    {this.renderBoards(teamBoards)}
                   </PageSection>
                 </React.Fragment>
               )}
