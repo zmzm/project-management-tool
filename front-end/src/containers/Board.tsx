@@ -14,7 +14,7 @@ import { BoardContent } from '../components/core/BoardContent/BoardContent';
 import { GetBoardInfo } from '../graphql/queries/boardQueries';
 import colors from '../styles/default/colors';
 import { ICONS } from '../consts/icons';
-import ICardList from '../interfaces/CardList';
+import ICardList from '../interfaces/ICardList';
 import { CardList } from './CardList';
 
 globalCss();
