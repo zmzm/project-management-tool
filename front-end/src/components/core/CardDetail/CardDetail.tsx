@@ -11,22 +11,27 @@ export interface ICardDetailProps {
   card: ICard;
 }
 
-const detailWrapper = css`
+const detailWrapperCss = css`
   display: flex;
   flex-direction: column;
 `;
 
-const bagesWrapper = css`
+const bagesWrapperCss = css`
   display: flex;
   flex-direction: row;
 `;
 
-const partisipantsWrapper = css`
+const partisipantsWrapperCss = css`
   display: flex;
   flex-direction: column;
 `;
 
-const partisipantsContent = css`
+const partisipantsContentCss = css`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const labelsContentCss = css`
   display: flex;
   justify-content: space-between;
 `;
@@ -41,10 +46,10 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
     const { card } = this.props;
 
     return (
-      <div className={detailWrapper}>
-        <div className={bagesWrapper}>
+      <div className={detailWrapperCss}>
+        <div className={bagesWrapperCss}>
           {card.partisipants && (
-            <div className={partisipantsWrapper}>
+            <div className={partisipantsWrapperCss}>
               <Text
                 fontSize={TextSize.Medium}
                 weight={TextWeight.Medium}
@@ -53,7 +58,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
                 PARTISIPANTS
               </Text>
               <Margin margin="2rem 0">
-                <div className={partisipantsContent}>
+                <div className={partisipantsContentCss}>
                   {card.partisipants.map((user, index) => (
                     <Margin key={index} margin="0 0.5rem 0 0">
                       <Button
@@ -82,13 +87,13 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
                 weight={TextWeight.Medium}
                 color={colors.darkGrayishBlue}
               >
-                MARKS
+                LABELS
               </Text>
               <Margin margin="2rem 0">
-                <div className={partisipantsContent}>
-                  {card.labels.map((mark, index) => (
+                <div className={labelsContentCss}>
+                  {card.labels.map((label, index) => (
                     <Margin key={index} margin="0 0.5rem 0 0">
-                      <Button size={ButtonSize.Default} color={mark} />
+                      <Button size={ButtonSize.Default} color={label} />
                     </Margin>
                   ))}
                 </div>
