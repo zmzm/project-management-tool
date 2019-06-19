@@ -88,7 +88,7 @@ export class Card extends React.PureComponent<ICardProps> {
                 color={colors.grayDark}
                 size={IconSize.Small}
               />
-              <Text fontSize={TextSize.Small} weight={TextWeight.Medium}>
+              <Text fontSize={TextSize.Medium} weight={TextWeight.Medium}>
                 {commentsCount}
               </Text>
             </div>
@@ -100,7 +100,7 @@ export class Card extends React.PureComponent<ICardProps> {
                 <Button key={index} size={ButtonSize.Medium} transparent>
                   <Text
                     component="span"
-                    fontSize={TextSize.Small}
+                    fontSize={TextSize.Medium}
                     color={colors.veryDarkBlue}
                     weight={TextWeight.Bold}
                   >

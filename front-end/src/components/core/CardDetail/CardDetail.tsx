@@ -27,7 +27,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
           {card.partisipants && (
             <Flex direction={FlexDirection.Column}>
               <Text
-                fontSize={TextSize.Medium}
+                fontSize={TextSize.H5}
                 weight={TextWeight.Medium}
                 color={colors.darkGrayishBlue}
               >
@@ -43,7 +43,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
                       >
                         <Text
                           component="span"
-                          fontSize={TextSize.Medium}
+                          fontSize={TextSize.Normal}
                           color={colors.veryDarkBlue}
                           weight={TextWeight.Bold}
                         >
@@ -59,7 +59,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
           {card.labels && (
             <Margin margin="0 0 0 4rem">
               <Text
-                fontSize={TextSize.Medium}
+                fontSize={TextSize.H5}
                 weight={TextWeight.Medium}
                 color={colors.darkGrayishBlue}
               >
@@ -79,7 +79,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
         </Flex>
         <Margin margin="1.5rem 0 0 0">
           <Text
-            fontSize={TextSize.MmmmmegaBig}
+            fontSize={TextSize.H5}
             weight={TextWeight.Bold}
             color={colors.veryDarkBlue}
           >
@@ -103,7 +103,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
               >
                 <Text
                   component="span"
-                  fontSize={TextSize.Big}
+                  fontSize={TextSize.Normal}
                   color={colors.white}
                   weight={TextWeight.Bold}
                 >
@@ -115,7 +115,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
         </Margin>
         <Margin margin="1.5rem 0 0 0">
           <Text
-            fontSize={TextSize.MmmmmegaBig}
+            fontSize={TextSize.Big}
             weight={TextWeight.Bold}
             color={colors.veryDarkBlue}
           >
@@ -138,7 +138,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
               >
                 <Text
                   component="span"
-                  fontSize={TextSize.Big}
+                  fontSize={TextSize.Normal}
                   color={colors.white}
                   weight={TextWeight.Bold}
                 >

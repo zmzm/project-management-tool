@@ -104,7 +104,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
           onClose={this.handleCloseModal}
           visible={this.state.showDialog}
           title={
-            <Text fontSize="2.3" weight={TextWeight.Bold}>
+            <Text fontSize={TextSize.H5} weight={TextWeight.Bold}>
               {this.state.card.cardName}
             </Text>
           }
@@ -148,7 +148,7 @@ export class CardList extends React.Component<ICardListProps, ICardListState> {
           >
             <Padding padding="0 13rem 0 0">
               <Text
-                fontSize={TextSize.Medium}
+                fontSize={TextSize.Normal}
                 color={colors.darkGrayishBlue}
                 weight={TextWeight.Medium}
               >

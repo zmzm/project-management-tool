@@ -46,7 +46,7 @@ export class List extends React.Component<IListProps> {
         <div className={cardCss}>
           <div className={headerCss}>
             <Text
-              fontSize={TextSize.Medium}
+              fontSize={TextSize.Normal}
               color={colors.veryDarkBlue}
               weight={TextWeight.Bold}
             >
