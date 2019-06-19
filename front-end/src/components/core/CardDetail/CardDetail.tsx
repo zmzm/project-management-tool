@@ -6,35 +6,11 @@ import { Margin } from '../Margin/Margin';
 import { Input, InputTypes, InputVariants } from '../Input/Input';
 import ICard from '../../../interfaces/ICard';
 import colors from '../../../styles/default/colors';
+import { Flex, FlexDirection, JustifyContent } from '../Flex/Flex';
 
 export interface ICardDetailProps {
   card: ICard;
 }
-
-const detailWrapperCss = css`
-  display: flex;
-  flex-direction: column;
-`;
-
-const bagesWrapperCss = css`
-  display: flex;
-  flex-direction: row;
-`;
-
-const partisipantsWrapperCss = css`
-  display: flex;
-  flex-direction: column;
-`;
-
-const partisipantsContentCss = css`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const labelsContentCss = css`
-  display: flex;
-  justify-content: space-between;
-`;
 
 const inputShadowCss = css`
   box-shadow: 0 1px 2px -1px rgba(9, 45, 66, 0.25),
@@ -46,10 +22,10 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
     const { card } = this.props;
 
     return (
-      <div className={detailWrapperCss}>
-        <div className={bagesWrapperCss}>
+      <Flex direction={FlexDirection.Column}>
+        <Flex direction={FlexDirection.Row}>
           {card.partisipants && (
-            <div className={partisipantsWrapperCss}>
+            <Flex direction={FlexDirection.Column}>
               <Text
                 fontSize={TextSize.Medium}
                 weight={TextWeight.Medium}
@@ -58,7 +34,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
                 PARTISIPANTS
               </Text>
               <Margin margin="2rem 0">
-                <div className={partisipantsContentCss}>
+                <Flex justifyContent={JustifyContent.SpaceBetween}>
                   {card.partisipants.map((user, index) => (
                     <Margin key={index} margin="0 0.5rem 0 0">
                       <Button
@@ -76,9 +52,9 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
                       </Button>
                     </Margin>
                   ))}
-                </div>
+                </Flex>
               </Margin>
-            </div>
+            </Flex>
           )}
           {card.labels && (
             <Margin margin="0 0 0 4rem">
@@ -90,17 +66,17 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
                 LABELS
               </Text>
               <Margin margin="2rem 0">
-                <div className={labelsContentCss}>
+                <Flex justifyContent={JustifyContent.SpaceBetween}>
                   {card.labels.map((label, index) => (
                     <Margin key={index} margin="0 0.5rem 0 0">
                       <Button size={ButtonSize.Default} color={label} />
                     </Margin>
                   ))}
-                </div>
+                </Flex>
               </Margin>
             </Margin>
           )}
-        </div>
+        </Flex>
         <Margin margin="1.5rem 0 0 0">
           <Text
             fontSize={TextSize.MmmmmegaBig}
@@ -172,7 +148,7 @@ export class CardDetail extends React.PureComponent<ICardDetailProps> {
             </Margin>
           </Margin>
         </Margin>
-      </div>
+      </Flex>
     );
   }
 }
