@@ -11,10 +11,16 @@ export enum TextWeight {
 }
 
 export enum TextSize {
-  Small = '1.4',
-  Normal = '1.5',
-  Medium = '1.6',
+  H1 = '4',
+  H2 = '3.4',
+  H3 = '2.8',
+  H4 = '2.6',
+  H5 = '2.2',
+  H6 = '2.0',
   Big = '1.8',
+  Normal = '1.6',
+  Medium = '1.4',
+  Small = '1.2',
 }
 
 const textCss = params => css`

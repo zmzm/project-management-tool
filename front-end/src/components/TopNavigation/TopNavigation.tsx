@@ -57,7 +57,7 @@ export class TopNavigation extends React.Component {
             <Button size={ButtonSize.Big}>
               <Text
                 component="span"
-                fontSize={TextSize.Medium}
+                fontSize={TextSize.Normal}
                 color={colors.white}
                 weight={TextWeight.Bold}
               >
@@ -71,7 +71,7 @@ export class TopNavigation extends React.Component {
           <Button size={ButtonSize.Big}>
             <Text
               component="span"
-              fontSize={TextSize.Medium}
+              fontSize={TextSize.Normal}
               color={colors.white}
               weight={TextWeight.Bold}
             >
