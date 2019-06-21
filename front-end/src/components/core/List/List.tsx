@@ -10,7 +10,7 @@ import { ICONS } from '../../../consts/icons';
 
 export interface IListProps {
   theme?: any;
-  children?: any[];
+  children?: any;
   listName?: string;
 }
 
@@ -22,7 +22,7 @@ const headerCss = css`
   padding: 0.7rem 0.7rem 0.4rem 1rem;
 `;
 
-const cardCss = css`
+const listCss = css`
   background-color: #dfe3e6;
   border-radius: 0.3rem;
 `;
@@ -43,7 +43,7 @@ export class List extends React.Component<IListProps> {
 
     return (
       <div className={wrapperCss}>
-        <div className={cardCss}>
+        <div className={listCss}>
           <div className={headerCss}>
             <Text
               fontSize={TextSize.Normal}

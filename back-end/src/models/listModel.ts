@@ -66,8 +66,8 @@ export class List implements IBaseModel {
     return this;
   }
 
-  public setBoardId(id: number): List {
-    this.id = id;
+  public setBoardId(boardId: number): List {
+    this.boardId = boardId;
     return this;
   }
 
@@ -81,7 +81,8 @@ export class List implements IBaseModel {
   public mapJson(attributes: any): List {
     if (attributes !== undefined) {
       this.setId(attributes.id);
-      this.setName(attributes.name);
+      this.setBoardId(attributes.boardId);
+      this.setName(attributes.listName);
     }
     return this;
   }
@@ -96,6 +97,7 @@ export class List implements IBaseModel {
   public mapDatabaseObject(attributes: any): List {
     if (attributes !== undefined) {
       this.setId(attributes.id);
+      this.setBoardId(attributes.board_id);
       this.setName(attributes.list_name);
     }
     return this;

@@ -27,6 +27,7 @@ export interface IconProps {
 const iconCss = (color?: string, size?: number) => css`
   color: ${color || 'white'};
   font-size: ${size || IconSize.Default}rem;
+  cursor: pointer;
 `;
 
 // @ts-ignore

@@ -15,6 +15,7 @@ import { GetBoardInfo } from '../graphql/queries/boardQueries';
 import colors from '../styles/default/colors';
 import { ICONS } from '../consts/icons';
 import ICardList from '../interfaces/ICardList';
+import { CreateList } from '../components/core/CreateList/CreateList';
 import { CardList } from './CardList';
 
 globalCss();
@@ -93,6 +94,9 @@ export default class Board extends React.Component<{}> {
                       listName={list.listName}
                     />
                   ))}
+                <CreateList
+                  boardId={Number.parseInt(this.props['match'].params.boardId)}
+                />
               </BoardContent>
             </React.Fragment>
           );
