@@ -14,6 +14,7 @@ const colors = {
   vividYellow: '#ffde03',
   darkGrayishBlue: '#6b808c',
   lightGrayishBlue: '#dfe3e6',
+  almostTransparent: '#0000001f',
 };
 
 export default colors;
