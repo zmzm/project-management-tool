@@ -13,6 +13,13 @@ import { RolesModule } from './roles/roles.module';
 import { BoardCardsModule } from './board-cards/board-cards.module';
 import { CardCommentsModule } from './card-comments/card-comments.module';
 import { BoardListsModule } from './board-lists/board-lists.module';
+import { User } from './users/entities/user.entity';
+import { Team } from './teams/entities/team.entity';
+import { Role } from './roles/entities/role.entity';
+import { CardComment } from './card-comments/entities/card-comment.entity';
+import { Board } from './boards/entities/board.entity';
+import { BoardCard } from './board-cards/entities/board-card.entity';
+import { BoardList } from './board-lists/entities/board-list.entity';
 
 @Module({
   imports: [
@@ -26,7 +33,7 @@ import { BoardListsModule } from './board-lists/board-lists.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [],
+      models: [User, Team, Role, CardComment, Board, BoardCard, BoardList],
       autoLoadModels: true,
       synchronize: true,
     }),
