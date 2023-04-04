@@ -1,7 +1,31 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Column, DataType, Table, Model, HasMany } from 'sequelize-typescript';
+import { Board } from '../../boards/entities/board.entity';
 
+interface TeamCreationAttrs {
+  name: string;
+}
 @ObjectType()
-export class Team {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+@Table({ tableName: 'teams' })
+export class Team extends Model<Team, TeamCreationAttrs> {
+  @Column({
+    type: DataType.INTEGER,
+    unique: true,
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true,
+  })
+  @Field(() => Int, { description: 'Team id' })
+  id: number;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  @Field(() => String, { description: 'Team name' })
+  name: string;
+
+  @HasMany(() => Board)
+  @Field(() => [Board], { description: 'Team boards' })
+  boards: Board[];
 }
