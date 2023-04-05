@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Column, DataType, Table, Model, HasMany } from 'sequelize-typescript';
 import { Board } from '../../boards/entities/board.entity';
+import { User } from '../../users/entities/user.entity';
 
 interface TeamCreationAttrs {
   name: string;
@@ -28,4 +29,8 @@ export class Team extends Model<Team, TeamCreationAttrs> {
   @HasMany(() => Board)
   @Field(() => [Board], { description: 'Team boards' })
   boards: Board[];
+
+  @HasMany(() => User)
+  @Field(() => [User], { description: 'Team members' })
+  users: User[];
 }

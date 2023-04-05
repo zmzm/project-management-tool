@@ -19,7 +19,7 @@ interface BoardCardCreationattrs {
 }
 
 @ObjectType()
-@Table({ tableName: 'board_card' })
+@Table({ tableName: 'board_cards' })
 export class BoardCard extends Model<BoardCard, BoardCardCreationattrs> {
   @Column({
     type: DataType.INTEGER,
@@ -45,14 +45,14 @@ export class BoardCard extends Model<BoardCard, BoardCardCreationattrs> {
   @Field(() => String, { description: 'Card about' })
   about: string;
 
+  @ForeignKey(() => BoardList)
+  @Column({ type: DataType.INTEGER })
+  boardListId: number;
+
   @HasMany(() => CardComment)
   @Field(() => [CardComment], { description: 'Card comments' })
   comments: CardComment[];
 
   @BelongsTo(() => BoardList)
   boardList: BoardList;
-
-  @ForeignKey(() => BoardList)
-  @Column({ type: DataType.INTEGER })
-  boardListId: number;
 }
