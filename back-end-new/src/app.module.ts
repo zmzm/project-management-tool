@@ -32,7 +32,7 @@ import { BoardList } from './board-lists/entities/board-list.entity';
       port: Number(process.env.DB_PORT),
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DB,
+      database: process.env.ENV || 'development',
       models: [User, Team, Role, CardComment, Board, BoardCard, BoardList],
       autoLoadModels: true,
       synchronize: true,

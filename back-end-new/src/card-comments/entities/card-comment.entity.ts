@@ -33,17 +33,17 @@ export class CardComment extends Model<CardComment, CardCommentCreationAttrs> {
   @Field(() => String, { description: 'Comment text' })
   text: string;
 
-  @BelongsTo(() => User)
-  author: User;
+  @ForeignKey(() => BoardCard)
+  @Column({ type: DataType.INTEGER })
+  cardId: number;
 
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
   userId: number;
 
+  @BelongsTo(() => User)
+  author: User;
+
   @BelongsTo(() => BoardCard)
   card: BoardCard;
-
-  @ForeignKey(() => BoardCard)
-  @Column({ type: DataType.INTEGER })
-  cardId: number;
 }

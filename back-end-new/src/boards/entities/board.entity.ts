@@ -42,14 +42,14 @@ export class Board extends Model<Board, BoardCreationAttrs> {
   @Field(() => Boolean, { description: 'Is board closed', defaultValue: false })
   closed: boolean;
 
+  @ForeignKey(() => Team)
+  @Column({ type: DataType.INTEGER })
+  teamId: number;
+
   @HasMany(() => BoardList)
   @Field(() => [BoardList], { description: 'Board lists' })
   lists: BoardList[];
 
   @BelongsTo(() => Team)
   team: Team;
-
-  @ForeignKey(() => Team)
-  @Column({ type: DataType.INTEGER })
-  teamId: number;
 }

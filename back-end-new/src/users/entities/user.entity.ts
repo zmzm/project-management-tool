@@ -1,6 +1,15 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Column, DataType, Table, Model, HasMany } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  Table,
+  Model,
+  HasMany,
+  ForeignKey,
+  BelongsTo,
+} from 'sequelize-typescript';
 import { CardComment } from '../../card-comments/entities/card-comment.entity';
+import { Team } from '../../teams/entities/team.entity';
 
 interface UserCreationAttrs {
   email: string;
@@ -50,6 +59,14 @@ export class User extends Model<User, UserCreationAttrs> {
   @Field(() => String, { description: 'User last name' })
   lastName: string;
 
+  @ForeignKey(() => Team)
+  @Column({ type: DataType.INTEGER })
+  teamId: number;
+
   @HasMany(() => CardComment)
+  @Field(() => [CardComment], { description: 'User comments' })
   comments: CardComment[];
+
+  @BelongsTo(() => Team)
+  team: Team;
 }

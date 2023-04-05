@@ -23,7 +23,7 @@ export class Role extends Model<Role, RoleCreationAttrs> {
     allowNull: false,
   })
   @Field(() => String, { description: 'Role type', defaultValue: 'USER' })
-  role: string;
+  type: string;
 
   @Column({
     type: DataType.STRING,
