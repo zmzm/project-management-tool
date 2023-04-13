@@ -1,5 +1,13 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { User } from '../../users/entities/user.entity';
+import { UserRoles } from './userRoles.entity';
 
 interface RoleCreationAttrs {
   type: string;
@@ -31,4 +39,7 @@ export class Role extends Model<Role, RoleCreationAttrs> {
   })
   @Field(() => String, { description: 'Role description' })
   description: string;
+
+  @BelongsToMany(() => User, () => UserRoles)
+  users: User[];
 }
