@@ -9,7 +9,9 @@ export class BoardCardsResolver {
   constructor(private readonly boardCardsService: BoardCardsService) {}
 
   @Mutation(() => BoardCard)
-  createBoardCard(@Args('createBoardCardInput') createBoardCardInput: CreateBoardCardInput) {
+  createBoardCard(
+    @Args('createBoardCardInput') createBoardCardInput: CreateBoardCardInput
+  ) {
     return this.boardCardsService.create(createBoardCardInput);
   }
 
@@ -20,12 +22,17 @@ export class BoardCardsResolver {
 
   @Query(() => BoardCard, { name: 'boardCard' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.boardCardsService.findOne(id);
+    return this.boardCardsService.findOneById(id);
   }
 
   @Mutation(() => BoardCard)
-  updateBoardCard(@Args('updateBoardCardInput') updateBoardCardInput: UpdateBoardCardInput) {
-    return this.boardCardsService.update(updateBoardCardInput.id, updateBoardCardInput);
+  updateBoardCard(
+    @Args('updateBoardCardInput') updateBoardCardInput: UpdateBoardCardInput
+  ) {
+    return this.boardCardsService.update(
+      updateBoardCardInput.id,
+      updateBoardCardInput
+    );
   }
 
   @Mutation(() => BoardCard)
