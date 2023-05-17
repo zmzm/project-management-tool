@@ -20,7 +20,7 @@ export class BoardsResolver {
 
   @Query(() => Board, { name: 'board' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.boardsService.findOne(id);
+    return this.boardsService.findById(id);
   }
 
   @Mutation(() => Board)

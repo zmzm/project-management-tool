@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { CreateRoleInput } from './dto/create-role.input';
 import { UpdateRoleInput } from './dto/update-role.input';
+import { Role } from './entities/role.entity';
 
 @Injectable()
 export class RolesService {
+  constructor(private readonly roleModel: typeof Role) {}
+
   create(createRoleInput: CreateRoleInput) {
-    return 'This action adds a new role';
+    return this.roleModel.create(createRoleInput);
   }
 
   findAll() {
-    return `This action returns all roles`;
+    return this.roleModel.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} role`;
+  findById(id: number) {
+    return this.roleModel.findOne({ where: { id } });
   }
 
-  update(id: number, updateRoleInput: UpdateRoleInput) {
-    return `This action updates a #${id} role`;
+  async update(id: number, updateRoleInput: UpdateRoleInput) {
+    const role = await this.findById(id);
+
+    await role.update(updateRoleInput);
+    await role.save();
+
+    return role;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} role`;
+  async remove(id: number) {
+    const role = await this.findById(id);
+
+    await role.destroy();
+
+    return id;
   }
 }

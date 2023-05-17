@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBoardListInput } from './dto/create-board-list.input';
 import { UpdateBoardListInput } from './dto/update-board-list.input';
+import { BoardList } from './entities/board-list.entity';
 
 @Injectable()
 export class BoardListsService {
+  constructor(private readonly listModel: typeof BoardList) {}
+
   create(createBoardListInput: CreateBoardListInput) {
-    return 'This action adds a new boardList';
+    return this.listModel.create(createBoardListInput);
   }
 
   findAll() {
-    return `This action returns all boardLists`;
+    return this.listModel.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} boardList`;
+  findById(id: number) {
+    return this.listModel.findOne({ where: { id } });
   }
 
-  update(id: number, updateBoardListInput: UpdateBoardListInput) {
-    return `This action updates a #${id} boardList`;
+  async update(id: number, updateBoardListInput: UpdateBoardListInput) {
+    const list = await this.findById(id);
+
+    await list.update(updateBoardListInput);
+    await list.save();
+
+    return list;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} boardList`;
+  async remove(id: number) {
+    const list = await this.findById(id);
+
+    await list.destroy();
+
+    return id;
   }
 }

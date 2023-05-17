@@ -20,12 +20,12 @@ export class BoardCardsService {
     return this.cardModel.findAll();
   }
 
-  findOneById(id: number) {
+  findById(id: number) {
     return this.cardModel.findOne({ where: { id } });
   }
 
   async update(id: number, updateBoardCardInput: UpdateBoardCardInput) {
-    const card = await this.findOneById(id);
+    const card = await this.findById(id);
 
     await card.update(updateBoardCardInput);
     await card.save();
@@ -34,7 +34,7 @@ export class BoardCardsService {
   }
 
   async remove(id: number) {
-    const card = await this.findOneById(id);
+    const card = await this.findById(id);
 
     await card.destroy();
 

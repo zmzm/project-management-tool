@@ -22,7 +22,7 @@ export class BoardCardsResolver {
 
   @Query(() => BoardCard, { name: 'boardCard' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.boardCardsService.findOneById(id);
+    return this.boardCardsService.findById(id);
   }
 
   @Mutation(() => BoardCard)

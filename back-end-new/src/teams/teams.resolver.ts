@@ -20,7 +20,7 @@ export class TeamsResolver {
 
   @Query(() => Team, { name: 'team' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.teamsService.findOne(id);
+    return this.teamsService.findById(id);
   }
 
   @Mutation(() => Team)

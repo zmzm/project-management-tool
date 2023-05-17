@@ -9,7 +9,10 @@ export class CardCommentsResolver {
   constructor(private readonly cardCommentsService: CardCommentsService) {}
 
   @Mutation(() => CardComment)
-  createCardComment(@Args('createCardCommentInput') createCardCommentInput: CreateCardCommentInput) {
+  createCardComment(
+    @Args('createCardCommentInput')
+    createCardCommentInput: CreateCardCommentInput
+  ) {
     return this.cardCommentsService.create(createCardCommentInput);
   }
 
@@ -20,12 +23,18 @@ export class CardCommentsResolver {
 
   @Query(() => CardComment, { name: 'cardComment' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.cardCommentsService.findOne(id);
+    return this.cardCommentsService.findById(id);
   }
 
   @Mutation(() => CardComment)
-  updateCardComment(@Args('updateCardCommentInput') updateCardCommentInput: UpdateCardCommentInput) {
-    return this.cardCommentsService.update(updateCardCommentInput.id, updateCardCommentInput);
+  updateCardComment(
+    @Args('updateCardCommentInput')
+    updateCardCommentInput: UpdateCardCommentInput
+  ) {
+    return this.cardCommentsService.update(
+      updateCardCommentInput.id,
+      updateCardCommentInput
+    );
   }
 
   @Mutation(() => CardComment)
