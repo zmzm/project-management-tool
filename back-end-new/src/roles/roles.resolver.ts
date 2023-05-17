@@ -20,7 +20,7 @@ export class RolesResolver {
 
   @Query(() => Role, { name: 'role' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.rolesService.findOne(id);
+    return this.rolesService.findById(id);
   }
 
   @Mutation(() => Role)

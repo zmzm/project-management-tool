@@ -9,7 +9,9 @@ export class BoardListsResolver {
   constructor(private readonly boardListsService: BoardListsService) {}
 
   @Mutation(() => BoardList)
-  createBoardList(@Args('createBoardListInput') createBoardListInput: CreateBoardListInput) {
+  createBoardList(
+    @Args('createBoardListInput') createBoardListInput: CreateBoardListInput
+  ) {
     return this.boardListsService.create(createBoardListInput);
   }
 
@@ -20,12 +22,17 @@ export class BoardListsResolver {
 
   @Query(() => BoardList, { name: 'boardList' })
   findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.boardListsService.findOne(id);
+    return this.boardListsService.findById(id);
   }
 
   @Mutation(() => BoardList)
-  updateBoardList(@Args('updateBoardListInput') updateBoardListInput: UpdateBoardListInput) {
-    return this.boardListsService.update(updateBoardListInput.id, updateBoardListInput);
+  updateBoardList(
+    @Args('updateBoardListInput') updateBoardListInput: UpdateBoardListInput
+  ) {
+    return this.boardListsService.update(
+      updateBoardListInput.id,
+      updateBoardListInput
+    );
   }
 
   @Mutation(() => BoardList)

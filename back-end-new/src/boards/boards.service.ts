@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBoardInput } from './dto/create-board.input';
 import { UpdateBoardInput } from './dto/update-board.input';
+import { Board } from './entities/board.entity';
 
 @Injectable()
 export class BoardsService {
+  constructor(private readonly boardModel: typeof Board) {}
+
   create(createBoardInput: CreateBoardInput) {
-    return 'This action adds a new board';
+    return this.boardModel.create(createBoardInput);
   }
 
   findAll() {
-    return `This action returns all boards`;
+    return this.boardModel.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} board`;
+  findById(id: number) {
+    return this.boardModel.findOne({ where: { id } });
   }
 
-  update(id: number, updateBoardInput: UpdateBoardInput) {
-    return `This action updates a #${id} board`;
+  async update(id: number, updateBoardInput: UpdateBoardInput) {
+    const board = await this.findById(id);
+
+    await board.update(updateBoardInput);
+    await board.save();
+
+    return board;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} board`;
+  async remove(id: number) {
+    const board = await this.findById(id);
+
+    await board.destroy();
+
+    return id;
   }
 }

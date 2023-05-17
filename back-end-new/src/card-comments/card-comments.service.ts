@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCardCommentInput } from './dto/create-card-comment.input';
 import { UpdateCardCommentInput } from './dto/update-card-comment.input';
+import { CardComment } from './entities/card-comment.entity';
 
 @Injectable()
 export class CardCommentsService {
+  constructor(private readonly cardModel: typeof CardComment) {}
+
   create(createCardCommentInput: CreateCardCommentInput) {
-    return 'This action adds a new cardComment';
+    return this.cardModel.create(createCardCommentInput);
   }
 
   findAll() {
-    return `This action returns all cardComments`;
+    return this.cardModel.findAll();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cardComment`;
+  findById(id: number) {
+    return this.cardModel.findOne({ where: { id } });
   }
 
-  update(id: number, updateCardCommentInput: UpdateCardCommentInput) {
-    return `This action updates a #${id} cardComment`;
+  async update(id: number, updateCardCommentInput: UpdateCardCommentInput) {
+    const card = await this.findById(id);
+
+    await card.update(updateCardCommentInput);
+    await card.save();
+
+    return card;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cardComment`;
+  async remove(id: number) {
+    const card = await this.findById(id);
+
+    await card.destroy();
+
+    return id;
   }
 }
