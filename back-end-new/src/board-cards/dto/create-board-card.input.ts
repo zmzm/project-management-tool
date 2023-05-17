@@ -1,7 +1,15 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 
 @InputType()
 export class CreateBoardCardInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  @Field(() => String, { description: 'Card name' })
+  name: string;
+
+  @Field(() => String, { description: 'Card about' })
+  about: string;
+
+  @Field(() => Int, {
+    description: 'ID of the board list to which the card belongs',
+  })
+  boardListId: number;
 }
