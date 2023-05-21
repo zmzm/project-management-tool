@@ -1,6 +1,11 @@
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 
 import { CreateUserInput } from '../users/dto/create-user.input';
 import { User } from '../users/entities/user.entity';
@@ -18,8 +23,20 @@ export class AuthService {
     return this.generateToken(user);
   }
 
-  registration(createUserInput: CreateUserInput) {
-    return createUserInput;
+  async registration(createUserInput: CreateUserInput) {
+    const user = await this.userService.findByEmail(createUserInput.email);
+
+    if (user) {
+      throw new HttpException('User aleady exists', HttpStatus.BAD_REQUEST);
+    }
+
+    const hashedPassword = await bcrypt.hash(createUserInput.password, 7);
+    const newUser = await this.userService.create({
+      ...createUserInput,
+      password: hashedPassword,
+    });
+
+    return this.generateToken(newUser);
   }
 
   private generateToken(user: User) {
