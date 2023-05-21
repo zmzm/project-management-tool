@@ -19,6 +19,10 @@ export class UsersService {
     return this.userModel.findOne({ where: { id } });
   }
 
+  findByEmail(email: string) {
+    return this.userModel.findOne({ where: { email } });
+  }
+
   async update(id: number, updateUserInput: UpdateUserInput) {
     const user = await this.findById(id);
 

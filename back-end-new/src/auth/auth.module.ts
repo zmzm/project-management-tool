@@ -1,13 +1,24 @@
 import { Module } from '@nestjs/common';
-import { SequelizeModule } from '@nestjs/sequelize';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule } from '@nestjs/config';
 
-import { BoardsService } from './auth.service';
-import { BoardsResolver } from './auth.resolver';
-import { Team } from '../teams/entities/team.entity';
-import { BoardList } from '../board-lists/entities/board-list.entity';
+import { AuthService } from './auth.service';
+import { AuthResolver } from './auth.resolver';
+import { UsersModule } from '../users/users.module';
 
 @Module({
-  providers: [BoardsResolver, BoardsService],
-  imports: [SequelizeModule.forFeature([Team, BoardList])],
+  providers: [AuthResolver, AuthService],
+  imports: [
+    UsersModule,
+    PassportModule,
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '24h' },
+    }),
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
+  ],
 })
-export class BoardsModule {}
+export class AuthModule {}
